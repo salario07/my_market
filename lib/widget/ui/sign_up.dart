@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_market/controller/sign_up_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
-import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/constants.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/model/user.dart';
@@ -22,15 +21,19 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.lazyPut<SignUpController>(() => SignUpController());
     return Scaffold(
-        appBar: AppBar(
-          title: Text(LocaleKeys.shared_sign_up.tr),
-        ),
+        appBar: buildAppBar(),
         body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.all(24),
             child: buildForm(),
           ),
         ));
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      title: Text(LocaleKeys.shared_sign_up.tr),
+    );
   }
 
   Form buildForm() {

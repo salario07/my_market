@@ -18,18 +18,18 @@ class LoginController extends GetxController {
     isLoading(true);
     getUsers().then((response) {
       List<User> users = JsonParser.parseUsers(response.data);
-      bool allowLogin = checkCredentials(users, user);
-      handleLoginResponse(allowLogin);
+      bool allowLogin = _checkCredentials(users, user);
+      _handleLoginResponse(allowLogin);
     }).catchError((error) {
       Helper.errorSnackBar(LocaleKeys.shared_error, error.toString());
     }).whenComplete(() => isLoading(false));
   }
 
-  void handleLoginResponse(bool allowLogin) {
+  void _handleLoginResponse(bool allowLogin) {
     if (allowLogin) {
       Helper.successSnackBar(LocaleKeys.shared_success.tr,
           LocaleKeys.login_logged_in_successfully.tr);
-      navigateToHomePage();
+      _navigateToHomePage();
     } else {
       Helper.errorSnackBar(LocaleKeys.login_invalid_credentials.tr,
           LocaleKeys.login_username_or_password_is_incorrect.tr);
@@ -40,7 +40,7 @@ class LoginController extends GetxController {
     return repository.getUsers();
   }
 
-  bool checkCredentials(List<User> users, User loggedInUser) {
+  bool _checkCredentials(List<User> users, User loggedInUser) {
     for (User user in users) {
       if (user.userName == loggedInUser.userName &&
           user.password == loggedInUser.password) {
@@ -50,7 +50,7 @@ class LoginController extends GetxController {
     return false;
   }
 
-  void navigateToHomePage() {
+  void _navigateToHomePage() {
     Future.delayed(Duration(seconds: 3)).then((value) {
       Get.off(() => HomePage());
     });

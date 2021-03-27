@@ -16,15 +16,16 @@ class SignUpController extends GetxController {
 
   void signUp(User user) {
     isLoading(true);
-    checkUsername(user);
+    _checkUsername(user);
   }
 
-  void checkUsername(User user) {
+  void _checkUsername(User user) {
     repository.getUsers().then((response) {
       List<User> users = JsonParser.parseUsers(response.data);
-      bool doesUserNameAlreadyExists = doesUsernameExists(users, user.userName);
+      bool doesUserNameAlreadyExists =
+          _doesUsernameExists(users, user.userName);
       if (!doesUserNameAlreadyExists) {
-        addUser(user);
+        _addUser(user);
       } else {
         isLoading(false);
         Helper.errorSnackBar(LocaleKeys.sign_up_username_already_exists.tr,
@@ -36,18 +37,18 @@ class SignUpController extends GetxController {
     });
   }
 
-  void addUser(User user) {
+  void _addUser(User user) {
     repository.addUser(user).then((response) {
       Helper.successSnackBar(LocaleKeys.shared_success.tr,
           LocaleKeys.sign_up_signed_up_successfully.tr);
-      navigateToHomePage();
+      _navigateToHomePage();
     }).catchError((error) {
       Helper.logDebug(error.toString());
       Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
     }).whenComplete(() => isLoading(false));
   }
 
-  bool doesUsernameExists(List<User> users, String userName) {
+  bool _doesUsernameExists(List<User> users, String userName) {
     for (User user in users) {
       if (user.userName == userName) {
         return true;
@@ -56,7 +57,7 @@ class SignUpController extends GetxController {
     return false;
   }
 
-  void navigateToHomePage() {
+  void _navigateToHomePage() {
     Future.delayed(Duration(seconds: 3)).then((value) {
       Get.off(() => HomePage());
     });

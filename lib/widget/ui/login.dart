@@ -18,28 +18,36 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.lazyPut<LoginController>(() => LoginController());
     return Scaffold(
-      appBar: AppBar(
-        title: Text(LocaleKeys.shared_login.tr),
-      ),
+      appBar: buildAppBar(),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(24),
-          child: (Form(
-            key: _controller.formKey,
-            child: Column(
-              children: [
-                buildUsernameTextField(),
-                SizedBox(height: 12),
-                buildPasswordTextField(),
-                buildLoginButton(),
-                Text(LocaleKeys.login_not_a_member.tr),
-                SizedBox(height: 8),
-                MyTextButton(LocaleKeys.shared_sign_up.tr,
-                    () => Get.off(() => SignUp())),
-              ],
-            ),
-          )),
+          child: (buildForm()),
         ),
+      ),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      title: Text(LocaleKeys.shared_login.tr),
+    );
+  }
+
+  Form buildForm() {
+    return Form(
+      key: _controller.formKey,
+      child: Column(
+        children: [
+          buildUsernameTextField(),
+          SizedBox(height: 12),
+          buildPasswordTextField(),
+          buildLoginButton(),
+          Text(LocaleKeys.login_not_a_member.tr),
+          SizedBox(height: 8),
+          MyTextButton(
+              LocaleKeys.shared_sign_up.tr, () => Get.off(() => SignUp())),
+        ],
       ),
     );
   }
