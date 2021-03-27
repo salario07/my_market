@@ -1,0 +1,32 @@
+{
+  "shared": {
+    "login": "Login",
+    "sign_up": "Sign Up",
+    "user_name": "User Name",
+    "password": "Password",
+    "user_name_hint": "Enter User Name here",
+    "password_hint": "Enter Password here",
+    "error": "Error",
+    "success": "Success"
+  },
+  "splash": {
+    "app_name": "My Market",
+    "app_description": "Shopping flutter application"
+  },
+  "sign_up": {
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "first_name_hint": "Enter First Name here",
+    "last_name_hint": "Enter Last Name here",
+    "already_registered": "Already Registered?",
+    "username_already_exists": "Username already exists",
+    "please_enter_another_username": "Please enter another username",
+    "signed_up_successfully": "Signed up successfully"
+  },
+  "login": {
+    "not_a_member": "Not a member?",
+    "logged_in_successfully": "Logged in Successfully",
+    "invalid_credentials": "Invalid Credentials",
+    "username_or_password_is_incorrect": "Username or password is incorrect"
+  }
+}

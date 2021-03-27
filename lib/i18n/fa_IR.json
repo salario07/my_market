@@ -1,0 +1,32 @@
+{
+  "shared": {
+    "login": "ورود",
+    "sign_up": "ثبت نام",
+    "user_name": "نام کاربری",
+    "password": "رمز عبور",
+    "user_name_hint": "نام کاربری را وارد کنید",
+    "password_hint": "رمز عبور را وارد کنید",
+    "error": "خطا",
+    "success": "موفق"
+  },
+  "splash": {
+    "app_name": "فروشگاه من",
+    "app_description": "اپلیکیشن فروشگاهی فلاتر"
+  },
+  "sign_up": {
+    "first_name": "نام",
+    "last_name": "نام خانوادگی",
+    "first_name_hint": "نام تان را اینجا وارد کنید",
+    "last_name_hint": "نام خانوادگی تان را اینجا وارد کنید",
+    "already_registered": "قبلا ثبت نام کرده اید؟",
+    "username_already_exists": "نام کاربری تکراری است",
+    "please_enter_another_username": "لطفا یک نام کاربری دیگر انتخاب کنید",
+    "signed_up_successfully": "ثبت نام موفق بود"
+  },
+  "login": {
+    "not_a_member": "عضو نیستید؟",
+    "logged_in_successfully": "با موفقیت وارد شدید",
+    "invalid_credentials": "اطلاعات نامعتبر است",
+    "username_or_password_is_incorrect": "نام کاربری یا رمز عبور اشتباه است"
+  }
+}
