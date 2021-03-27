@@ -8,14 +8,6 @@ class Helper {
     return text == null || text.isEmpty;
   }
 
-  static String emptyValidator(String text) {
-    return Helper.isNullOrEmpty(text) ? 'Required' : null;
-  }
-
-  static String passwordValidator(String text) {
-    return text.length >= 6 ? null : 'Password must be at least 6 characters';
-  }
-
   static void logDebug(String text, {String className = ''}) {
     print('${Constants.debug_tag} $className : $text');
   }

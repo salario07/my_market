@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/login_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/helper.dart';
+import 'package:my_market/helper/validators.dart';
 import 'package:my_market/model/user.dart';
 import 'package:my_market/widget/component/my_button.dart';
 import 'package:my_market/widget/component/my_progress_indicator.dart';
@@ -39,9 +40,15 @@ class Login extends StatelessWidget {
       key: _controller.formKey,
       child: Column(
         children: [
-          buildUsernameTextField(),
+          buildTextField(false,
+              controller: _usernameController,
+              label: LocaleKeys.shared_user_name.tr,
+              hint: LocaleKeys.shared_user_name_hint.tr),
           SizedBox(height: 12),
-          buildPasswordTextField(),
+          buildTextField(true,
+              controller: _passwordController,
+              label: LocaleKeys.shared_password.tr,
+              hint: LocaleKeys.shared_password_hint.tr),
           buildLoginButton(),
           Text(LocaleKeys.login_not_a_member.tr),
           SizedBox(height: 8),
@@ -52,28 +59,22 @@ class Login extends StatelessWidget {
     );
   }
 
-  Obx buildPasswordTextField() {
-    return Obx(
-      () => MyTextField(
-        controller: _passwordController,
-        labelText: LocaleKeys.shared_password.tr,
-        hintText: LocaleKeys.shared_password_hint.tr,
-        validator: (text) => Helper.passwordValidator(text),
-        suffixIconGestureDetector: getGestureDetectorSuffixIcon(true),
-        obscureText: _controller.obscurePassword(),
-        textInputAction: TextInputAction.done,
-      ),
+  Widget buildTextField(bool isPassword,
+      {TextEditingController controller, String label, String hint}) {
+    MyTextField myTextField = MyTextField(
+      validator: (text) => Validators.getValidator(isPassword, text),
+      controller: controller,
+      labelText: label,
+      hintText: hint,
+      obscureText: isPassword,
+      textInputAction: isPassword ? TextInputAction.done : TextInputAction.next,
+      suffixIconGestureDetector: getGestureDetectorSuffixIcon(isPassword),
     );
-  }
-
-  MyTextField buildUsernameTextField() {
-    return MyTextField(
-      controller: _usernameController,
-      labelText: LocaleKeys.shared_user_name.tr,
-      hintText: LocaleKeys.shared_user_name_hint.tr,
-      validator: (text) => Helper.emptyValidator(text),
-      suffixIconGestureDetector: getGestureDetectorSuffixIcon(false),
-    );
+    if (isPassword) {
+      return Obx(() => myTextField);
+    } else {
+      return myTextField;
+    }
   }
 
   Obx buildLoginButton() {

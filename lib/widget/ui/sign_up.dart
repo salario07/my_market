@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/sign_up_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/constants.dart';
-import 'package:my_market/helper/helper.dart';
+import 'package:my_market/helper/validators.dart';
 import 'package:my_market/model/user.dart';
 import 'package:my_market/widget/component/my_button.dart';
 import 'package:my_market/widget/component/my_progress_indicator.dart';
@@ -41,13 +41,33 @@ class SignUp extends StatelessWidget {
       key: _controller.formKey,
       child: Column(
         children: [
-          buildFirstNameTextField(),
+          buildTextField(
+            true,
+            controller: _firstNameController,
+            hint: LocaleKeys.sign_up_first_name_hint.tr,
+            label: LocaleKeys.sign_up_first_name.tr,
+          ),
           SizedBox(height: 12),
-          buildLastNameTextField(),
+          buildTextField(
+            true,
+            controller: _lastNameController,
+            hint: LocaleKeys.sign_up_last_name_hint.tr,
+            label: LocaleKeys.sign_up_last_name.tr,
+          ),
           SizedBox(height: 12),
-          buildUserNameTextField(),
+          buildTextField(
+            true,
+            controller: _userNameController,
+            hint: LocaleKeys.shared_user_name_hint.tr,
+            label: LocaleKeys.shared_user_name.tr,
+          ),
           SizedBox(height: 12),
-          buildPasswordTextField(),
+          buildTextField(
+            true,
+            controller: _passwordController,
+            hint: LocaleKeys.shared_password_hint.tr,
+            label: LocaleKeys.shared_password.tr,
+          ),
           buildSignUpButton(),
           Text(LocaleKeys.sign_up_already_registered.tr),
           SizedBox(height: 8),
@@ -68,54 +88,22 @@ class SignUp extends StatelessWidget {
     });
   }
 
-  Obx buildPasswordTextField() {
-    return Obx(
-      () => MyTextField(
-        validator: (text) => Helper.passwordValidator(text),
-        controller: _passwordController,
-        labelText: LocaleKeys.shared_password.tr,
-        hintText: LocaleKeys.shared_password_hint.tr,
-        obscureText: _controller.obscurePassword(),
-        textInputAction: TextInputAction.done,
-        suffixIconGestureDetector: getGestureDetectorSuffixIcon(true),
-      ),
+  Widget buildTextField(bool isPassword,
+      {TextEditingController controller, String label, String hint}) {
+    MyTextField myTextField = MyTextField(
+      validator: (text) => Validators.getValidator(isPassword, text),
+      controller: controller,
+      labelText: label,
+      hintText: hint,
+      obscureText: isPassword,
+      textInputAction: isPassword ? TextInputAction.done : TextInputAction.next,
+      suffixIconGestureDetector: getGestureDetectorSuffixIcon(isPassword),
     );
-  }
-
-  MyTextField buildUserNameTextField() {
-    return MyTextField(
-      validator: (text) => Helper.emptyValidator(text),
-      controller: _userNameController,
-      labelText: LocaleKeys.shared_user_name.tr,
-      hintText: LocaleKeys.shared_user_name_hint.tr,
-      obscureText: false,
-      textInputAction: TextInputAction.next,
-      suffixIconGestureDetector: getGestureDetectorSuffixIcon(false),
-    );
-  }
-
-  MyTextField buildLastNameTextField() {
-    return MyTextField(
-      validator: (text) => Helper.emptyValidator(text),
-      controller: _lastNameController,
-      labelText: LocaleKeys.sign_up_last_name.tr,
-      hintText: LocaleKeys.sign_up_last_name_hint.tr,
-      obscureText: false,
-      textInputAction: TextInputAction.next,
-      suffixIconGestureDetector: getGestureDetectorSuffixIcon(false),
-    );
-  }
-
-  MyTextField buildFirstNameTextField() {
-    return MyTextField(
-      validator: (text) => Helper.emptyValidator(text),
-      controller: _firstNameController,
-      labelText: LocaleKeys.sign_up_first_name.tr,
-      hintText: LocaleKeys.sign_up_first_name_hint.tr,
-      obscureText: false,
-      textInputAction: TextInputAction.next,
-      suffixIconGestureDetector: getGestureDetectorSuffixIcon(false),
-    );
+    if (isPassword) {
+      return Obx(() => myTextField);
+    } else {
+      return myTextField;
+    }
   }
 
   Widget getGestureDetectorSuffixIcon(bool isPassword) {
