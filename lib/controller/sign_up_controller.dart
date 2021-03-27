@@ -58,7 +58,7 @@ class SignUpController extends GetxController {
   }
 
   void _navigateToHomePage() {
-    Future.delayed(Duration(seconds: 3)).then((value) {
+    Future.delayed(Duration(seconds: 1)).then((value) {
       Get.off(() => HomePage());
     });
   }

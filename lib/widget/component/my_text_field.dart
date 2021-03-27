@@ -9,7 +9,7 @@ class MyTextField extends StatelessWidget {
   final TextInputAction textInputAction;
   final String labelText;
   final String hintText;
-  final GestureDetector suffixIconGestureDetector;
+  final Widget suffixIconGestureDetector;
 
   MyTextField(
       {this.controller,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_market/controller/login_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
+import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/validators.dart';
 import 'package:my_market/model/user.dart';
@@ -19,6 +20,7 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.lazyPut<LoginController>(() => LoginController());
     return Scaffold(
+      backgroundColor: AppColors.colorBackground,
       appBar: buildAppBar(),
       body: SingleChildScrollView(
         child: Container(
@@ -61,19 +63,26 @@ class Login extends StatelessWidget {
 
   Widget buildTextField(bool isPassword,
       {TextEditingController controller, String label, String hint}) {
-    MyTextField myTextField = MyTextField(
-      validator: (text) => Validators.getValidator(isPassword, text),
-      controller: controller,
-      labelText: label,
-      hintText: hint,
-      obscureText: isPassword,
-      textInputAction: isPassword ? TextInputAction.done : TextInputAction.next,
-      suffixIconGestureDetector: getGestureDetectorSuffixIcon(isPassword),
-    );
     if (isPassword) {
-      return Obx(() => myTextField);
+      return Obx(() => MyTextField(
+            validator: (text) => Validators.getValidator(isPassword, text),
+            controller: controller,
+            labelText: label,
+            hintText: hint,
+            obscureText: _controller.obscurePassword(),
+            textInputAction: TextInputAction.done,
+            suffixIconGestureDetector: getPasswordGestureSuffixIcon(),
+          ));
     } else {
-      return myTextField;
+      return MyTextField(
+        validator: (text) => Validators.getValidator(isPassword, text),
+        controller: controller,
+        labelText: label,
+        hintText: hint,
+        obscureText: false,
+        textInputAction: TextInputAction.next,
+        suffixIconGestureDetector: SizedBox(),
+      );
     }
   }
 
@@ -81,7 +90,7 @@ class Login extends StatelessWidget {
     return Obx(() {
       return MyButton(
           _controller.isLoading()
-              ? MyProgressIndicator()
+              ? MyProgressIndicator(24)
               : Text(LocaleKeys.shared_login.tr),
           _controller.isLoading() ? null : onLogin);
     });
@@ -93,24 +102,14 @@ class Login extends StatelessWidget {
     }
   }
 
-  Widget getGestureDetectorSuffixIcon(bool isPassword) {
+  Widget getPasswordGestureSuffixIcon() {
     return GestureDetector(
-        child: getTextFieldSuffixIcon(isPassword),
+        child: _controller.obscurePassword()
+            ? Icon(Icons.visibility_off)
+            : Icon(Icons.visibility),
         onTap: () {
-          if (isPassword) {
-            _controller.obscurePassword(!_controller.obscurePassword());
-          }
+          _controller.obscurePassword(!_controller.obscurePassword());
         });
-  }
-
-  Widget getTextFieldSuffixIcon(bool isPassword) {
-    if (isPassword) {
-      return _controller.obscurePassword()
-          ? Icon(Icons.visibility_off)
-          : Icon(Icons.visibility);
-    } else {
-      return SizedBox();
-    }
   }
 
   User buildUserFromInput() {

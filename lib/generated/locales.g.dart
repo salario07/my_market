@@ -10,6 +10,8 @@ class AppTranslation {
 }
 
 class LocaleKeys {
+  static const shared_app_name = 'shared_app_name';
+  static const shared_app_description = 'shared_app_description';
   static const shared_login = 'shared_login';
   static const shared_sign_up = 'shared_sign_up';
   static const shared_user_name = 'shared_user_name';
@@ -18,8 +20,6 @@ class LocaleKeys {
   static const shared_password_hint = 'shared_password_hint';
   static const shared_error = 'shared_error';
   static const shared_success = 'shared_success';
-  static const splash_app_name = 'splash_app_name';
-  static const splash_app_description = 'splash_app_description';
   static const sign_up_first_name = 'sign_up_first_name';
   static const sign_up_last_name = 'sign_up_last_name';
   static const sign_up_first_name_hint = 'sign_up_first_name_hint';
@@ -36,10 +36,15 @@ class LocaleKeys {
   static const login_invalid_credentials = 'login_invalid_credentials';
   static const login_username_or_password_is_incorrect =
       'login_username_or_password_is_incorrect';
+  static const home_page_app_name = 'home_page_app_name';
+  static const home_page_categories = 'home_page_categories';
+  static const home_page_populars = 'home_page_populars';
 }
 
 class Locales {
   static const en_US = {
+    'shared_app_name': 'My Market',
+    'shared_app_description': 'Shopping flutter application',
     'shared_login': 'Login',
     'shared_sign_up': 'Sign Up',
     'shared_user_name': 'User Name',
@@ -48,8 +53,6 @@ class Locales {
     'shared_password_hint': 'Enter Password here',
     'shared_error': 'Error',
     'shared_success': 'Success',
-    'splash_app_name': 'My Market',
-    'splash_app_description': 'Shopping flutter application',
     'sign_up_first_name': 'First Name',
     'sign_up_last_name': 'Last Name',
     'sign_up_first_name_hint': 'Enter First Name here',
@@ -63,8 +66,13 @@ class Locales {
     'login_invalid_credentials': 'Invalid Credentials',
     'login_username_or_password_is_incorrect':
         'Username or password is incorrect',
+    'home_page_app_name': 'My Market',
+    'home_page_categories': 'Categories',
+    'home_page_populars': 'Populars',
   };
   static const fa_IR = {
+    'shared_app_name': 'My Market',
+    'shared_app_description': 'اپلیکیشن فروشگاهی فلاتر',
     'shared_login': 'ورود',
     'shared_sign_up': 'ثبت نام',
     'shared_user_name': 'نام کاربری',
@@ -73,8 +81,6 @@ class Locales {
     'shared_password_hint': 'رمز عبور را وارد کنید',
     'shared_error': 'خطا',
     'shared_success': 'موفق',
-    'splash_app_name': 'فروشگاه من',
-    'splash_app_description': 'اپلیکیشن فروشگاهی فلاتر',
     'sign_up_first_name': 'نام',
     'sign_up_last_name': 'نام خانوادگی',
     'sign_up_first_name_hint': 'نام تان را اینجا وارد کنید',
@@ -89,5 +95,8 @@ class Locales {
     'login_invalid_credentials': 'اطلاعات نامعتبر است',
     'login_username_or_password_is_incorrect':
         'نام کاربری یا رمز عبور اشتباه است',
+    'home_page_app_name': 'فروشگاه من',
+    'home_page_categories': 'دسته بندی ها',
+    'home_page_populars': 'محبوب ها',
   };
 }

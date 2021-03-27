@@ -1,5 +1,7 @@
 {
   "shared": {
+    "app_name": "My Market",
+    "app_description": "اپلیکیشن فروشگاهی فلاتر",
     "login": "ورود",
     "sign_up": "ثبت نام",
     "user_name": "نام کاربری",
@@ -8,10 +10,6 @@
     "password_hint": "رمز عبور را وارد کنید",
     "error": "خطا",
     "success": "موفق"
-  },
-  "splash": {
-    "app_name": "فروشگاه من",
-    "app_description": "اپلیکیشن فروشگاهی فلاتر"
   },
   "sign_up": {
     "first_name": "نام",
@@ -28,5 +26,10 @@
     "logged_in_successfully": "با موفقیت وارد شدید",
     "invalid_credentials": "اطلاعات نامعتبر است",
     "username_or_password_is_incorrect": "نام کاربری یا رمز عبور اشتباه است"
+  },
+  "home_page": {
+    "app_name": "فروشگاه من",
+    "categories": "دسته بندی ها",
+    "populars": "محبوب ها"
   }
 }

@@ -18,9 +18,9 @@ class User {
 
   Map<String, dynamic> toJson() => {
         Constants.id: id,
-        Constants.firstName: firstName,
-        Constants.lastName: lastName,
-        Constants.userName: userName,
+        Constants.first_name: firstName,
+        Constants.last_name: lastName,
+        Constants.user_name: userName,
         Constants.password: password,
         Constants.role: role
       };
@@ -28,9 +28,9 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json[Constants.id],
-      firstName: json[Constants.firstName],
-      lastName: json[Constants.lastName],
-      userName: json[Constants.userName],
+      firstName: json[Constants.first_name],
+      lastName: json[Constants.last_name],
+      userName: json[Constants.user_name],
       password: json[Constants.password],
       role: json[Constants.role],
     );

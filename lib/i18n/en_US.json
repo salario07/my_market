@@ -1,5 +1,7 @@
 {
   "shared": {
+    "app_name": "My Market",
+    "app_description": "Shopping flutter application",
     "login": "Login",
     "sign_up": "Sign Up",
     "user_name": "User Name",
@@ -8,10 +10,6 @@
     "password_hint": "Enter Password here",
     "error": "Error",
     "success": "Success"
-  },
-  "splash": {
-    "app_name": "My Market",
-    "app_description": "Shopping flutter application"
   },
   "sign_up": {
     "first_name": "First Name",
@@ -28,5 +26,10 @@
     "logged_in_successfully": "Logged in Successfully",
     "invalid_credentials": "Invalid Credentials",
     "username_or_password_is_incorrect": "Username or password is incorrect"
+  },
+  "home_page": {
+    "app_name": "My Market",
+    "categories": "Categories",
+    "populars": "Populars"
   }
 }

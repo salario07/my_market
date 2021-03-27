@@ -2,13 +2,22 @@ class Constants {
   static const String base_url = 'http://10.0.2.2:3000/';
   static const String content_type = 'application/json';
   static const String url_users = 'users';
+  static const String url_categories = 'categories';
+  static const String url_products = 'products';
 
   static const String id = 'id';
-  static const String firstName = 'firstName';
-  static const String lastName = 'lastName';
-  static const String userName = 'userName';
+  static const String first_name = 'firstName';
+  static const String last_name = 'lastName';
+  static const String user_name = 'userName';
   static const String password = 'password';
   static const String role = 'role';
+  static const String name = 'name';
+  static const String category_id = 'categoryId';
+  static const String stock = 'stock';
+  static const String category_name = 'categoryName';
+  static const String price = 'price';
+  static const String description = 'description';
+  static const String images = 'images';
 
   static const String role_user = 'user';
   static const String role_admin = 'admin';
