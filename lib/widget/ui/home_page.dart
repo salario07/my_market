@@ -23,11 +23,9 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Text(LocaleKeys.home_page_categories.tr,
                   textAlign: TextAlign.start)),
-          Flexible(
-            fit: FlexFit.loose,
+          Expanded(
             child: Obx(
               () => ListView.builder(
-                shrinkWrap: true,
                 padding: EdgeInsets.all(8),
                 itemBuilder: (context, index) =>
                     ItemCategory(_controller.categories()[index]),

@@ -65,7 +65,7 @@ class Login extends StatelessWidget {
       {TextEditingController controller, String label, String hint}) {
     if (isPassword) {
       return Obx(() => MyTextField(
-            validator: (text) => Validators.getValidator(isPassword, text),
+            validator: (text) => Validators.passwordValidator(text),
             controller: controller,
             labelText: label,
             hintText: hint,
@@ -75,7 +75,7 @@ class Login extends StatelessWidget {
           ));
     } else {
       return MyTextField(
-        validator: (text) => Validators.getValidator(isPassword, text),
+        validator: (text) => Validators.emptyValidator(text),
         controller: controller,
         labelText: label,
         hintText: hint,

@@ -44,21 +44,21 @@ class SignUp extends StatelessWidget {
       child: Column(
         children: [
           buildTextField(
-            true,
+            false,
             controller: _firstNameController,
             hint: LocaleKeys.sign_up_first_name_hint.tr,
             label: LocaleKeys.sign_up_first_name.tr,
           ),
           SizedBox(height: 12),
           buildTextField(
-            true,
+            false,
             controller: _lastNameController,
             hint: LocaleKeys.sign_up_last_name_hint.tr,
             label: LocaleKeys.sign_up_last_name.tr,
           ),
           SizedBox(height: 12),
           buildTextField(
-            true,
+            false,
             controller: _userNameController,
             hint: LocaleKeys.shared_user_name_hint.tr,
             label: LocaleKeys.shared_user_name.tr,
@@ -94,7 +94,7 @@ class SignUp extends StatelessWidget {
       {TextEditingController controller, String label, String hint}) {
     if (isPassword) {
       return Obx(() => MyTextField(
-            validator: (text) => Validators.getValidator(isPassword, text),
+            validator: (text) => Validators.passwordValidator(text),
             controller: controller,
             labelText: label,
             hintText: hint,
@@ -105,7 +105,7 @@ class SignUp extends StatelessWidget {
           ));
     } else {
       return MyTextField(
-        validator: (text) => Validators.getValidator(isPassword, text),
+        validator: (text) => Validators.emptyValidator(text),
         controller: controller,
         labelText: label,
         hintText: hint,

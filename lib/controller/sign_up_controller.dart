@@ -43,7 +43,6 @@ class SignUpController extends GetxController {
           LocaleKeys.sign_up_signed_up_successfully.tr);
       _navigateToHomePage();
     }).catchError((error) {
-      Helper.logDebug(error.toString());
       Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
     }).whenComplete(() => isLoading(false));
   }
@@ -59,7 +58,7 @@ class SignUpController extends GetxController {
 
   void _navigateToHomePage() {
     Future.delayed(Duration(seconds: 1)).then((value) {
-      Get.off(() => HomePage());
+      Get.offAll(() => HomePage());
     });
   }
 }
