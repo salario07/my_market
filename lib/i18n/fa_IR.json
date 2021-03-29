@@ -30,6 +30,12 @@
   "home_page": {
     "app_name": "فروشگاه من",
     "categories": "دسته بندی ها",
-    "populars": "محبوب ها"
+    "populars": "محبوب ها",
+    "home": "خانه"
+  },
+  "show_product": {
+    "stock" : "موجودی",
+    "items" : "عدد",
+    "add_to_cart" : "اضافه به سبد خرید"
   }
 }

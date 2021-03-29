@@ -30,6 +30,12 @@
   "home_page": {
     "app_name": "My Market",
     "categories": "Categories",
-    "populars": "Populars"
+    "populars": "Populars",
+    "home": "Home"
+  },
+  "show_product": {
+    "stock" : "Stock",
+    "items" : "Items",
+    "add_to_cart" : "Add to Cart"
   }
 }

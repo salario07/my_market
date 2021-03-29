@@ -15,9 +15,11 @@ class ItemCategory extends StatelessWidget {
       margin: EdgeInsets.all(8),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: Text(
-          category.name,
-          style: TextStyle(fontSize: 18),
+        child: Center(
+          child: Text(
+            category.name,
+            style: TextStyle(fontSize: 18),
+          ),
         ),
       ),
     );

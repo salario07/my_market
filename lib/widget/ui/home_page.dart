@@ -16,7 +16,6 @@ class HomePage extends StatelessWidget {
         title: Text(LocaleKeys.shared_app_name.tr),
       ),
       body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
         child: Container(
           height: MediaQuery.of(context).size.height,
           child: Column(
@@ -26,7 +25,9 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 16),
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(LocaleKeys.home_page_categories.tr)),
+                  child: Text(LocaleKeys.home_page_categories.tr,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 15))),
               Flexible(
                 fit: FlexFit.loose,
                 flex: 1,
@@ -43,7 +44,9 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 16),
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(LocaleKeys.home_page_populars.tr)),
+                  child: Text(LocaleKeys.home_page_populars.tr,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 15))),
               Flexible(
                 fit: FlexFit.tight,
                 flex: 6,
@@ -74,7 +77,7 @@ class HomePage extends StatelessWidget {
               height: 160,
               child: ColoredBox(color: AppColors.colorPrimary),
             ),
-            buildDrawerItem(Icons.home, 'Home', () => Get.back(), true),
+            buildDrawerItem(Icons.home, LocaleKeys.home_page_home.tr, () => Get.back(), true),
             Divider(height: 1, color: AppColors.colorDivider),
           ],
         ),
