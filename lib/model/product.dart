@@ -46,4 +46,16 @@ class Product {
       Constants.images: images
     };
   }
+
+  static Product getDefault(){
+    return Product(
+        id: 0,
+        name: '',
+        categoryId: 0,
+        categoryName: '',
+        description: '',
+        images: [],
+        price: 0,
+        stock: 0);
+  }
 }

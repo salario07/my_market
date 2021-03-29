@@ -15,69 +15,81 @@ class ShowProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.lazyPut<ShowProductController>(() => ShowProductController(id));
     return Scaffold(
+      backgroundColor: AppColors.colorBackground,
       appBar: AppBar(
         title: Obx(() => Text(_controller.product().name)),
       ),
-      body: Obx(
-        () => Column(
-          children: [
-            /*Image.network(
-              _controller.product().images[0],
-              width: double.infinity,
-              fit: BoxFit.fitWidth,
-            ),*/
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Text(
-                      _controller.product().name,
-                      textAlign: TextAlign.start,
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.colorPrimary),
-                        borderRadius: BorderRadius.circular(
-                            Dimens.edit_text_border_radius)),
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Obx(
+          () => Padding(
+            padding: EdgeInsets.only(top: 16, bottom: 24, right: 16, left: 16),
+            child: Column(
+              children: [
+                _controller.product().images.length > 0
+                    ? Image.network(
+                        _controller.product().images[0],
+                        width: double.infinity,
+                        fit: BoxFit.fitWidth,
+                      )
+                    : Container(
+                        width: double.infinity,
+                        child: FittedBox(
+                            fit: BoxFit.fitWidth, child: Icon(Icons.image,color: AppColors.colorDivider,))),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
                       child: Text(
-                        _controller.product().price.toString(),
+                        _controller.product().name,
+                        textAlign: TextAlign.start,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: AppColors.colorPrimary),
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
-                  )
-                ],
-              ),
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.colorPrimary),
+                          borderRadius: BorderRadius.circular(
+                              Dimens.edit_text_border_radius)),
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        child: Text(
+                          _controller.product().price.toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: AppColors.colorPrimary),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Container(
+                  width: double.infinity,
+                  child: Text(
+                    _controller.product().description,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(LocaleKeys.show_product_stock.tr),
+                    Text(
+                        '${_controller.product().stock} ${LocaleKeys.show_product_items.tr}',textAlign: TextAlign.end,)
+                  ],
+                )
+              ],
             ),
-            Padding(
-                padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                child: Text(_controller.product().description,textAlign: TextAlign.start,)),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(LocaleKeys.show_product_stock.tr),
-                  Text(
-                      '${_controller.product().stock} ${LocaleKeys.show_product_items.tr}')
-                ],
-              ),
-            )
-          ],
+          ),
         ),
       ),
       bottomNavigationBar: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
           child: MyButton(Text(LocaleKeys.show_product_add_to_cart.tr), () {})),
     );
   }
