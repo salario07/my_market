@@ -32,4 +32,14 @@ class JsonParser {
 
     return products;
   }
+
+  static List<String> parseStringList(List<dynamic> responseBody) {
+    List<String> strings = [];
+
+    for (var i = 0; i < responseBody.length; ++i) {
+      strings.add(responseBody[i]);
+    }
+
+    return strings;
+  }
 }

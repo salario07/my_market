@@ -8,4 +8,8 @@ class HomePageRepo {
   Future<Response> getCategories() {
     return _dio.get(Constants.url_categories);
   }
+
+  Future<Response> getProducts() {
+    return _dio.get(Constants.url_products);
+  }
 }

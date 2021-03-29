@@ -4,6 +4,7 @@ import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/widget/ui/item_category.dart';
+import 'package:my_market/widget/ui/item_product.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -14,32 +15,89 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(LocaleKeys.shared_app_name.tr),
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 16),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text(LocaleKeys.home_page_categories.tr,
-                  textAlign: TextAlign.start)),
-          Expanded(
-            child: Obx(
-              () => ListView.builder(
-                padding: EdgeInsets.all(8),
-                itemBuilder: (context, index) =>
-                    ItemCategory(_controller.categories()[index]),
-                itemCount: _controller.categories().length,
-                scrollDirection: Axis.horizontal,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 16),
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(LocaleKeys.home_page_categories.tr)),
+              Flexible(
+                fit: FlexFit.loose,
+                flex: 1,
+                child: Obx(
+                  () => ListView.builder(
+                    padding: EdgeInsets.all(8),
+                    itemBuilder: (context, index) =>
+                        ItemCategory(_controller.categories()[index]),
+                    itemCount: _controller.categories().length,
+                    scrollDirection: Axis.horizontal,
+                  ),
+                ),
               ),
-            ),
+              SizedBox(height: 16),
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(LocaleKeys.home_page_populars.tr)),
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 6,
+                child: Obx(
+                  () => GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.all(8),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2),
+                    itemBuilder: (context, index) =>
+                        ItemProduct(_controller.products()[index]),
+                    scrollDirection: Axis.vertical,
+                    itemCount: _controller.products().length,
+                  ),
+                ),
+              ),
+              SizedBox(height: 16)
+            ],
           ),
-          SizedBox(height: 16),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text(LocaleKeys.home_page_populars.tr)),
-          SizedBox(height: 16)
-        ],
+        ),
+      ),
+      drawer: Drawer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              height: 160,
+              child: ColoredBox(color: AppColors.colorPrimary),
+            ),
+            buildDrawerItem(Icons.home, 'Home', () => Get.back(), true),
+            Divider(height: 1, color: AppColors.colorDivider),
+          ],
+        ),
+      ),
+    );
+  }
+
+  InkWell buildDrawerItem(
+      IconData iconData, String text, Function onTap, bool isHome) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(iconData,
+                color:
+                    isHome ? AppColors.colorPrimary : AppColors.colorDivider),
+            SizedBox(width: 8),
+            Text(text)
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:my_market/helper/constants.dart';
+import 'package:my_market/helper/json_parser.dart';
 
 class Product {
   final int id;
@@ -6,7 +7,7 @@ class Product {
   final int stock;
   final String name;
   final String categoryName;
-  final double price;
+  final num price;
   final String description;
   final List<String> images;
 
@@ -27,9 +28,9 @@ class Product {
       stock: json[Constants.stock],
       name: json[Constants.name],
       categoryName: json[Constants.category_name],
-      price: json[Constants.price],
+      price: (json[Constants.price]),
       description: json[Constants.description],
-      images: json[Constants.images],
+      images: JsonParser.parseStringList(json[Constants.images]),
     );
   }
 
