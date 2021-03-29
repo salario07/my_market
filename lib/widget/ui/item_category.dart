@@ -3,7 +3,7 @@ import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/model/category.dart';
 
 class ItemCategory extends StatelessWidget {
-  final Category category;
+  final Category? category;
 
   ItemCategory(this.category);
 
@@ -17,7 +17,7 @@ class ItemCategory extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Center(
           child: Text(
-            category.name,
+            category?.name??'',
             style: TextStyle(fontSize: 18),
           ),
         ),

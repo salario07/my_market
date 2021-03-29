@@ -19,11 +19,11 @@ class SignUpController extends GetxController {
     _checkUsername(user);
   }
 
-  void _checkUsername(User user) {
+  void _checkUsername(User? user) {
     repository.getUsers().then((response) {
       List<User> users = JsonParser.parseUsers(response.data);
       bool doesUserNameAlreadyExists =
-          _doesUsernameExists(users, user.userName);
+          _doesUsernameExists(users, user?.userName??'');
       if (!doesUserNameAlreadyExists) {
         _addUser(user);
       } else {
@@ -37,7 +37,7 @@ class SignUpController extends GetxController {
     });
   }
 
-  void _addUser(User user) {
+  void _addUser(User? user) {
     repository.addUser(user).then((response) {
       Helper.successSnackBar(LocaleKeys.shared_success.tr,
           LocaleKeys.sign_up_signed_up_successfully.tr);

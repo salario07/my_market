@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:my_market/generated/locales.g.dart';
 
 class LocalizationService extends Translations {
-  Map<String, String> faIR;
-  Map<String, String> enUS;
+  Map<String, String>? faIR;
+  Map<String, String>? enUS;
 
   static final defaultLocale = locales[0];
 
@@ -19,12 +19,12 @@ class LocalizationService extends Translations {
   LocalizationService() {
     faIR = {};
     enUS = {};
-    faIR.addAll(Locales.fa_IR);
-    enUS.addAll(Locales.en_US);
+    faIR?.addAll(Locales.fa_IR);
+    enUS?.addAll(Locales.en_US);
   }
 
   @override
-  Map<String, Map<String, String>> get keys => {'fa_IR': faIR, 'en_US': enUS};
+  Map<String, Map<String, String>?> get keys => {'fa_IR': faIR, 'en_US': enUS};
 
   void changeLocale(Locale locale) {
     Get.updateLocale(locale);

@@ -91,10 +91,10 @@ class SignUp extends StatelessWidget {
   }
 
   Widget buildTextField(bool isPassword,
-      {TextEditingController controller, String label, String hint}) {
+      {TextEditingController? controller, String label = '', String hint = ''}) {
     if (isPassword) {
       return Obx(() => MyTextField(
-            validator: (text) => Validators.passwordValidator(text),
+            validator: (text) => Validators.passwordValidator(text!=null?text:''),
             controller: controller,
             labelText: label,
             hintText: hint,
@@ -105,7 +105,7 @@ class SignUp extends StatelessWidget {
           ));
     } else {
       return MyTextField(
-        validator: (text) => Validators.emptyValidator(text),
+        validator: (text) => Validators.emptyValidator(text!=null?text:''),
         controller: controller,
         labelText: label,
         hintText: hint,
@@ -127,7 +127,7 @@ class SignUp extends StatelessWidget {
   }
 
   void onSignUp() {
-    if (_controller.formKey.currentState.validate()) {
+    if (_controller.formKey.currentState?.validate()??false) {
       _controller.signUp(buildUserFromInput());
     }
   }

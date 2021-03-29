@@ -5,6 +5,10 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/widget/component/my_button.dart';
+import 'package:my_market/widget/component/text_content.dart';
+import 'package:my_market/widget/component/text_label.dart';
+import 'package:my_market/widget/component/text_title.dart';
+import 'package:number_picker/number_picker.dart';
 
 class ShowProduct extends StatelessWidget {
   final int id;
@@ -17,7 +21,7 @@ class ShowProduct extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: AppBar(
-        title: Obx(() => Text(_controller.product().name)),
+        title: Obx(() => Text(_controller.product()?.name ?? '')),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -26,26 +30,19 @@ class ShowProduct extends StatelessWidget {
             padding: EdgeInsets.only(top: 16, bottom: 24, right: 16, left: 16),
             child: Column(
               children: [
-                _controller.product().images.length > 0
-                    ? Image.network(
-                        _controller.product().images[0],
-                        width: double.infinity,
-                        fit: BoxFit.fitWidth,
-                      )
-                    : Container(
-                        width: double.infinity,
-                        child: FittedBox(
-                            fit: BoxFit.fitWidth, child: Icon(Icons.image,color: AppColors.colorDivider,))),
+                Image.network(
+                  _controller.product().images?.elementAt(0) ?? '',
+                  width: double.infinity,
+                  fit: BoxFit.fitWidth,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: Text(
-                        _controller.product().name,
+                      child: TextTitle(
+                        _controller.product()?.name ?? '',
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
                     Container(
@@ -67,30 +64,36 @@ class ShowProduct extends StatelessWidget {
                     )
                   ],
                 ),
-                Container(
-                  width: double.infinity,
-                  child: Text(
-                    _controller.product().description,
-                    textAlign: TextAlign.start,
-                  ),
-                ),
+                SizedBox(height: 16),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(LocaleKeys.show_product_stock.tr),
-                    Text(
-                        '${_controller.product().stock} ${LocaleKeys.show_product_items.tr}',textAlign: TextAlign.end,)
+                    TextLabel(LocaleKeys.show_product_stock.tr),
+                    SizedBox(width: 8),
+                    TextContent(
+                      '${_controller.product().stock} ${LocaleKeys.show_product_items.tr}',
+                      textAlign: TextAlign.end,
+                    )
                   ],
-                )
+                ),
+                SizedBox(height: 16),
+                Container(
+                  width: double.infinity,
+                  child: TextContent(
+                    _controller.product()?.description ?? '',
+                    textAlign: TextAlign.start,
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: Padding(
+      /*bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-          child: MyButton(Text(LocaleKeys.show_product_add_to_cart.tr), () {})),
+          child: MyButton(Text(LocaleKeys.show_product_add_to_cart.tr), () {})),*/
+      bottomNavigationBar: NumberPicker(),
     );
   }
 

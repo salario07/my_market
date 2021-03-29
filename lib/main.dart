@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_market/helper/app_colors.dart';
-import 'file:///D:/Salar/flutter/MyMarket/my_market/lib/widget/ui/splash.dart';
 
 import 'helper/localization_service.dart';
+import 'widget/ui/splash.dart';
 
 void main() {
   runApp(MyApp());

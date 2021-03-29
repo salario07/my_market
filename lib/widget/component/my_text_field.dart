@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/helper/validators.dart';
 
 class MyTextField extends StatelessWidget {
-  final TextEditingController controller;
-  final Function validator;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
   final bool obscureText;
   final TextInputAction textInputAction;
   final String labelText;
   final String hintText;
-  final Widget suffixIconGestureDetector;
+  final Widget? suffixIconGestureDetector;
 
   MyTextField(
       {this.controller,

@@ -1,12 +1,12 @@
 import 'package:my_market/helper/constants.dart';
 
 class User {
-  final int id;
-  final String firstName;
-  final String lastName;
-  final String userName;
-  final String password;
-  final String role;
+  final int? id;
+  final String? firstName;
+  final String? lastName;
+  final String? userName;
+  final String? password;
+  final String? role;
 
   User(
       {this.id,

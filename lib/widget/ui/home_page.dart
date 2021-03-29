@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
   }
 
   InkWell buildDrawerItem(
-      IconData iconData, String text, Function onTap, bool isHome) {
+      IconData iconData, String text, Function()? onTap, bool isHome) {
     return InkWell(
       onTap: onTap,
       child: Padding(

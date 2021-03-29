@@ -1,8 +1,8 @@
 import 'package:my_market/helper/constants.dart';
 
 class Category {
-  final int id;
-  final String name;
+  final int? id;
+  final String? name;
 
   Category({this.id, this.name});
 

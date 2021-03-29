@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/login_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
-import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/validators.dart';
 import 'package:my_market/model/user.dart';
 import 'package:my_market/widget/component/my_button.dart';
@@ -62,10 +61,10 @@ class Login extends StatelessWidget {
   }
 
   Widget buildTextField(bool isPassword,
-      {TextEditingController controller, String label, String hint}) {
+      {TextEditingController? controller, String label = '', String hint = ''}) {
     if (isPassword) {
       return Obx(() => MyTextField(
-            validator: (text) => Validators.passwordValidator(text),
+            validator: (text) => Validators.passwordValidator(text!=null?text:''),
             controller: controller,
             labelText: label,
             hintText: hint,
@@ -75,7 +74,7 @@ class Login extends StatelessWidget {
           ));
     } else {
       return MyTextField(
-        validator: (text) => Validators.emptyValidator(text),
+        validator: (text) => Validators.emptyValidator(text!=null?text:''),
         controller: controller,
         labelText: label,
         hintText: hint,
@@ -97,7 +96,7 @@ class Login extends StatelessWidget {
   }
 
   void onLogin() {
-    if (_controller.formKey.currentState.validate()) {
+    if (_controller.formKey.currentState?.validate()??false) {
       _controller.login(buildUserFromInput());
     }
   }
