@@ -10,7 +10,7 @@ class AppTranslation {
 }
 
 class LocaleKeys {
-  static const add_to_cart = 'add_to_cart';
+  static const add_to_cart = 'Add to Cart';
 }
 
 class Locales {

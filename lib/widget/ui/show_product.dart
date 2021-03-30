@@ -29,7 +29,7 @@ class ShowProduct extends StatelessWidget {
             child: Obx(
               () => Padding(
                 padding:
-                    EdgeInsets.only(top: 16, bottom: 64, right: 16, left: 16),
+                    EdgeInsets.only(top: 16, bottom: 88, right: 16, left: 16),
                 child: buildProductInfo(),
               ),
             ),
@@ -78,26 +78,32 @@ class ShowProduct extends StatelessWidget {
   Widget buildNumberPicker() {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Obx(
-        () => Expanded(
-          child: Row(children: [
-            _controller.number() != 0
-                ? Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextLabel(LocaleKeys.show_product_total_price.tr),
-                      TextTitle(calculateTotalPrice().toString())
-                    ],
-                  )
-                : SizedBox(),
-            NumberPicker(
-              onIncrement: () => _controller.number(_controller.number() + 1),
-              onDecrement: () => _controller.number(
-                _controller.number() - 1,
-              ),
-            )
-          ]),
+      child: Container(
+        color: AppColors.colorBackground,
+        child: Obx(
+          () => Expanded(
+            child: Row(children: [
+              _controller.number() != 0
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextLabel(LocaleKeys.show_product_total_price.tr),
+                          TextTitle(calculateTotalPrice().toString())
+                        ],
+                      ),
+                    )
+                  : SizedBox(),
+              NumberPicker(
+                onIncrement: () => _controller.number(_controller.number() + 1),
+                onDecrement: () => _controller.number(
+                  _controller.number() - 1,
+                ),
+              )
+            ]),
+          ),
         ),
       ),
     );
