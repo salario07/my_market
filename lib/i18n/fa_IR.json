@@ -36,6 +36,7 @@
   "show_product": {
     "stock" : "موجودی",
     "items" : "عدد",
-    "add_to_cart" : "اضافه به سبد خرید"
+    "add_to_cart" : "اضافه به سبد خرید",
+    "total_price" : "مبلغ کل"
   }
 }

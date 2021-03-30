@@ -43,6 +43,7 @@ class LocaleKeys {
   static const show_product_stock = 'show_product_stock';
   static const show_product_items = 'show_product_items';
   static const show_product_add_to_cart = 'show_product_add_to_cart';
+  static const show_product_total_price = 'show_product_total_price';
 }
 
 class Locales {
@@ -77,6 +78,7 @@ class Locales {
     'show_product_stock': 'Stock',
     'show_product_items': 'Items',
     'show_product_add_to_cart': 'Add to Cart',
+    'show_product_total_price': 'Total Price',
   };
   static const fa_IR = {
     'shared_app_name': 'My Market',
@@ -110,5 +112,6 @@ class Locales {
     'show_product_stock': 'موجودی',
     'show_product_items': 'عدد',
     'show_product_add_to_cart': 'اضافه به سبد خرید',
+    'show_product_total_price': 'مبلغ کل',
   };
 }

@@ -24,10 +24,6 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
-  fonts:
-    - family:  Custom
-      fonts:
-       - asset: fonts/Custom.ttf
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

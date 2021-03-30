@@ -91,7 +91,7 @@ class SignUp extends StatelessWidget {
   }
 
   Widget buildTextField(bool isPassword,
-      {TextEditingController? controller, String label = '', String hint = ''}) {
+      {TextEditingController controller, String label = '', String hint = ''}) {
     if (isPassword) {
       return Obx(() => MyTextField(
             validator: (text) => Validators.passwordValidator(text!=null?text:''),

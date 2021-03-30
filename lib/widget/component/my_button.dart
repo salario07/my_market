@@ -4,7 +4,7 @@ import 'package:my_market/helper/dimens.dart';
 class MyButton extends StatelessWidget {
 
   final Widget child;
-  final Function()? onTap;
+  final Function() onTap;
 
   MyButton(this.child,this.onTap);
 

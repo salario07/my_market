@@ -3,7 +3,7 @@ import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/model/category.dart';
 
 class ItemCategory extends StatelessWidget {
-  final Category? category;
+  final Category category;
 
   ItemCategory(this.category);
 

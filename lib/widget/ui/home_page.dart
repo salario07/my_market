@@ -5,6 +5,7 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/widget/ui/item_category.dart';
 import 'package:my_market/widget/ui/item_product.dart';
+import 'package:number_picker/number_picker.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -86,7 +87,7 @@ class HomePage extends StatelessWidget {
   }
 
   InkWell buildDrawerItem(
-      IconData iconData, String text, Function()? onTap, bool isHome) {
+      IconData iconData, String text, Function() onTap, bool isHome) {
     return InkWell(
       onTap: onTap,
       child: Padding(

@@ -36,6 +36,7 @@
   "show_product": {
     "stock" : "Stock",
     "items" : "Items",
-    "add_to_cart" : "Add to Cart"
+    "add_to_cart" : "Add to Cart",
+    "total_price" : "Total Price"
   }
 }

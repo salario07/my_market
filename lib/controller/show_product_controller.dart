@@ -8,6 +8,7 @@ import 'package:my_market/repository/show_product_repo.dart';
 class ShowProductController extends GetxController {
   Rx<Product> product = Product.getDefault().obs;
   RxBool isLoading = true.obs;
+  RxInt number = 0.obs;
 
   ShowProductRepo repository = ShowProductRepo();
 

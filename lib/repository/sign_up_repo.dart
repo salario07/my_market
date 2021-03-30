@@ -10,7 +10,7 @@ class SignUpRepo {
     return _dio.get(Constants.url_users);
   }
 
-  Future<Response> addUser(User? user) {
+  Future<Response> addUser(User user) {
     return _dio.post(Constants.url_users, data: user?.toJson());
   }
 }

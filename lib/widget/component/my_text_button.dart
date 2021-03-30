@@ -3,7 +3,7 @@ import 'package:my_market/helper/app_colors.dart';
 
 class MyTextButton extends StatelessWidget {
   final String text;
-  final Function()? onTap;
+  final Function() onTap;
 
   MyTextButton(this.text, this.onTap);
 

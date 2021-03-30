@@ -5,7 +5,7 @@ import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/ui/show_product.dart';
 
 class ItemProduct extends StatelessWidget {
-  final Product? product;
+  final Product product;
 
   ItemProduct(this.product);
 
@@ -20,16 +20,20 @@ class ItemProduct extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                product?.images?.elementAt(0)??'',
-                width: 80,
-                height: 80,
+              Center(
+                child: Image.network(
+                  product?.images?.elementAt(0)??'',
+                  width: 80,
+                  height: 80,
+                ),
               ),
               Text(
                 product?.name??'',
                 style: TextStyle(fontSize: 14),
               ),
+              SizedBox(height: 8),
               Text(
                 product?.price.toString()??'',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
