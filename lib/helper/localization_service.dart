@@ -20,10 +20,10 @@ class LocalizationService extends Translations {
   LocalizationService() {
     faIR = {};
     enUS = {};
-    faIR?.addAll(main.Locales.fa_IR);
-    faIR?.addAll(numberPicker.Locales.fa_IR);
-    enUS?.addAll(main.Locales.en_US);
-    enUS?.addAll(numberPicker.Locales.en_US);
+    faIR.addAll(main.Locales.fa_IR);
+    faIR.addAll(numberPicker.Locales.fa_IR);
+    enUS.addAll(main.Locales.en_US);
+    enUS.addAll(numberPicker.Locales.en_US);
   }
 
   @override

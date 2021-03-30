@@ -33,11 +33,15 @@ class NumberPicker extends StatelessWidget {
                   buildPlusButton(),
                 ],
               )
-            : Expanded(
-                child: MyButton(Text(LocaleKeys.add_to_cart.tr), _onIncrement),
-              )),
+            : buildAddToCartButton()),
       ),
     );
+  }
+
+  Expanded buildAddToCartButton() {
+    return Expanded(
+              child: MyButton(Text(LocaleKeys.add_to_cart.tr), _onIncrement),
+            );
   }
 
   Container buildCounterNumber() => Container(

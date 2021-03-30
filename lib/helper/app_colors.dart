@@ -11,6 +11,7 @@ class AppColors {
   static const Color colorTextOnPrimary = Color(0xFFFFFFFF);
   static const Color colorTextLight = Color(0xFF6F6F6F);
   static const Color colorText = Color(0xFF111111);
+  static const Color colorSurface = Color(0xFFFFFFFF);
 
   static const Color colorError = Color(0xFFEA2323);
   static const Color colorSuccess = Color(0xFF28C938);

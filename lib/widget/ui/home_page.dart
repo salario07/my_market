@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
+import 'package:my_market/widget/ui/cart.dart';
 import 'package:my_market/widget/ui/item_category.dart';
 import 'package:my_market/widget/ui/item_product.dart';
 
@@ -14,6 +15,14 @@ class HomePage extends StatelessWidget {
       backgroundColor: AppColors.colorBackground,
       appBar: AppBar(
         title: Text(LocaleKeys.shared_app_name.tr),
+        actions: [
+          GestureDetector(
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Icon(Icons.shopping_cart)),
+            onTap: () => Get.to(() => Cart()),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -77,7 +86,8 @@ class HomePage extends StatelessWidget {
               height: 160,
               child: ColoredBox(color: AppColors.colorPrimary),
             ),
-            buildDrawerItem(Icons.home, LocaleKeys.home_page_home.tr, () => Get.back(), true),
+            buildDrawerItem(Icons.home, LocaleKeys.home_page_home.tr,
+                () => Get.back(), true),
             Divider(height: 1, color: AppColors.colorDivider),
           ],
         ),

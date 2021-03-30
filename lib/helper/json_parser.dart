@@ -1,3 +1,4 @@
+import 'package:my_market/model/shopping_item.dart';
 import 'package:my_market/model/category.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/model/user.dart';
@@ -31,6 +32,16 @@ class JsonParser {
     }
 
     return products;
+  }
+
+  static List<ShoppingItem> parseShoppingItems(List<dynamic> responseBody) {
+    List<ShoppingItem> items = [];
+
+    for (var i = 0; i < responseBody.length; ++i) {
+      items.add(ShoppingItem.fromJson(responseBody[i]));
+    }
+
+    return items;
   }
 
   static List<String> parseStringList(List<dynamic> responseBody) {

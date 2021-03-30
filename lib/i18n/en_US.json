@@ -38,5 +38,9 @@
     "items" : "Items",
     "add_to_cart" : "Add to Cart",
     "total_price" : "Total Price"
+  },
+  "cart": {
+    "cart": "Cart",
+    "buy": "Buy"
   }
 }

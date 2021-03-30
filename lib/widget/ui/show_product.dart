@@ -23,19 +23,19 @@ class ShowProduct extends StatelessWidget {
         title: Obx(() => Text(_controller.product()?.name ?? '')),
       ),
       body: Stack(
-        children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Obx(
-              () => Padding(
-                padding:
-                    EdgeInsets.only(top: 16, bottom: 88, right: 16, left: 16),
-                child: buildProductInfo(),
-              ),
-            ),
-          ),
-          buildNumberPicker()
-        ],
+        children: [buildContent(), buildNumberPicker()],
+      ),
+    );
+  }
+
+  SingleChildScrollView buildContent() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Obx(
+        () => Padding(
+          padding: EdgeInsets.only(top: 16, bottom: 88, right: 16, left: 16),
+          child: buildProductInfo(),
+        ),
       ),
     );
   }
@@ -51,27 +51,35 @@ class ShowProduct extends StatelessWidget {
           children: [buildName(), buildPrice()],
         ),
         SizedBox(height: 16),
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextLabel(LocaleKeys.show_product_stock.tr),
-            SizedBox(width: 8),
-            TextContent(
-              '${_controller.product().stock} ${LocaleKeys.show_product_items.tr}',
-              textAlign: TextAlign.end,
-            )
-          ],
-        ),
+        buildStockCount(),
         SizedBox(height: 16),
-        Container(
-          width: double.infinity,
-          child: TextContent(
-            _controller.product()?.description ?? '',
-            textAlign: TextAlign.start,
-          ),
-        ),
+        buildDescription(),
       ],
+    );
+  }
+
+  Row buildStockCount() {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        TextLabel(LocaleKeys.show_product_stock.tr),
+        SizedBox(width: 8),
+        TextContent(
+          '${_controller.product().stock} ${LocaleKeys.show_product_items.tr}',
+          textAlign: TextAlign.end,
+        )
+      ],
+    );
+  }
+
+  Container buildDescription() {
+    return Container(
+      width: double.infinity,
+      child: TextContent(
+        _controller.product()?.description ?? '',
+        textAlign: TextAlign.start,
+      ),
     );
   }
 
@@ -83,19 +91,7 @@ class ShowProduct extends StatelessWidget {
         child: Obx(
           () => Expanded(
             child: Row(children: [
-              _controller.number() != 0
-                  ? Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextLabel(LocaleKeys.show_product_total_price.tr),
-                          TextTitle(calculateTotalPrice().toString())
-                        ],
-                      ),
-                    )
-                  : SizedBox(),
+              buildTotalPrice(),
               NumberPicker(
                 onIncrement: () => _controller.number(_controller.number() + 1),
                 onDecrement: () => _controller.number(
@@ -107,6 +103,22 @@ class ShowProduct extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget buildTotalPrice() {
+    return _controller.number() != 0
+        ? Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextLabel(LocaleKeys.show_product_total_price.tr),
+                TextTitle(calculateTotalPrice().toString())
+              ],
+            ),
+          )
+        : SizedBox();
   }
 
   Widget buildName() {

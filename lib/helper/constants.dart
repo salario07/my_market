@@ -4,6 +4,7 @@ class Constants {
   static const String url_users = 'users';
   static const String url_categories = 'categories';
   static const String url_products = 'products';
+  static const String url_shopping_list = 'shopping_list';
 
   static const String id = 'id';
   static const String first_name = 'firstName';
@@ -18,6 +19,8 @@ class Constants {
   static const String price = 'price';
   static const String description = 'description';
   static const String images = 'images';
+  static const String count = 'count';
+  static const String product = 'product';
 
   static const String role_user = 'user';
   static const String role_admin = 'admin';
