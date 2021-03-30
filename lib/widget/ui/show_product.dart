@@ -4,11 +4,10 @@ import 'package:my_market/controller/show_product_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
-import 'package:my_market/widget/component/my_button.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/component/text_title.dart';
-import 'package:number_picker/number_picker.dart';
+import 'package:number_picker/number_picker.dart' hide LocaleKeys;
 
 class ShowProduct extends StatelessWidget {
   final int id;
@@ -30,7 +29,7 @@ class ShowProduct extends StatelessWidget {
             child: Obx(
               () => Padding(
                 padding:
-                    EdgeInsets.only(top: 16, bottom: 24, right: 16, left: 16),
+                    EdgeInsets.only(top: 16, bottom: 64, right: 16, left: 16),
                 child: buildProductInfo(),
               ),
             ),

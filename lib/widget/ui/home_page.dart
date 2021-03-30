@@ -5,7 +5,6 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/widget/ui/item_category.dart';
 import 'package:my_market/widget/ui/item_product.dart';
-import 'package:number_picker/number_picker.dart';
 
 class HomePage extends StatelessWidget {
   @override

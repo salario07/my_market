@@ -1,7 +1,8 @@
 import 'dart:ui';
 
 import 'package:get/get.dart';
-import 'package:my_market/generated/locales.g.dart';
+import 'package:my_market/generated/locales.g.dart' as main;
+import 'package:number_picker/generated/locales.g.dart' as numberPicker;
 
 class LocalizationService extends Translations {
   Map<String, String> faIR;
@@ -19,8 +20,10 @@ class LocalizationService extends Translations {
   LocalizationService() {
     faIR = {};
     enUS = {};
-    faIR?.addAll(Locales.fa_IR);
-    enUS?.addAll(Locales.en_US);
+    faIR?.addAll(main.Locales.fa_IR);
+    faIR?.addAll(numberPicker.Locales.fa_IR);
+    enUS?.addAll(main.Locales.en_US);
+    enUS?.addAll(numberPicker.Locales.en_US);
   }
 
   @override
