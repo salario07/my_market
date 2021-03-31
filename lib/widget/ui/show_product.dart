@@ -109,19 +109,17 @@ class ShowProduct extends StatelessWidget {
       child: Container(
         color: AppColors.colorBackground,
         child: Obx(
-          () => Expanded(
-            child: Row(children: [
-              buildTotalPrice(),
-              !_controller.isProductCountLoaded()
-                  ? SizedBox()
-                  : NumberPicker(
-                      onIncrement: isStockEmpty() ? null : onIncrement,
-                      onDecrement: onDecrement,
-                      initCount: _controller.productCount(),
-                      maxCount: _controller.product().stock,
-                    )
-            ]),
-          ),
+          () => Row(children: [
+            buildTotalPrice(),
+            !_controller.isProductCountLoaded()
+                ? SizedBox()
+                : NumberPicker(
+                    onIncrement: isStockEmpty() ? null : onIncrement,
+                    onDecrement: onDecrement,
+                    initCount: _controller.productCount(),
+                    maxCount: _controller.product().stock,
+                  )
+          ]),
         ),
       ),
     );

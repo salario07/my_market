@@ -62,6 +62,7 @@ class Cart extends StatelessWidget {
     return Obx(
       () => _controller.shoppingItems().length > 0
           ? ListView.separated(
+        padding: EdgeInsets.only(bottom: 80),
               itemBuilder: (context, index) => ItemCart(
                   _controller.shoppingItems().elementAt(index).product.id),
               scrollDirection: Axis.vertical,

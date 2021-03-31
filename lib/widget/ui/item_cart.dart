@@ -111,7 +111,9 @@ class ItemCart extends StatelessWidget {
 
   ElevatedButton buildPlusButton() {
     return ElevatedButton(
-        child: Icon(Icons.keyboard_arrow_up), onPressed: _onIncrement);
+        child: Icon(Icons.keyboard_arrow_up),
+        onPressed:
+            getItem().product.stock <= getItem().count ? null : _onIncrement);
   }
 
   OutlinedButton buildMinusButton() {
