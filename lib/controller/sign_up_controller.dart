@@ -3,6 +3,7 @@ import 'package:get/get.dart' hide Response;
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/json_parser.dart';
+import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/user.dart';
 import 'package:my_market/repository/sign_up_repo.dart';
 import 'package:my_market/widget/ui/home_page.dart';
@@ -39,6 +40,7 @@ class SignUpController extends GetxController {
 
   void _addUser(User user) {
     repository.addUser(user).then((response) {
+      SharedPref.setUserLoggedIn(true);
       Helper.successSnackBar(LocaleKeys.shared_success.tr,
           LocaleKeys.sign_up_signed_up_successfully.tr);
       _navigateToHomePage();

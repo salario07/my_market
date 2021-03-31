@@ -42,6 +42,9 @@ class LocaleKeys {
   static const home_page_categories = 'home_page_categories';
   static const home_page_populars = 'home_page_populars';
   static const home_page_home = 'home_page_home';
+  static const home_page_logout = 'home_page_logout';
+  static const home_page_sure_to_logout = 'home_page_sure_to_logout';
+  static const home_page_language = 'home_page_language';
   static const show_product_stock = 'show_product_stock';
   static const show_product_items = 'show_product_items';
   static const show_product_add_to_cart = 'show_product_add_to_cart';
@@ -85,6 +88,9 @@ class Locales {
     'home_page_categories': 'Categories',
     'home_page_populars': 'Populars',
     'home_page_home': 'Home',
+    'home_page_logout': 'Logout',
+    'home_page_sure_to_logout': 'Sure to Logout?',
+    'home_page_language': 'Language',
     'show_product_stock': 'Stock',
     'show_product_items': 'Items',
     'show_product_add_to_cart': 'Add to Cart',
@@ -127,6 +133,9 @@ class Locales {
     'home_page_categories': 'دسته بندی ها',
     'home_page_populars': 'محبوب ها',
     'home_page_home': 'خانه',
+    'home_page_logout': 'خروج از حساب کاربری',
+    'home_page_sure_to_logout': 'آیا می خواهید از حساب کاربری خود خارج شوید؟',
+    'home_page_language': 'زبان',
     'show_product_stock': 'موجودی',
     'show_product_items': 'عدد',
     'show_product_add_to_cart': 'اضافه به سبد خرید',

@@ -33,7 +33,10 @@
     "app_name": "My Market",
     "categories": "Categories",
     "populars": "Populars",
-    "home": "Home"
+    "home": "Home",
+    "logout":"Logout",
+    "sure_to_logout":"Sure to Logout?",
+    "language": "Language"
   },
   "show_product": {
     "stock" : "Stock",

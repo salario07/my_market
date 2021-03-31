@@ -4,6 +4,7 @@ import 'package:get/get.dart' hide Response;
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/json_parser.dart';
+import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/user.dart';
 import 'package:my_market/repository/login_repo.dart';
 import 'package:my_market/widget/ui/home_page.dart';
@@ -27,6 +28,7 @@ class LoginController extends GetxController {
 
   void _handleLoginResponse(bool allowLogin) {
     if (allowLogin) {
+      SharedPref.setUserLoggedIn(true);
       Helper.successSnackBar(LocaleKeys.shared_success.tr,
           LocaleKeys.login_logged_in_successfully.tr);
       _navigateToHomePage();

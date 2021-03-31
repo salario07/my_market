@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
+import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/widget/ui/home_page.dart';
 import 'package:my_market/widget/ui/login.dart';
 import 'sign_up.dart';
 
 class Splash extends StatelessWidget {
   Splash() {
-    navigateToLogin();
+    navigate();
   }
 
-  void navigateToLogin() {
+  void navigate() {
     Future.delayed(Duration(seconds: 1)).then((value) {
-      //Get.off(() => Login());
-      Get.off(() => HomePage());
+      SharedPref.isUserLoggedIn()
+          ? Get.off(() => HomePage())
+          : Get.off(() => Login());
     });
   }
 

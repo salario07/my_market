@@ -26,4 +26,6 @@ class Constants {
   static const String role_admin = 'admin';
 
   static const String debug_tag = 'salario_debug';
+
+  static const String is_user_logged_in = "isUserLoggedIn";
 }
