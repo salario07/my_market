@@ -29,6 +29,7 @@ dependencies:
     path: ./number_picker
   badges: ^1.2.0
   get_storage: 1.4.0
+  search_app_bar_page: ^1.6.0
 
 
   # The following adds the Cupertino Icons font to your application.

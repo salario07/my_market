@@ -1,6 +1,6 @@
 {
   "shared": {
-    "app_name": "My Market",
+    "app_name": "فروشگاه من",
     "app_description": "اپلیکیشن فروشگاهی فلاتر",
     "login": "ورود",
     "sign_up": "ثبت نام",
@@ -36,7 +36,8 @@
     "home": "خانه",
     "logout":"خروج از حساب کاربری",
     "sure_to_logout":"آیا می خواهید از حساب کاربری خود خارج شوید؟",
-    "language": "زبان"
+    "language": "زبان",
+    "search_product": "جستجوی محصول"
   },
   "show_product": {
     "stock" : "موجودی",

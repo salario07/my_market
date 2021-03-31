@@ -27,5 +27,8 @@ class Constants {
 
   static const String debug_tag = 'salario_debug';
 
-  static const String is_user_logged_in = "isUserLoggedIn";
+  static const String shared_pref_key_is_user_logged_in = "isUserLoggedIn";
+  static const String shared_pref_key_locale = "locale";
+  static const String locale_english = "locale_english";
+  static const String locale_persian = "locale_persian";
 }

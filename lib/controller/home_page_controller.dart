@@ -9,29 +9,26 @@ import 'package:my_market/repository/home_page_repo.dart';
 class HomePageController extends GetxController {
   RxList<Category> categories = [].cast<Category>().obs;
   RxList<Product> products = [].cast<Product>().obs;
-  RxBool isLoadingCategories = false.obs;
-  RxBool isLoadingProducts = false.obs;
+  RxBool searchMode = false.obs;
   RxInt cartCount = 0.obs;
 
   HomePageRepo repository = HomePageRepo();
 
   void getCategories() {
-    isLoadingCategories(true);
     repository.getCategories().then((response) {
       categories(JsonParser.parseCategories(response.data));
     }).catchError((error) {
       Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
-    }).whenComplete(() => isLoadingCategories(false));
+    });
   }
 
   void getProducts() {
-    isLoadingProducts(true);
     repository.getProducts().then((response) {
       products(JsonParser.parseProducts(response.data));
     }).catchError((error) {
       Helper.logDebug(error.toString());
       Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
-    }).whenComplete(() => isLoadingProducts(false));
+    });
   }
 
   void getShoppingListCount() {

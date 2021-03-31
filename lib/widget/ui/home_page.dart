@@ -7,60 +7,75 @@ import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/widget/ui/cart.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
+import 'package:my_market/widget/ui/dialog_language.dart';
 import 'package:my_market/widget/ui/item_category.dart';
 import 'package:my_market/widget/ui/item_product.dart';
 import 'package:my_market/widget/ui/login.dart';
 
 class HomePage extends StatelessWidget {
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<HomePageController>(() => HomePageController());
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
-      appBar: buildAppBar(),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                fit: FlexFit.loose,
-                flex: 1,
-                child: Obx(
-                      () => ListView.builder(
-                    padding: EdgeInsets.all(8),
-                    itemBuilder: (context, index) =>
-                        ItemCategory(_controller.categories()[index]),
-                    itemCount: _controller.categories().length,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-              ),
-              Flexible(
-                fit: FlexFit.loose,
-                flex: 6,
-                child: Obx(
-                      () => GridView.builder(
-                    padding: EdgeInsets.all(8),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2),
-                    itemBuilder: (context, index) =>
-                        ItemProduct(_controller.products()[index]),
-                    scrollDirection: Axis.vertical,
-                    itemCount: _controller.products().length,
-                  ),
-                ),
-              )
-            ],
-          );
-        },
+      appBar: buildDefaultAppBar(),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [buildCategoriesListView(), buildProductsListView()],
       ),
       drawer: buildDrawer(),
     );
   }
 
-  AppBar buildAppBar() {
+  Flexible buildCategoriesListView() {
+    return Flexible(
+      fit: FlexFit.loose,
+      flex: 1,
+      child: Obx(
+        () => ListView.builder(
+          padding: EdgeInsets.all(8),
+          itemBuilder: (context, index) =>
+              ItemCategory(_controller.categories()[index]),
+          itemCount: _controller.categories().length,
+          scrollDirection: Axis.horizontal,
+        ),
+      ),
+    );
+  }
+
+  Flexible buildProductsListView() {
+    return Flexible(
+      fit: FlexFit.loose,
+      flex: 6,
+      child: Obx(
+        () => GridView.builder(
+          padding: EdgeInsets.all(8),
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (context, index) =>
+              ItemProduct(_controller.products()[index]),
+          scrollDirection: Axis.vertical,
+          itemCount: _controller.products().length,
+        ),
+      ),
+    );
+  }
+
+  /*AppBar buildSearchAppBar() {
+    return AppBar(
+      title: MyTextField(
+        controller: _searchController,
+        textInputAction: TextInputAction.search,
+        suffixIconGestureDetector: SizedBox(),
+        hintText: LocaleKeys.home_page_search_product.tr,
+      ),
+    );
+  }*/
+
+  AppBar buildDefaultAppBar() {
     return AppBar(
       title: Text(LocaleKeys.shared_app_name.tr),
       actions: [
@@ -71,6 +86,12 @@ class HomePage extends StatelessWidget {
                 () => buildBadge(),
               )),
           onTap: () => Get.to(() => Cart()),
+        ),
+        GestureDetector(
+          child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Icon(Icons.search)),
+          onTap: () => _controller.searchMode(true),
         )
       ],
     );
@@ -99,6 +120,9 @@ class HomePage extends StatelessWidget {
           ),
           buildDrawerItem(
               Icons.home, LocaleKeys.home_page_home.tr, () => Get.back(), true),
+          Divider(height: 2, color: AppColors.colorDivider),
+          buildDrawerItem(
+              Icons.language, LocaleKeys.home_page_language.tr, changeLanguage, false),
           Divider(height: 2, color: AppColors.colorDivider),
           buildDrawerItem(
               Icons.logout, LocaleKeys.home_page_logout.tr, askToLogout, false),
@@ -142,6 +166,14 @@ class HomePage extends StatelessWidget {
   void logout() {
     SharedPref.setUserLoggedIn(false);
     Get.offAll(() => Login());
+  }
+
+  void onSearch() {}
+
+  void changeLanguage(){
+    showDialog(
+        context: Get.context,
+        builder: (context) => DialogLanguage());
   }
 
   HomePageController get _controller => Get.find<HomePageController>();

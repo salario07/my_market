@@ -45,6 +45,7 @@ class LocaleKeys {
   static const home_page_logout = 'home_page_logout';
   static const home_page_sure_to_logout = 'home_page_sure_to_logout';
   static const home_page_language = 'home_page_language';
+  static const home_page_search_product = 'home_page_search_product';
   static const show_product_stock = 'show_product_stock';
   static const show_product_items = 'show_product_items';
   static const show_product_add_to_cart = 'show_product_add_to_cart';
@@ -91,6 +92,7 @@ class Locales {
     'home_page_logout': 'Logout',
     'home_page_sure_to_logout': 'Sure to Logout?',
     'home_page_language': 'Language',
+    'home_page_search_product': 'Search Product',
     'show_product_stock': 'Stock',
     'show_product_items': 'Items',
     'show_product_add_to_cart': 'Add to Cart',
@@ -103,7 +105,7 @@ class Locales {
     'cart_cart_is_empty': 'Cart is Empty',
   };
   static const fa_IR = {
-    'shared_app_name': 'My Market',
+    'shared_app_name': 'فروشگاه من',
     'shared_app_description': 'اپلیکیشن فروشگاهی فلاتر',
     'shared_login': 'ورود',
     'shared_sign_up': 'ثبت نام',
@@ -136,6 +138,7 @@ class Locales {
     'home_page_logout': 'خروج از حساب کاربری',
     'home_page_sure_to_logout': 'آیا می خواهید از حساب کاربری خود خارج شوید؟',
     'home_page_language': 'زبان',
+    'home_page_search_product': 'جستجوی محصول',
     'show_product_stock': 'موجودی',
     'show_product_items': 'عدد',
     'show_product_add_to_cart': 'اضافه به سبد خرید',

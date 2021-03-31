@@ -36,7 +36,8 @@
     "home": "Home",
     "logout":"Logout",
     "sure_to_logout":"Sure to Logout?",
-    "language": "Language"
+    "language": "Language",
+    "search_product": "Search Product"
   },
   "show_product": {
     "stock" : "Stock",
