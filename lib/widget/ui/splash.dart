@@ -14,9 +14,8 @@ class Splash extends StatelessWidget {
 
   void navigate() {
     Future.delayed(Duration(seconds: 1)).then((value) {
-      SharedPref.isUserLoggedIn()
-          ? Get.off(() => HomePage())
-          : Get.off(() => Login());
+      bool isUserLoggedIn = SharedPref?.isUserLoggedIn() ?? false;
+      isUserLoggedIn ? Get.off(() => HomePage()) : Get.off(() => Login());
     });
   }
 

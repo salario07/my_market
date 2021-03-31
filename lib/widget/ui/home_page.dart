@@ -93,13 +93,13 @@ class HomePage extends StatelessWidget {
 
   Badge buildBadge() {
     return Badge(
-                  position: BadgePosition.topStart(top: 2, start: 8),
-                  badgeColor: AppColors.colorSecondary,
-                  showBadge: _controller.cartCount() > 0,
-                  animationType: BadgeAnimationType.scale,
-                  animationDuration: Duration(milliseconds: 200),
-                  badgeContent: Text(_controller.cartCount().toString()),
-                  child: Icon(Icons.shopping_cart));
+        position: BadgePosition.topStart(top: 2, start: 8),
+        badgeColor: AppColors.colorSecondary,
+        showBadge: _controller.cartCount() > 0,
+        animationType: BadgeAnimationType.scale,
+        animationDuration: Duration(milliseconds: 200),
+        badgeContent: Text(_controller.cartCount().toString()),
+        child: Icon(Icons.shopping_cart));
   }
 
   Drawer buildDrawer() {
@@ -112,11 +112,11 @@ class HomePage extends StatelessWidget {
             height: 160,
             child: ColoredBox(color: AppColors.colorPrimary),
           ),
-          buildDrawerItem(Icons.home, LocaleKeys.home_page_home.tr,
-              () => Get.back(), true),
+          buildDrawerItem(
+              Icons.home, LocaleKeys.home_page_home.tr, () => Get.back(), true),
           Divider(height: 2, color: AppColors.colorDivider),
           buildDrawerItem(
-              Icons.logout, LocaleKeys.home_page_logout.tr, logout, false),
+              Icons.logout, LocaleKeys.home_page_logout.tr, askToLogout, false),
         ],
       ),
     );
