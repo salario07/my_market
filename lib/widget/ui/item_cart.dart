@@ -80,10 +80,10 @@ class ItemCart extends StatelessWidget {
       child: getItem().product.images.length > 0
           ? Image.network(
               getItem().product.images[0],
-              width: 40,
-              height: 40,
+              width: 48,
+              height: 48,
             )
-          : SizedBox(width: 40, height: 40),
+          : SizedBox(width: 48, height: 48),
     );
   }
 
@@ -126,29 +126,35 @@ class ItemCart extends StatelessWidget {
   void _onDecrement() {
     ShoppingItem item = getItem();
     if (item.count > 1) {
-      int index = getIndex();
-      _controller.shoppingItems().elementAt(index).count = item.count - 1;
-      _updateItem();
+      ShoppingItem item = getItem();
+      item.count = item.count - 1;
+      _controller.updateItemCount(item);
     } else {
-      showDialog(
-          context: Get.context,
-          builder: (context) => DialogAsk(
-                title: LocaleKeys.cart_confirm.tr,
-                message: '${LocaleKeys.cart_sure_to_remove.tr} ${item.product.name} ${LocaleKeys.cart_from_cart_.tr}',
-                negative: LocaleKeys.shared_cancel.tr,
-                positive: LocaleKeys.shared_remove.tr,
-                onPositiveTap: removeItemFromCart,
-              ));
+      askToRemoveItem(item);
     }
   }
 
-  void removeItemFromCart() {}
+  void askToRemoveItem(ShoppingItem item) {
+    showDialog(
+        context: Get.context,
+        builder: (context) => DialogAsk(
+              title: LocaleKeys.cart_confirm.tr,
+              message:
+                  '${LocaleKeys.cart_sure_to_remove.tr} ${item.product.name} ${LocaleKeys.cart_from_cart_.tr}',
+              negative: LocaleKeys.shared_cancel.tr,
+              positive: LocaleKeys.shared_remove.tr,
+              onPositiveTap: removeItemFromCart,
+            ));
+  }
+
+  void removeItemFromCart() {
+    _controller.removeItem(getItem().id);
+  }
 
   void _onIncrement() {
     ShoppingItem item = getItem();
-    int index = getIndex();
-    _controller.shoppingItems().elementAt(index).count = item.count + 1;
-    _updateItem();
+    item.count = item.count + 1;
+    _controller.updateItemCount(item);
   }
 
   int calculateTotalPrice() {
@@ -159,19 +165,6 @@ class ItemCart extends StatelessWidget {
     return _controller.shoppingItems().firstWhere((element) {
       return element.product.id == id;
     });
-  }
-
-  int getIndex() {
-    return _controller.shoppingItems().indexWhere((element) {
-      return element.product.id == id;
-    });
-  }
-
-  void _updateItem() {
-    List<ShoppingItem> items = [];
-    items.addAll(_controller.shoppingItems());
-    items.firstWhere((element) => element.product.id == id);
-    _controller.shoppingItems(items);
   }
 
   CartController get _controller => Get.find<CartController>();

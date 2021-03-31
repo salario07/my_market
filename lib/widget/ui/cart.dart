@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/cart_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/ui/item_cart.dart';
 import 'package:my_market/helper/app_colors.dart';
@@ -17,6 +18,7 @@ class Cart extends StatelessWidget {
         title: Text(LocaleKeys.cart_cart.tr),
       ),
       body: Stack(
+        alignment: Alignment.topCenter,
         children: [buildShoppingList(), buildBottomBar()],
       ),
     );
@@ -43,29 +45,40 @@ class Cart extends StatelessWidget {
 
   Expanded buildBuyButton() {
     return Expanded(
-      child: ElevatedButton(
-          child: Text(LocaleKeys.cart_buy.tr),
-          onPressed: onBuy,
-          style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          Dimens.button_border_radius))))),
+      child: Obx(
+          ()=> ElevatedButton(
+            child: Text(LocaleKeys.cart_buy.tr),
+            onPressed: _controller.shoppingItems().length>0?onBuy:null,
+            style: ButtonStyle(
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            Dimens.button_border_radius))))),
+      ),
     );
   }
 
   Widget buildShoppingList() {
     return Obx(
-      () => ListView.separated(
-        itemBuilder: (context, index) =>
-            ItemCart(_controller.shoppingItems().elementAt(index).product.id),
-        scrollDirection: Axis.vertical,
-        itemCount: _controller.shoppingItems().length,
-        separatorBuilder: (context, index) =>
-            Divider(color: AppColors.colorDivider),
-      ),
+      () => _controller.shoppingItems().length > 0
+          ? ListView.separated(
+              itemBuilder: (context, index) => ItemCart(
+                  _controller.shoppingItems().elementAt(index).product.id),
+              scrollDirection: Axis.vertical,
+              itemCount: _controller.shoppingItems().length,
+              separatorBuilder: (context, index) =>
+                  Divider(color: AppColors.colorDivider),
+            )
+          : buildEmptyItem(),
     );
   }
+
+  Widget buildEmptyItem() => Padding(
+      padding: EdgeInsets.only(left: 16, right: 16,top: 80),
+      child: TextContent(
+        LocaleKeys.cart_cart_is_empty.tr,
+        textAlign: TextAlign.center,
+      ));
 
   Widget buildTotalPrice() {
     return Column(

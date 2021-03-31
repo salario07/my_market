@@ -51,6 +51,7 @@ class LocaleKeys {
   static const cart_confirm = 'cart_confirm';
   static const cart_sure_to_remove = 'cart_sure_to_remove';
   static const cart_from_cart_ = 'cart_from_cart_';
+  static const cart_cart_is_empty = 'cart_cart_is_empty';
 }
 
 class Locales {
@@ -93,6 +94,7 @@ class Locales {
     'cart_confirm': 'Confirm',
     'cart_sure_to_remove': 'Sure to remove',
     'cart_from_cart_': 'from Cart?',
+    'cart_cart_is_empty': 'Cart is Empty',
   };
   static const fa_IR = {
     'shared_app_name': 'My Market',
@@ -134,5 +136,6 @@ class Locales {
     'cart_confirm': 'تایید',
     'cart_sure_to_remove': 'از حذف',
     'cart_from_cart_': 'از سبد خرید اطمینان دارید؟',
+    'cart_cart_is_empty': 'سبد خرید خالی است',
   };
 }

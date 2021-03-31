@@ -46,6 +46,7 @@
     "buy": "Buy",
     "confirm": "Confirm",
     "sure_to_remove": "Sure to remove",
-    "from_cart_": "from Cart?"
+    "from_cart_": "from Cart?",
+    "cart_is_empty": "Cart is Empty"
   }
 }

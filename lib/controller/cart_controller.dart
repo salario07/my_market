@@ -21,6 +21,24 @@ class CartController extends GetxController {
     }).whenComplete(() => isLoading(false));
   }
 
+  void removeItem(int id){
+    repository.removeItem(id).then((response) {
+      getShoppingList();
+    }).catchError((error) {
+      Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
+      Helper.logDebug(error.toString());
+    });
+  }
+
+  void updateItemCount(ShoppingItem shoppingItem){
+    repository.updateItemCount(shoppingItem).then((response) {
+      getShoppingList();
+    }).catchError((error) {
+      Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
+      Helper.logDebug(error.toString());
+    });
+  }
+
   @override
   void onInit() {
     super.onInit();
