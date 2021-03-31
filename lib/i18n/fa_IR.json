@@ -9,7 +9,9 @@
     "user_name_hint": "نام کاربری را وارد کنید",
     "password_hint": "رمز عبور را وارد کنید",
     "error": "خطا",
-    "success": "موفق"
+    "success": "موفق",
+    "cancel": "لغو",
+    "remove": "حذف"
   },
   "sign_up": {
     "first_name": "نام",
@@ -41,6 +43,9 @@
   },
   "cart": {
     "cart": "سبد خرید",
-    "buy": "خرید"
+    "buy": "خرید",
+    "confirm": "تایید",
+    "sure_to_remove": "از حذف",
+    "from_cart_": "از سبد خرید اطمینان دارید؟"
   }
 }

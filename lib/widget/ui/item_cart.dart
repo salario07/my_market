@@ -8,6 +8,7 @@ import 'package:my_market/model/shopping_item.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/component/text_title.dart';
+import 'package:my_market/widget/ui/dialog_ask.dart';
 
 class ItemCart extends StatelessWidget {
   final int id;
@@ -43,7 +44,7 @@ class ItemCart extends StatelessWidget {
         child: Text(
           calculateTotalPrice().toString(),
           textAlign: TextAlign.end,
-          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
       ),
     );
@@ -124,10 +125,24 @@ class ItemCart extends StatelessWidget {
 
   void _onDecrement() {
     ShoppingItem item = getItem();
-    int index = getIndex();
-    _controller.shoppingItems().elementAt(index).count = item.count - 1;
-    _updateItem();
+    if (item.count > 1) {
+      int index = getIndex();
+      _controller.shoppingItems().elementAt(index).count = item.count - 1;
+      _updateItem();
+    } else {
+      showDialog(
+          context: Get.context,
+          builder: (context) => DialogAsk(
+                title: LocaleKeys.cart_confirm.tr,
+                message: '${LocaleKeys.cart_sure_to_remove.tr} ${item.product.name} ${LocaleKeys.cart_from_cart_.tr}',
+                negative: LocaleKeys.shared_cancel.tr,
+                positive: LocaleKeys.shared_remove.tr,
+                onPositiveTap: removeItemFromCart,
+              ));
+    }
   }
+
+  void removeItemFromCart() {}
 
   void _onIncrement() {
     ShoppingItem item = getItem();

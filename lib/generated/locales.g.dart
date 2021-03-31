@@ -20,6 +20,8 @@ class LocaleKeys {
   static const shared_password_hint = 'shared_password_hint';
   static const shared_error = 'shared_error';
   static const shared_success = 'shared_success';
+  static const shared_cancel = 'shared_cancel';
+  static const shared_remove = 'shared_remove';
   static const sign_up_first_name = 'sign_up_first_name';
   static const sign_up_last_name = 'sign_up_last_name';
   static const sign_up_first_name_hint = 'sign_up_first_name_hint';
@@ -46,6 +48,9 @@ class LocaleKeys {
   static const show_product_total_price = 'show_product_total_price';
   static const cart_cart = 'cart_cart';
   static const cart_buy = 'cart_buy';
+  static const cart_confirm = 'cart_confirm';
+  static const cart_sure_to_remove = 'cart_sure_to_remove';
+  static const cart_from_cart_ = 'cart_from_cart_';
 }
 
 class Locales {
@@ -60,6 +65,8 @@ class Locales {
     'shared_password_hint': 'Enter Password here',
     'shared_error': 'Error',
     'shared_success': 'Success',
+    'shared_cancel': 'Cancel',
+    'shared_remove': 'Remove',
     'sign_up_first_name': 'First Name',
     'sign_up_last_name': 'Last Name',
     'sign_up_first_name_hint': 'Enter First Name here',
@@ -83,6 +90,9 @@ class Locales {
     'show_product_total_price': 'Total Price',
     'cart_cart': 'Cart',
     'cart_buy': 'Buy',
+    'cart_confirm': 'Confirm',
+    'cart_sure_to_remove': 'Sure to remove',
+    'cart_from_cart_': 'from Cart?',
   };
   static const fa_IR = {
     'shared_app_name': 'My Market',
@@ -95,6 +105,8 @@ class Locales {
     'shared_password_hint': 'رمز عبور را وارد کنید',
     'shared_error': 'خطا',
     'shared_success': 'موفق',
+    'shared_cancel': 'لغو',
+    'shared_remove': 'حذف',
     'sign_up_first_name': 'نام',
     'sign_up_last_name': 'نام خانوادگی',
     'sign_up_first_name_hint': 'نام تان را اینجا وارد کنید',
@@ -119,5 +131,8 @@ class Locales {
     'show_product_total_price': 'مبلغ کل',
     'cart_cart': 'سبد خرید',
     'cart_buy': 'خرید',
+    'cart_confirm': 'تایید',
+    'cart_sure_to_remove': 'از حذف',
+    'cart_from_cart_': 'از سبد خرید اطمینان دارید؟',
   };
 }

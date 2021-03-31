@@ -9,7 +9,9 @@
     "user_name_hint": "Enter User Name here",
     "password_hint": "Enter Password here",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "cancel": "Cancel",
+    "remove": "Remove"
   },
   "sign_up": {
     "first_name": "First Name",
@@ -41,6 +43,9 @@
   },
   "cart": {
     "cart": "Cart",
-    "buy": "Buy"
+    "buy": "Buy",
+    "confirm": "Confirm",
+    "sure_to_remove": "Sure to remove",
+    "from_cart_": "from Cart?"
   }
 }
