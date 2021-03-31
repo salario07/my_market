@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_market/controller/home_page_controller.dart';
@@ -19,7 +20,16 @@ class HomePage extends StatelessWidget {
           GestureDetector(
             child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.shopping_cart)),
+                child: Obx(
+                    ()=> Badge(
+                      position: BadgePosition.topStart(top: 2, start: 8),
+                      badgeColor: AppColors.colorSecondary,
+                      showBadge: _controller.cartCount() > 0,
+                      animationType: BadgeAnimationType.scale,
+                      animationDuration: Duration(milliseconds: 200),
+                      badgeContent: Text(_controller.cartCount().toString()),
+                      child: Icon(Icons.shopping_cart)),
+                )),
             onTap: () => Get.to(() => Cart()),
           )
         ],
@@ -100,7 +110,7 @@ class HomePage extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        padding: EdgeInsets.all(16),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

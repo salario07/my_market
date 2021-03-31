@@ -14,12 +14,19 @@ class NumberPicker extends StatelessWidget {
   final Color colorPrimary = Color(0xFF673AB7);
   final Color colorBackground = Color(0xFFFBFBFB);
   final Function onIncrement, onDecrement;
+  final int initCount;
+  final int maxCount;
 
-  NumberPicker({this.onIncrement, this.onDecrement});
+  NumberPicker(
+      {this.onIncrement,
+      this.onDecrement,
+      this.initCount = 0,
+      this.maxCount = 100});
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<NumberPickerController>(() => NumberPickerController());
+    Get.lazyPut<NumberPickerController>(
+        () => NumberPickerController(initCount));
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -40,8 +47,8 @@ class NumberPicker extends StatelessWidget {
 
   Expanded buildAddToCartButton() {
     return Expanded(
-              child: MyButton(Text(LocaleKeys.add_to_cart.tr), _onIncrement),
-            );
+      child: MyButton(Text(LocaleKeys.add_to_cart.tr), _onIncrement),
+    );
   }
 
   Container buildCounterNumber() => Container(
@@ -52,9 +59,12 @@ class NumberPicker extends StatelessWidget {
         textAlign: TextAlign.center,
       ));
 
-  ElevatedButton buildPlusButton() {
-    return ElevatedButton(
-        child: Icon(Icons.keyboard_arrow_up), onPressed: _onIncrement);
+  Widget buildPlusButton() {
+    return Obx(
+      () => ElevatedButton(
+          child: Icon(Icons.keyboard_arrow_up),
+          onPressed: maxCount <= _controller.number() ? null : _onIncrement),
+    );
   }
 
   OutlinedButton buildMinusButton() {
@@ -73,6 +83,10 @@ class NumberPicker extends StatelessWidget {
   void _onIncrement() {
     _controller.number(_controller.number() + 1);
     onIncrement();
+  }
+
+  bool isMaxCountReached() {
+    return maxCount < _controller.number();
   }
 
   NumberPickerController get _controller => Get.find<NumberPickerController>();

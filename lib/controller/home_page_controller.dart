@@ -11,6 +11,7 @@ class HomePageController extends GetxController {
   RxList<Product> products = [].cast<Product>().obs;
   RxBool isLoadingCategories = false.obs;
   RxBool isLoadingProducts = false.obs;
+  RxInt cartCount = 0.obs;
 
   HomePageRepo repository = HomePageRepo();
 
@@ -33,10 +34,20 @@ class HomePageController extends GetxController {
     }).whenComplete(() => isLoadingProducts(false));
   }
 
+  void getShoppingListCount() {
+    repository.getShoppingList().then((response) {
+      cartCount(JsonParser.parseShoppingItems(response.data).length);
+    }).catchError((error) {
+      cartCount(0);
+      Helper.logDebug(error.toString());
+    });
+  }
+
   @override
   void onInit() {
     super.onInit();
     getCategories();
     getProducts();
+    getShoppingListCount();
   }
 }

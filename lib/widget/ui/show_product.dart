@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_market/controller/show_product_controller.dart';
@@ -8,6 +9,8 @@ import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/component/text_title.dart';
 import 'package:number_picker/number_picker.dart' hide LocaleKeys;
+
+import 'cart.dart';
 
 class ShowProduct extends StatelessWidget {
   final int id;
@@ -21,6 +24,23 @@ class ShowProduct extends StatelessWidget {
       backgroundColor: AppColors.colorBackground,
       appBar: AppBar(
         title: Obx(() => Text(_controller.product()?.name ?? '')),
+        actions: [
+          GestureDetector(
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Obx(
+                  () => Badge(
+                      position: BadgePosition.topStart(top: 2, start: 8),
+                      badgeColor: AppColors.colorSecondary,
+                      showBadge: _controller.cartCount() > 0,
+                      animationType: BadgeAnimationType.scale,
+                      animationDuration: Duration(milliseconds: 200),
+                      badgeContent: Text(_controller.cartCount().toString()),
+                      child: Icon(Icons.shopping_cart)),
+                )),
+            onTap: () => Get.to(() => Cart()),
+          )
+        ],
       ),
       body: Stack(
         children: [buildContent(), buildNumberPicker()],
@@ -92,12 +112,14 @@ class ShowProduct extends StatelessWidget {
           () => Expanded(
             child: Row(children: [
               buildTotalPrice(),
-              NumberPicker(
-                onIncrement: () => _controller.number(_controller.number() + 1),
-                onDecrement: () => _controller.number(
-                  _controller.number() - 1,
-                ),
-              )
+              !_controller.isProductCountLoaded()
+                  ? SizedBox()
+                  : NumberPicker(
+                      onIncrement: isStockEmpty() ? null : onIncrement,
+                      onDecrement: onDecrement,
+                      initCount: _controller.productCount(),
+                      maxCount: _controller.product().stock,
+                    )
             ]),
           ),
         ),
@@ -106,7 +128,7 @@ class ShowProduct extends StatelessWidget {
   }
 
   Widget buildTotalPrice() {
-    return _controller.number() != 0
+    return _controller.productCount() != 0
         ? Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -162,8 +184,28 @@ class ShowProduct extends StatelessWidget {
           );
   }
 
+  void onIncrement() {
+    if (_controller.productCount() == 0) {
+      _controller.addToShoppingList();
+    } else {
+      _controller.updateShoppingCount(_controller.productCount() + 1);
+    }
+  }
+
+  void onDecrement() {
+    if (_controller.productCount() == 1) {
+      _controller.removeFromShoppingList();
+    } else {
+      _controller.updateShoppingCount(_controller.productCount() - 1);
+    }
+  }
+
   int calculateTotalPrice() {
-    return _controller.number() * _controller.product().price;
+    return _controller.productCount() * _controller.product().price;
+  }
+
+  bool isStockEmpty() {
+    return _controller.product().stock <= _controller.productCount();
   }
 
   ShowProductController get _controller => Get.find<ShowProductController>();

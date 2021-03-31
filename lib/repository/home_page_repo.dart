@@ -12,4 +12,8 @@ class HomePageRepo {
   Future<Response> getProducts() {
     return _dio.get(Constants.url_products);
   }
+
+  Future<Response> getShoppingList() {
+    return _dio.get(Constants.url_shopping_list);
+  }
 }

@@ -27,6 +27,7 @@ dependencies:
   dio: ^3.0.10
   number_picker:
     path: ./number_picker
+  badges: ^1.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
