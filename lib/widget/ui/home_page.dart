@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
+import 'package:my_market/helper/search_product.dart';
 import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/widget/ui/cart.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
@@ -13,8 +14,6 @@ import 'package:my_market/widget/ui/item_product.dart';
 import 'package:my_market/widget/ui/login.dart';
 
 class HomePage extends StatelessWidget {
-  final TextEditingController _searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<HomePageController>(() => HomePageController());
@@ -64,17 +63,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  /*AppBar buildSearchAppBar() {
-    return AppBar(
-      title: MyTextField(
-        controller: _searchController,
-        textInputAction: TextInputAction.search,
-        suffixIconGestureDetector: SizedBox(),
-        hintText: LocaleKeys.home_page_search_product.tr,
-      ),
-    );
-  }*/
-
   AppBar buildDefaultAppBar() {
     return AppBar(
       title: Text(LocaleKeys.shared_app_name.tr),
@@ -91,7 +79,9 @@ class HomePage extends StatelessWidget {
           child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Icon(Icons.search)),
-          onTap: () => _controller.searchMode(true),
+          onTap: () => showSearch(
+              context: Get.context,
+              delegate: SearchProduct(_controller.products())),
         )
       ],
     );
@@ -121,8 +111,8 @@ class HomePage extends StatelessWidget {
           buildDrawerItem(
               Icons.home, LocaleKeys.home_page_home.tr, () => Get.back(), true),
           Divider(height: 2, color: AppColors.colorDivider),
-          buildDrawerItem(
-              Icons.language, LocaleKeys.home_page_language.tr, changeLanguage, false),
+          buildDrawerItem(Icons.language, LocaleKeys.home_page_language.tr,
+              changeLanguage, false),
           Divider(height: 2, color: AppColors.colorDivider),
           buildDrawerItem(
               Icons.logout, LocaleKeys.home_page_logout.tr, askToLogout, false),
@@ -170,10 +160,8 @@ class HomePage extends StatelessWidget {
 
   void onSearch() {}
 
-  void changeLanguage(){
-    showDialog(
-        context: Get.context,
-        builder: (context) => DialogLanguage());
+  void changeLanguage() {
+    showDialog(context: Get.context, builder: (context) => DialogLanguage());
   }
 
   HomePageController get _controller => Get.find<HomePageController>();
