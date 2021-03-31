@@ -4,9 +4,8 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/component/text_content.dart';
-import 'package:my_market/widget/ui/item_product.dart';
+import 'package:my_market/widget/ui/item_search.dart';
 import 'package:my_market/widget/ui/item_search_suggestion.dart';
-import 'package:my_market/widget/ui/show_product.dart';
 
 class SearchProduct extends SearchDelegate {
   List<Product> allProducts;
@@ -37,14 +36,15 @@ class SearchProduct extends SearchDelegate {
           );
   }
 
-  GridView buildSearchResult(List<Product> filtered) {
-    return GridView.builder(
+  Widget buildSearchResult(List<Product> filtered) {
+    return ListView.separated(
       padding: EdgeInsets.all(8),
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemBuilder: (context, index) => ItemProduct(filtered[index]),
+      itemBuilder: (context, index) => ItemSearch(filtered[index]),
       scrollDirection: Axis.vertical,
       itemCount: filtered.length,
+      separatorBuilder: (context, index) => Divider(
+        color: AppColors.colorDivider,
+      ),
     );
   }
 
