@@ -18,24 +18,17 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: buildAppBar(),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 16),
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(LocaleKeys.home_page_categories.tr,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 15))),
               Flexible(
                 fit: FlexFit.loose,
                 flex: 1,
                 child: Obx(
-                  () => ListView.builder(
+                      () => ListView.builder(
                     padding: EdgeInsets.all(8),
                     itemBuilder: (context, index) =>
                         ItemCategory(_controller.categories()[index]),
@@ -44,18 +37,11 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(LocaleKeys.home_page_populars.tr,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 15))),
               Flexible(
-                fit: FlexFit.tight,
+                fit: FlexFit.loose,
                 flex: 6,
                 child: Obx(
-                  () => GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
+                      () => GridView.builder(
                     padding: EdgeInsets.all(8),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2),
@@ -65,11 +51,10 @@ class HomePage extends StatelessWidget {
                     itemCount: _controller.products().length,
                   ),
                 ),
-              ),
-              SizedBox(height: 16)
+              )
             ],
-          ),
-        ),
+          );
+        },
       ),
       drawer: buildDrawer(),
     );
