@@ -16,21 +16,25 @@ class DialogAsk extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.all(Radius.circular(Dimens.dialog_border_radius))),
+      shape: _buildShape(),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-        child: buildContent(),
+        child: _buildContent(),
       ),
     );
   }
 
-  Column buildContent() {
+  RoundedRectangleBorder _buildShape() {
+    return RoundedRectangleBorder(
+        borderRadius:
+            BorderRadius.all(Radius.circular(Dimens.dialog_border_radius)));
+  }
+
+  Column _buildContent() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        buildTitle(),
+        _buildTitle(),
         SizedBox(
           height: 16,
         ),
@@ -38,25 +42,25 @@ class DialogAsk extends StatelessWidget {
         SizedBox(
           height: 32,
         ),
-        buildButtons(),
+        _buildButtons(),
       ],
     );
   }
 
-  Row buildButtons() {
+  Row _buildButtons() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        buildNegativeButton(),
+        _buildNegativeButton(),
         SizedBox(
           width: 24,
         ),
-        buildPositiveButton(),
+        _buildPositiveButton(),
       ],
     );
   }
 
-  TextButton buildNegativeButton() {
+  TextButton _buildNegativeButton() {
     return TextButton(
         onPressed: () {
           Get.back();
@@ -64,7 +68,7 @@ class DialogAsk extends StatelessWidget {
         child: Text(negative));
   }
 
-  ElevatedButton buildPositiveButton() {
+  ElevatedButton _buildPositiveButton() {
     return ElevatedButton(
         onPressed: () {
           onPositiveTap();
@@ -73,7 +77,7 @@ class DialogAsk extends StatelessWidget {
         child: Text(positive));
   }
 
-  Text buildTitle() {
+  Text _buildTitle() {
     return Text(
       title,
       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

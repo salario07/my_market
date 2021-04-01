@@ -24,30 +24,40 @@ class ShowProduct extends StatelessWidget {
     Get.lazyPut<ShowProductController>(() => ShowProductController(id));
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
-      appBar: AppBar(
-        title: Obx(() => Text(_controller.product()?.name ?? '')),
-        actions: [
-          GestureDetector(
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Obx(
-                  () => Badge(
-                      position: BadgePosition.topStart(top: 2, start: 8),
-                      badgeColor: AppColors.colorSecondary,
-                      showBadge: _controller.cartCount() > 0,
-                      animationType: BadgeAnimationType.scale,
-                      animationDuration: Duration(milliseconds: 200),
-                      badgeContent: Text(_controller.cartCount().toString()),
-                      child: Icon(Icons.shopping_cart)),
-                )),
-            onTap: _navigateToCart,
-          )
-        ],
-      ),
+      appBar: buildAppBar(),
       body: Stack(
-        children: [buildContent(), buildNumberPicker()],
+        children: [buildContent(), _buildBottomBar()],
       ),
     );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      title: Obx(() => Text(_controller.product()?.name ?? '')),
+      actions: [buildCartIcon()],
+    );
+  }
+
+  GestureDetector buildCartIcon() {
+    return GestureDetector(
+      child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Obx(
+            () => buildBadge(),
+          )),
+      onTap: _navigateToCart,
+    );
+  }
+
+  Badge buildBadge() {
+    return Badge(
+        position: BadgePosition.topStart(top: 2, start: 8),
+        badgeColor: AppColors.colorSecondary,
+        showBadge: _controller.cartCount() > 0,
+        animationType: BadgeAnimationType.scale,
+        animationDuration: Duration(milliseconds: 200),
+        badgeContent: Text(_controller.cartCount().toString()),
+        child: Icon(Icons.shopping_cart));
   }
 
   SingleChildScrollView buildContent() {
@@ -105,7 +115,7 @@ class ShowProduct extends StatelessWidget {
     );
   }
 
-  Widget buildNumberPicker() {
+  Widget _buildBottomBar() {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
@@ -117,17 +127,21 @@ class ShowProduct extends StatelessWidget {
                 ? SizedBox()
                 : Expanded(
                     child: _controller.productCount() != 0
-                        ? NumberPicker(
-                            onIncrement: _isStockEmpty() ? null : _onIncrement,
-                            onDecrement: _onDecrement,
-                            initCount: _controller.productCount(),
-                            maxCount: _controller.product().stock,
-                          )
+                        ? buildNumberPicker()
                         : buildAddToCartButton(),
                   )
           ]),
         ),
       ),
+    );
+  }
+
+  NumberPicker buildNumberPicker() {
+    return NumberPicker(
+      onIncrement: _isStockEmpty() ? null : _onIncrement,
+      onDecrement: _onDecrement,
+      initCount: _controller.productCount(),
+      maxCount: _controller.product().stock,
     );
   }
 
