@@ -3,12 +3,8 @@ library number_picker;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:number_picker/controller/number_picker_controller.dart';
-import 'package:number_picker/generated/locales.g.dart';
-
-import 'widget/my_button.dart';
 
 export 'number_picker.dart';
-export 'generated/locales.g.dart';
 
 class NumberPicker extends StatelessWidget {
   final Color colorPrimary = Color(0xFF673AB7);
