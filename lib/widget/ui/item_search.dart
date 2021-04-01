@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_title.dart';
@@ -29,7 +30,7 @@ class ItemSearch extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextContent(product.name),
-                TextTitle(product.price.toString())
+                TextTitle(Helper.buildPriceText(product.price.toString()))
               ],
             )
           ],

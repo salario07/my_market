@@ -22,6 +22,7 @@ class LocaleKeys {
   static const shared_success = 'shared_success';
   static const shared_cancel = 'shared_cancel';
   static const shared_remove = 'shared_remove';
+  static const shared_currency = 'shared_currency';
   static const sign_up_first_name = 'sign_up_first_name';
   static const sign_up_last_name = 'sign_up_last_name';
   static const sign_up_first_name_hint = 'sign_up_first_name_hint';
@@ -73,6 +74,7 @@ class Locales {
     'shared_success': 'Success',
     'shared_cancel': 'Cancel',
     'shared_remove': 'Remove',
+    'shared_currency': '\$',
     'sign_up_first_name': 'First Name',
     'sign_up_last_name': 'Last Name',
     'sign_up_first_name_hint': 'Enter First Name here',
@@ -119,6 +121,7 @@ class Locales {
     'shared_success': 'موفق',
     'shared_cancel': 'لغو',
     'shared_remove': 'حذف',
+    'shared_currency': 'تومان',
     'sign_up_first_name': 'نام',
     'sign_up_last_name': 'نام خانوادگی',
     'sign_up_first_name_hint': 'نام تان را اینجا وارد کنید',

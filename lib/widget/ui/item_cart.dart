@@ -4,6 +4,7 @@ import 'package:my_market/controller/cart_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/model/shopping_item.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
@@ -42,7 +43,7 @@ class ItemCart extends StatelessWidget {
       child: Align(
         alignment: AlignmentDirectional.centerStart,
         child: Text(
-          calculateTotalPrice().toString(),
+          Helper.buildPriceText(calculateTotalPrice().toString()),
           textAlign: TextAlign.end,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
@@ -62,7 +63,7 @@ class ItemCart extends StatelessWidget {
           child: Align(
             alignment: AlignmentDirectional.centerEnd,
             child: TextLabel(
-              getItem().product.price.toString(),
+              Helper.buildPriceText(getItem().product.price.toString()),
               textAlign: TextAlign.end,
             ),
           ),

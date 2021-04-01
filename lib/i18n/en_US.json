@@ -11,7 +11,8 @@
     "error": "Error",
     "success": "Success",
     "cancel": "Cancel",
-    "remove": "Remove"
+    "remove": "Remove",
+    "currency": "$"
   },
   "sign_up": {
     "first_name": "First Name",

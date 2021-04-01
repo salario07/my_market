@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/model/product.dart';
 
 class ItemProduct extends StatelessWidget {
@@ -34,7 +36,7 @@ class ItemProduct extends StatelessWidget {
 
   Text buildPrice() {
     return Text(
-      product?.price.toString() ?? '',
+      Helper.buildPriceText(product?.price.toString()?? ''),
       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     );
   }

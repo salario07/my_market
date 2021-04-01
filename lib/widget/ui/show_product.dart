@@ -5,6 +5,7 @@ import 'package:my_market/controller/show_product_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/component/text_title.dart';
@@ -136,7 +137,7 @@ class ShowProduct extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextLabel(LocaleKeys.show_product_total_price.tr),
-                TextTitle(calculateTotalPrice().toString())
+                TextTitle(Helper.buildPriceText(calculateTotalPrice().toString()))
               ],
             ),
           )
@@ -160,7 +161,7 @@ class ShowProduct extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         child: Text(
-          _controller.product().price.toString(),
+          Helper.buildPriceText(_controller.product().price.toString()),
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
