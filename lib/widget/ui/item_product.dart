@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/model/product.dart';
-import 'package:my_market/widget/ui/show_product.dart';
 
 class ItemProduct extends StatelessWidget {
   final Product product;
+  final Function onTap;
 
-  ItemProduct(this.product);
+  ItemProduct(this.product,this.onTap);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +15,7 @@ class ItemProduct extends StatelessWidget {
           borderRadius: BorderRadius.circular(Dimens.card_border_radius)),
       margin: EdgeInsets.all(8),
       child: InkWell(
-        onTap: navigateToShowProduct,
+        onTap: onTap,
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Column(
@@ -57,11 +55,4 @@ class ItemProduct extends StatelessWidget {
       ),
     );
   }
-
-  void navigateToShowProduct() {
-    Get.to(() => ShowProduct(product?.id ?? 0))
-        .then((value) => _controller.getShoppingListCount());
-  }
-
-  HomePageController get _controller => Get.find<HomePageController>();
 }

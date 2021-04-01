@@ -74,8 +74,7 @@ class Cart extends StatelessWidget {
     );
   }
 
-  Widget buildEmptyItem() => Padding(
-      padding: EdgeInsets.only(left: 16, right: 16,top: 80),
+  Widget buildEmptyItem() => Center(
       child: TextContent(
         LocaleKeys.cart_cart_is_empty.tr,
         textAlign: TextAlign.center,

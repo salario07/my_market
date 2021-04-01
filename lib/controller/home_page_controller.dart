@@ -9,7 +9,6 @@ import 'package:my_market/repository/home_page_repo.dart';
 class HomePageController extends GetxController {
   RxList<Category> categories = [].cast<Category>().obs;
   RxList<Product> products = [].cast<Product>().obs;
-  RxBool searchMode = false.obs;
   RxInt cartCount = 0.obs;
 
   HomePageRepo repository = HomePageRepo();

@@ -6,6 +6,7 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/search_product.dart';
 import 'package:my_market/helper/shared_pref.dart';
+import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/ui/cart.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
 import 'package:my_market/widget/ui/dialog_language.dart';
@@ -13,19 +14,25 @@ import 'package:my_market/widget/ui/item_category.dart';
 import 'package:my_market/widget/ui/item_product.dart';
 import 'package:my_market/widget/ui/login.dart';
 
+import 'show_product.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<HomePageController>(() => HomePageController());
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
-      appBar: buildDefaultAppBar(),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [buildCategoriesListView(), buildProductsListView()],
-      ),
+      appBar: buildAppBar(),
+      body: buildContent(),
       drawer: buildDrawer(),
+    );
+  }
+
+  Column buildContent() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [buildCategoriesListView(), buildProductsListView()],
     );
   }
 
@@ -54,8 +61,9 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.all(8),
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          itemBuilder: (context, index) =>
-              ItemProduct(_controller.products()[index]),
+          itemBuilder: (context, index) => ItemProduct(
+              _controller.products()[index],
+              () => navigateToShowProduct(_controller.products()[index])),
           scrollDirection: Axis.vertical,
           itemCount: _controller.products().length,
         ),
@@ -63,27 +71,32 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  AppBar buildDefaultAppBar() {
+  AppBar buildAppBar() {
     return AppBar(
       title: Text(LocaleKeys.shared_app_name.tr),
-      actions: [
-        GestureDetector(
-          child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Obx(
-                () => buildBadge(),
-              )),
-          onTap: () => Get.to(() => Cart()),
-        ),
-        GestureDetector(
-          child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(Icons.search)),
-          onTap: () => showSearch(
-              context: Get.context,
-              delegate: SearchProduct(_controller.products())),
-        )
-      ],
+      actions: [buildCartIcon(), buildSearchIcon()],
+    );
+  }
+
+  GestureDetector buildSearchIcon() {
+    return GestureDetector(
+      child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Icon(Icons.search)),
+      onTap: () => showSearch(
+          context: Get.context,
+          delegate: SearchProduct(_controller.products())),
+    );
+  }
+
+  GestureDetector buildCartIcon() {
+    return GestureDetector(
+      child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Obx(
+            () => buildBadge(),
+          )),
+      onTap: () => Get.to(() => Cart()),
     );
   }
 
@@ -103,11 +116,7 @@ class HomePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: double.infinity,
-            height: 160,
-            child: ColoredBox(color: AppColors.colorPrimary),
-          ),
+          buildDrawerHeader(),
           buildDrawerItem(
               Icons.home, LocaleKeys.home_page_home.tr, () => Get.back(), true),
           Divider(height: 2, color: AppColors.colorDivider),
@@ -118,6 +127,14 @@ class HomePage extends StatelessWidget {
               Icons.logout, LocaleKeys.home_page_logout.tr, askToLogout, false),
         ],
       ),
+    );
+  }
+
+  Container buildDrawerHeader() {
+    return Container(
+      width: double.infinity,
+      height: 160,
+      child: ColoredBox(color: AppColors.colorPrimary),
     );
   }
 
@@ -158,10 +175,13 @@ class HomePage extends StatelessWidget {
     Get.offAll(() => Login());
   }
 
-  void onSearch() {}
-
   void changeLanguage() {
     showDialog(context: Get.context, builder: (context) => DialogLanguage());
+  }
+
+  void navigateToShowProduct(Product product) {
+    Get.to(() => ShowProduct(product?.id ?? 0))
+        .then((value) => _controller.getShoppingListCount());
   }
 
   HomePageController get _controller => Get.find<HomePageController>();
