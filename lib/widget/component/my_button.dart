@@ -5,15 +5,16 @@ class MyButton extends StatelessWidget {
 
   final Widget child;
   final Function() onTap;
+  final double paddingVertical;
+  final double paddingHorizontal;
 
-  MyButton(this.child,this.onTap);
+  MyButton(this.child,this.onTap,{this.paddingVertical = 8,this.paddingHorizontal = 16});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 88,
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 24, horizontal: 0),
+      padding: EdgeInsets.symmetric(vertical: paddingVertical, horizontal: paddingHorizontal),
       child: ElevatedButton(
         style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(

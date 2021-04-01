@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/json_parser.dart';
-import 'package:my_market/model/product.dart';
 import 'package:my_market/repository/home_page_repo.dart';
 
 class ShowProductListController extends GetxController {

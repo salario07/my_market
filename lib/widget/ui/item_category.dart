@@ -19,21 +19,26 @@ class ItemCategory extends StatelessWidget {
       margin: EdgeInsets.all(8),
       child: InkWell(
         onTap: navigateToProductList,
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          child: Center(
-            child: Text(
-              category?.name ?? '',
-              style: TextStyle(fontSize: 18),
-            ),
-          ),
+        child: buildContent(),
+      ),
+    );
+  }
+
+  Padding buildContent() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      child: Center(
+        child: Text(
+          category?.name ?? '',
+          style: TextStyle(fontSize: 18),
         ),
       ),
     );
   }
 
   void navigateToProductList() {
-    Get.to(() => ShowProductList(category.name, getThisCategoryProductList()));
+    Get.to(() => ShowProductList(category.name, getThisCategoryProductList()))
+        .then((value) => _controller.getShoppingListCount());
   }
 
   List<Product> getThisCategoryProductList() {

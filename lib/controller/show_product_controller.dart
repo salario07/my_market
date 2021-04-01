@@ -81,6 +81,10 @@ class ShowProductController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    updateData(id);
+  }
+
+  void updateData(int id) {
     getProduct(id);
     getProductCount();
     getShoppingListCount();

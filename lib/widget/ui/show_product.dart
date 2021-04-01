@@ -6,6 +6,7 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/helper/helper.dart';
+import 'package:my_market/widget/component/my_button.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/component/text_title.dart';
@@ -39,7 +40,7 @@ class ShowProduct extends StatelessWidget {
                       badgeContent: Text(_controller.cartCount().toString()),
                       child: Icon(Icons.shopping_cart)),
                 )),
-            onTap: () => Get.to(() => Cart()),
+            onTap: _navigateToCart,
           )
         ],
       ),
@@ -115,17 +116,23 @@ class ShowProduct extends StatelessWidget {
             !_controller.isProductCountLoaded()
                 ? SizedBox()
                 : Expanded(
-                  child: NumberPicker(
-                      onIncrement: isStockEmpty() ? null : onIncrement,
-                      onDecrement: onDecrement,
-                      initCount: _controller.productCount(),
-                      maxCount: _controller.product().stock,
-                    ),
-                )
+                    child: _controller.productCount() != 0
+                        ? NumberPicker(
+                            onIncrement: _isStockEmpty() ? null : _onIncrement,
+                            onDecrement: _onDecrement,
+                            initCount: _controller.productCount(),
+                            maxCount: _controller.product().stock,
+                          )
+                        : buildAddToCartButton(),
+                  )
           ]),
         ),
       ),
     );
+  }
+
+  Widget buildAddToCartButton() {
+    return MyButton(Text(LocaleKeys.show_product_add_to_cart.tr), _onIncrement);
   }
 
   Widget buildTotalPrice() {
@@ -137,7 +144,8 @@ class ShowProduct extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextLabel(LocaleKeys.show_product_total_price.tr),
-                TextTitle(Helper.buildPriceText(calculateTotalPrice().toString()))
+                TextTitle(
+                    Helper.buildPriceText(_calculateTotalPrice().toString()))
               ],
             ),
           )
@@ -185,15 +193,14 @@ class ShowProduct extends StatelessWidget {
           );
   }
 
-  void onIncrement() {
+  void _onIncrement() {
     if (_controller.productCount() == 0) {
       _controller.addToShoppingList();
-    } else {
-      _controller.updateShoppingCount(_controller.productCount() + 1);
     }
+    _controller.updateShoppingCount(_controller.productCount() + 1);
   }
 
-  void onDecrement() {
+  void _onDecrement() {
     if (_controller.productCount() == 1) {
       _controller.removeFromShoppingList();
     } else {
@@ -201,12 +208,18 @@ class ShowProduct extends StatelessWidget {
     }
   }
 
-  int calculateTotalPrice() {
+  int _calculateTotalPrice() {
     return _controller.productCount() * _controller.product().price;
   }
 
-  bool isStockEmpty() {
+  bool _isStockEmpty() {
     return _controller.product().stock <= _controller.productCount();
+  }
+
+  void _navigateToCart() {
+    Get.to(() => Cart()).then((value) {
+      _controller.updateData(id);
+    });
   }
 
   ShowProductController get _controller => Get.find<ShowProductController>();

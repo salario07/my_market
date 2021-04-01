@@ -30,11 +30,15 @@ class Helper {
         margin: EdgeInsets.all(16));
   }
 
-  static String buildPriceText(String price){
-    if(Get.locale == LocalizationService.locales[0]){
+  static String buildPriceText(String price) {
+    if (Get.locale == LocalizationService.locales[0]) {
       return '${LocaleKeys.shared_currency.tr} $price';
-    }else{
+    } else {
       return '$price ${LocaleKeys.shared_currency.tr}';
     }
+  }
+
+  static bool isSuccessful(int statusCode) {
+    return statusCode == 200 || statusCode == 201;
   }
 }

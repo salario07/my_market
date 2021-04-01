@@ -8,8 +8,9 @@ import 'package:my_market/helper/helper.dart';
 import 'package:my_market/model/shopping_item.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
-import 'package:my_market/widget/component/text_title.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
+
+import 'show_product.dart';
 
 class ItemCart extends StatelessWidget {
   final int id;
@@ -18,14 +19,17 @@ class ItemCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          buildItemInfo(),
-          buildItemPrice(),
-        ],
+    return InkWell(
+      onTap: navigateToShowProduct,
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            buildItemInfo(),
+            buildItemPrice(),
+          ],
+        ),
       ),
     );
   }
@@ -168,6 +172,11 @@ class ItemCart extends StatelessWidget {
     return _controller.shoppingItems().firstWhere((element) {
       return element.product.id == id;
     });
+  }
+
+  void navigateToShowProduct() {
+    Get.to(() => ShowProduct(id))
+        .then((value) => _controller.getShoppingList());
   }
 
   CartController get _controller => Get.find<CartController>();

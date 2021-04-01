@@ -4,7 +4,7 @@ import 'package:my_market/helper/json_parser.dart';
 class Product {
   final int id;
   final int categoryId;
-  final int stock;
+  int stock;
   final String name;
   final String categoryName;
   final num price;

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class NumberPickerController extends GetxController {
-  int initCount = 0;
+  int initCount;
   RxInt number;
 
   NumberPickerController(this.initCount) {

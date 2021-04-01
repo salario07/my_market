@@ -20,7 +20,7 @@ class NumberPicker extends StatelessWidget {
   NumberPicker(
       {this.onIncrement,
       this.onDecrement,
-      this.initCount = 0,
+      this.initCount = 1,
       this.maxCount = 100});
 
   @override
@@ -29,24 +29,15 @@ class NumberPicker extends StatelessWidget {
         () => NumberPickerController(initCount));
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      child: Obx(() => _controller.number > 0
-          ? Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                buildMinusButton(),
-                buildCounterNumber(),
-                buildPlusButton(),
-              ],
-            )
-          : buildAddToCartButton()),
-    );
-  }
-
-  Widget buildAddToCartButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: MyButton(Text(LocaleKeys.add_to_cart.tr), _onIncrement),
+      child: Obx(() => Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              buildMinusButton(),
+              buildCounterNumber(),
+              buildPlusButton(),
+            ],
+          )),
     );
   }
 

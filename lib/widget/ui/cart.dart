@@ -46,9 +46,9 @@ class Cart extends StatelessWidget {
   Expanded buildBuyButton() {
     return Expanded(
       child: Obx(
-          ()=> ElevatedButton(
+        () => ElevatedButton(
             child: Text(LocaleKeys.cart_buy.tr),
-            onPressed: _controller.shoppingItems().length>0?onBuy:null,
+            onPressed: _controller.shoppingItems().length > 0 ? onBuy : null,
             style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -62,20 +62,20 @@ class Cart extends StatelessWidget {
     return Obx(
       () => _controller.shoppingItems().length > 0
           ? ListView.separated(
-        padding: EdgeInsets.only(bottom: 80),
+              padding: EdgeInsets.only(bottom: 80),
               itemBuilder: (context, index) => ItemCart(
                   _controller.shoppingItems().elementAt(index).product.id),
               scrollDirection: Axis.vertical,
               itemCount: _controller.shoppingItems().length,
               separatorBuilder: (context, index) =>
-                  Divider(color: AppColors.colorDivider),
+                  Divider(color: AppColors.colorDivider, height: 1),
             )
           : buildEmptyItem(),
     );
   }
 
   Widget buildEmptyItem() => Center(
-      child: TextContent(
+          child: TextContent(
         LocaleKeys.cart_cart_is_empty.tr,
         textAlign: TextAlign.center,
       ));
@@ -102,7 +102,9 @@ class Cart extends StatelessWidget {
     return totalPrice;
   }
 
-  void onBuy() {}
+  void onBuy() {
+    _controller.purchase();
+  }
 
   CartController get _controller => Get.find<CartController>();
 }
