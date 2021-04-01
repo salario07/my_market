@@ -66,7 +66,9 @@ class NumberPicker extends StatelessWidget {
   }
 
   void _onDecrement() {
-    _controller.number(_controller.number() - 1);
+    if(_controller.number()!=1){
+      _controller.number(_controller.number() - 1);
+    }
     onDecrement();
   }
 
