@@ -113,12 +113,14 @@ class ShowProduct extends StatelessWidget {
             buildTotalPrice(),
             !_controller.isProductCountLoaded()
                 ? SizedBox()
-                : NumberPicker(
-                    onIncrement: isStockEmpty() ? null : onIncrement,
-                    onDecrement: onDecrement,
-                    initCount: _controller.productCount(),
-                    maxCount: _controller.product().stock,
-                  )
+                : Expanded(
+                  child: NumberPicker(
+                      onIncrement: isStockEmpty() ? null : onIncrement,
+                      onDecrement: onDecrement,
+                      initCount: _controller.productCount(),
+                      maxCount: _controller.product().stock,
+                    ),
+                )
           ]),
         ),
       ),

@@ -27,26 +27,25 @@ class NumberPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.lazyPut<NumberPickerController>(
         () => NumberPickerController(initCount));
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: Obx(() => _controller.number > 0
-            ? Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  buildMinusButton(),
-                  buildCounterNumber(),
-                  buildPlusButton(),
-                ],
-              )
-            : buildAddToCartButton()),
-      ),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      child: Obx(() => _controller.number > 0
+          ? Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                buildMinusButton(),
+                buildCounterNumber(),
+                buildPlusButton(),
+              ],
+            )
+          : buildAddToCartButton()),
     );
   }
 
-  Expanded buildAddToCartButton() {
-    return Expanded(
+  Widget buildAddToCartButton() {
+    return SizedBox(
+      width: double.infinity,
       child: MyButton(Text(LocaleKeys.add_to_cart.tr), _onIncrement),
     );
   }
