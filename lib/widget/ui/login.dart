@@ -91,7 +91,8 @@ class Login extends StatelessWidget {
           _controller.isLoading()
               ? MyProgressIndicator(24)
               : Text(LocaleKeys.shared_login.tr),
-          _controller.isLoading() ? null : onLogin);
+          _controller.isLoading() ? null : onLogin,
+      paddingVertical: 16,paddingHorizontal: 0);
     });
   }
 

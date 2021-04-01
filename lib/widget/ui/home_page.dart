@@ -144,17 +144,20 @@ class HomePage extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.all(16),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(iconData,
-                color:
-                    isHome ? AppColors.colorPrimary : AppColors.colorDivider),
-            SizedBox(width: 8),
-            Text(text)
-          ],
-        ),
+        child: buildDrawerItemContent(iconData, isHome, text),
       ),
+    );
+  }
+
+  Row buildDrawerItemContent(IconData iconData, bool isHome, String text) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(iconData,
+            color: isHome ? AppColors.colorPrimary : AppColors.colorDivider),
+        SizedBox(width: 8),
+        Text(text)
+      ],
     );
   }
 

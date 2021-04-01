@@ -86,7 +86,9 @@ class SignUp extends StatelessWidget {
           _controller.isLoading()
               ? MyProgressIndicator(24)
               : Text(LocaleKeys.shared_sign_up.tr),
-          _controller.isLoading() ? null : onSignUp);
+          _controller.isLoading() ? null : onSignUp,
+          paddingVertical: 16,
+          paddingHorizontal: 0);
     });
   }
 
@@ -94,7 +96,8 @@ class SignUp extends StatelessWidget {
       {TextEditingController controller, String label = '', String hint = ''}) {
     if (isPassword) {
       return Obx(() => MyTextField(
-            validator: (text) => Validators.passwordValidator(text!=null?text:''),
+            validator: (text) =>
+                Validators.passwordValidator(text != null ? text : ''),
             controller: controller,
             labelText: label,
             hintText: hint,
@@ -105,7 +108,8 @@ class SignUp extends StatelessWidget {
           ));
     } else {
       return MyTextField(
-        validator: (text) => Validators.emptyValidator(text!=null?text:''),
+        validator: (text) =>
+            Validators.emptyValidator(text != null ? text : ''),
         controller: controller,
         labelText: label,
         hintText: hint,
@@ -127,7 +131,7 @@ class SignUp extends StatelessWidget {
   }
 
   void onSignUp() {
-    if (_controller.formKey.currentState?.validate()??false) {
+    if (_controller.formKey.currentState?.validate() ?? false) {
       _controller.signUp(buildUserFromInput());
     }
   }
