@@ -9,6 +9,7 @@ import 'package:my_market/model/shopping_item.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
+import 'package:number_picker/number_picker.dart';
 
 import 'show_product.dart';
 
@@ -93,52 +94,13 @@ class ItemCart extends StatelessWidget {
   }
 
   Widget buildNumberPicker() {
-    return Obx(
-      () => Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          buildMinusButton(),
-          buildCounterNumber(),
-          buildPlusButton(),
-        ],
-      ),
+    return NumberPicker(
+      initCount: getItem().count,
+      maxCount: getItem().product.stock,
+      onDecrement: _onDecrement,
+      onIncrement: _onIncrement,
+      horizontalPadding: 0,
     );
-  }
-
-  Container buildCounterNumber() => Container(
-      width: 40,
-      child: Text(
-        getItem().count.toString(),
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        textAlign: TextAlign.center,
-      ));
-
-  ElevatedButton buildPlusButton() {
-    return ElevatedButton(
-        child: Icon(Icons.keyboard_arrow_up),
-        onPressed:
-            getItem().product.stock <= getItem().count ? null : _onIncrement);
-  }
-
-  OutlinedButton buildMinusButton() {
-    return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-          side: BorderSide(color: AppColors.colorPrimary)),
-      child: Icon(Icons.keyboard_arrow_down),
-      onPressed: _onDecrement,
-    );
-  }
-
-  void _onDecrement() {
-    ShoppingItem item = getItem();
-    if (item.count > 1) {
-      ShoppingItem item = getItem();
-      item.count = item.count - 1;
-      _controller.updateItemCount(item);
-    } else {
-      askToRemoveItem(item);
-    }
   }
 
   void askToRemoveItem(ShoppingItem item) {
@@ -162,6 +124,17 @@ class ItemCart extends StatelessWidget {
     ShoppingItem item = getItem();
     item.count = item.count + 1;
     _controller.updateItemCount(item);
+  }
+
+  void _onDecrement() {
+    ShoppingItem item = getItem();
+    if (item.count > 1) {
+      ShoppingItem item = getItem();
+      item.count = item.count - 1;
+      _controller.updateItemCount(item);
+    } else {
+      askToRemoveItem(item);
+    }
   }
 
   int calculateTotalPrice() {

@@ -12,19 +12,21 @@ class NumberPicker extends StatelessWidget {
   final Function onIncrement, onDecrement;
   final int initCount;
   final int maxCount;
+  final double horizontalPadding;
 
   NumberPicker(
       {this.onIncrement,
       this.onDecrement,
       this.initCount = 1,
-      this.maxCount = 100});
+      this.maxCount = 100,
+      this.horizontalPadding = 16});
 
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<NumberPickerController>(
         () => NumberPickerController(initCount));
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: horizontalPadding),
       child: Obx(() => Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
