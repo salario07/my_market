@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/cart_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/widget/component/my_progress_indicator.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/ui/item_cart.dart';
@@ -47,15 +48,30 @@ class Cart extends StatelessWidget {
     return Expanded(
       child: Obx(
         () => ElevatedButton(
-            child: Text(LocaleKeys.cart_buy.tr),
-            onPressed: _controller.shoppingItems().length > 0 ? onBuy : null,
-            style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            Dimens.button_border_radius))))),
+            child: _buildBuyButtonChild(),
+            onPressed: _controller.shoppingItems().length <= 0 ||
+                    _controller.isPurchaseLoading()
+                ? null
+                : onBuy,
+            style: buildBuyButtonStyle()),
       ),
     );
+  }
+
+  ButtonStyle buildBuyButtonStyle() {
+    return ButtonStyle(
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(Dimens.button_border_radius))));
+  }
+
+  Widget _buildBuyButtonChild() {
+    return _controller.isPurchaseLoading()
+        ? Row(
+            children: [MyProgressIndicator(24), Text(LocaleKeys.cart_buy.tr)],
+          )
+        : Text(LocaleKeys.cart_buy.tr);
   }
 
   Widget buildShoppingList() {

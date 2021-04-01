@@ -16,7 +16,7 @@ import 'cart.dart';
 
 class ShowProduct extends StatelessWidget {
   final int id;
-
+  NumberPicker _numberPicker;
   ShowProduct(this.id);
 
   @override
@@ -137,12 +137,13 @@ class ShowProduct extends StatelessWidget {
   }
 
   NumberPicker buildNumberPicker() {
-    return NumberPicker(
+    _numberPicker = NumberPicker(
       onIncrement: _isStockEmpty() ? null : _onIncrement,
       onDecrement: _onDecrement,
       initCount: _controller.productCount(),
       maxCount: _controller.product().stock,
     );
+    return _numberPicker;
   }
 
   Widget buildAddToCartButton() {
@@ -233,6 +234,7 @@ class ShowProduct extends StatelessWidget {
   void _navigateToCart() {
     Get.to(() => Cart()).then((value) {
       _controller.updateData(id);
+      _numberPicker.setNumber(_controller.productCount());
     });
   }
 

@@ -79,5 +79,9 @@ class NumberPicker extends StatelessWidget {
     return maxCount < _controller.number();
   }
 
+  void setNumber(int number){
+    _controller.number(number);
+  }
+
   NumberPickerController get _controller => Get.find<NumberPickerController>();
 }
