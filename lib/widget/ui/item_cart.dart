@@ -15,6 +15,7 @@ import 'show_product.dart';
 
 class ItemCart extends StatelessWidget {
   final int id;
+  NumberPicker _numberPicker;
 
   ItemCart(this.id);
 
@@ -94,13 +95,14 @@ class ItemCart extends StatelessWidget {
   }
 
   Widget buildNumberPicker() {
-    return NumberPicker(
+    _numberPicker = NumberPicker(
       initCount: getItem().count,
       maxCount: getItem().product.stock,
       onDecrement: _onDecrement,
       onIncrement: _onIncrement,
       horizontalPadding: 0,
     );
+    return _numberPicker;
   }
 
   void askToRemoveItem(ShoppingItem item) {
@@ -124,6 +126,7 @@ class ItemCart extends StatelessWidget {
     ShoppingItem item = getItem();
     item.count = item.count + 1;
     _controller.updateItemCount(item);
+    _numberPicker.setNumber(item.count);
   }
 
   void _onDecrement() {
@@ -132,6 +135,7 @@ class ItemCart extends StatelessWidget {
       ShoppingItem item = getItem();
       item.count = item.count - 1;
       _controller.updateItemCount(item);
+      _numberPicker.setNumber(item.count);
     } else {
       askToRemoveItem(item);
     }
@@ -143,6 +147,7 @@ class ItemCart extends StatelessWidget {
 
   ShoppingItem getItem() {
     return _controller.shoppingItems().firstWhere((element) {
+      if (element.product.id == id) Helper.logDebug('get item id is $id');
       return element.product.id == id;
     });
   }
