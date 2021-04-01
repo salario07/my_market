@@ -10,7 +10,7 @@ import 'package:my_market/widget/component/my_button.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/component/text_title.dart';
-import 'package:number_picker/number_picker.dart' hide LocaleKeys;
+import 'package:number_picker/number_picker.dart';
 
 import 'cart.dart';
 

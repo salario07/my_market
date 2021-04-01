@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:my_market/generated/locales.g.dart';
-import 'package:my_market/helper/constants.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/json_parser.dart';
 import 'package:my_market/model/product.dart';

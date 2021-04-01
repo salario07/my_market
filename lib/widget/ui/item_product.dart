@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/model/product.dart';

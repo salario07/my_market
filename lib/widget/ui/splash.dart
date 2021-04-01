@@ -5,18 +5,10 @@ import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/widget/ui/home_page.dart';
 import 'package:my_market/widget/ui/login.dart';
-import 'sign_up.dart';
 
 class Splash extends StatelessWidget {
   Splash() {
     navigate();
-  }
-
-  void navigate() {
-    Future.delayed(Duration(seconds: 1)).then((value) {
-      bool isUserLoggedIn = SharedPref?.isUserLoggedIn() ?? false;
-      isUserLoggedIn ? Get.off(() => HomePage()) : Get.off(() => Login());
-    });
   }
 
   @override
@@ -24,29 +16,49 @@ class Splash extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.colorPrimary,
       body: Container(
-        child: Center(
-          child: Column(
-            children: [
-              //TODO add image
-              /*Image.asset(
-                'assets/images/cart.svg',
-                width: 120,
-                height: 120,
-              ),*/
-              SizedBox(height: 32),
-              Text(LocaleKeys.shared_app_name.tr,
-                  style: TextStyle(
-                      color: AppColors.colorTextOnPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22)),
-              SizedBox(height: 16),
-              Text(LocaleKeys.shared_app_description.tr,
-                  style: TextStyle(
-                      color: AppColors.colorTextOnPrimary, fontSize: 17)),
-            ],
-          ),
-        ),
+        height: double.infinity,
+        child: buildBrandInfo(),
       ),
     );
+  }
+
+  Center buildBrandInfo() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          buildIcon(),
+          SizedBox(height: 32),
+          buildTitleText(),
+          SizedBox(height: 16),
+          buildDescriptionText(),
+        ],
+      ),
+    );
+  }
+
+  Icon buildIcon() {
+    return Icon(Icons.shopping_cart_sharp,
+        color: AppColors.colorTextOnPrimary, size: 144);
+  }
+
+  Text buildTitleText() {
+    return Text(LocaleKeys.shared_app_name.tr,
+        style: TextStyle(
+            color: AppColors.colorTextOnPrimary,
+            fontWeight: FontWeight.bold,
+            fontSize: 22));
+  }
+
+  Text buildDescriptionText() {
+    return Text(LocaleKeys.shared_app_description.tr,
+        style: TextStyle(color: AppColors.colorTextOnPrimary, fontSize: 17));
+  }
+
+  void navigate() {
+    Future.delayed(Duration(seconds: 1)).then((value) {
+      bool isUserLoggedIn = SharedPref?.isUserLoggedIn() ?? false;
+      isUserLoggedIn ? Get.off(() => HomePage()) : Get.off(() => Login());
+    });
   }
 }
