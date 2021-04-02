@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
       flex: 6,
       child: Obx(
         () => GridView.builder(
-          padding: EdgeInsets.only(top:8,left:8,right:8,bottom:80),
+          padding: EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 80),
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemBuilder: (context, index) => ItemProduct(
@@ -110,7 +110,7 @@ class HomePage extends StatelessWidget {
           child: Obx(
             () => buildBadge(),
           )),
-      onTap: () => Get.to(() => Cart()),
+      onTap: navigateToCart,
     );
   }
 
@@ -217,7 +217,8 @@ class HomePage extends StatelessWidget {
       }
     }
     Get.to(() => ShowProductList(
-        LocaleKeys.show_product_list_filtered_products.tr, filtered)).then((value) => _controller.getShoppingListCount());
+            LocaleKeys.show_product_list_filtered_products.tr, filtered))
+        .then((value) => _controller.getShoppingListCount());
   }
 
   bool isEligibleForFilter(Filter filter, Product product) {
@@ -233,6 +234,11 @@ class HomePage extends StatelessWidget {
           topRight: Radius.circular(Dimens.dialog_border_radius),
           topLeft: Radius.circular(Dimens.dialog_border_radius)),
     );
+  }
+
+  void navigateToCart(){
+    Get.to(() => Cart())
+        .then((value) => _controller.getShoppingListCount());
   }
 
   HomePageController get _controller => Get.find<HomePageController>();
