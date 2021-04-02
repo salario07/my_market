@@ -7,24 +7,28 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:my_market/generated/locales.g.dart';
 
-import 'package:my_market/main.dart';
+import 'package:my_market/widget/ui/show_product.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  testWidgets('Number picker and add to cart button',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MediaQuery(
+        data: MediaQueryData(), child: MaterialApp(home: ShowProduct(2))));
+    await tester.pump(Duration(milliseconds: 2500));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    Finder addToCartButton =
+        find.text(LocaleKeys.show_product_add_to_cart).first;
+    Finder numberPickerIncrementButton = find.byIcon(Icons.keyboard_arrow_up);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    expect(addToCartButton, findsOneWidget);
+    expect(numberPickerIncrementButton, findsNothing);
+
+    await tester.tap(addToCartButton);
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(addToCartButton, findsOneWidget);
+    expect(numberPickerIncrementButton, findsNothing);
   });
 }

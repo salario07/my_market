@@ -1,5 +1,6 @@
 class Constants {
-  static const String base_url = 'http://10.0.2.2:3000/';
+  //static const String base_url = 'http://10.0.2.2:3000/';
+  static const String base_url = 'localhost:3000/';
   static const String content_type = 'application/json';
   static const String url_users = 'users';
   static const String url_categories = 'categories';

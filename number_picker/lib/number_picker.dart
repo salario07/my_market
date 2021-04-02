@@ -67,12 +67,12 @@ class NumberPicker extends StatelessWidget {
     if(_controller.number()!=1){
       _controller.number(_controller.number() - 1);
     }
-    onDecrement();
+    onDecrement?.call();
   }
 
   void _onIncrement() {
     _controller.number(_controller.number() + 1);
-    onIncrement();
+    onIncrement?.call();
   }
 
   bool isMaxCountReached() {

@@ -26,6 +26,7 @@ class ShowProductController extends GetxController {
       product(fetchedProduct);
     }).catchError((error) {
       Helper.errorSnackBar(LocaleKeys.shared_error, error.toString());
+      Helper.logDebug(error.toString());
     }).whenComplete(() => isLoading(false));
   }
 
@@ -35,6 +36,7 @@ class ShowProductController extends GetxController {
       productCount(shoppingItem.count);
     }).catchError((error) {
       productCount(0);
+      Helper.logDebug(error.toString());
     }).whenComplete(() => isProductCountLoaded(true));
   }
 
@@ -53,6 +55,7 @@ class ShowProductController extends GetxController {
       getShoppingListCount();
     }).catchError((error) {
       Helper.errorSnackBar(LocaleKeys.shared_error, error.toString());
+      Helper.logDebug(error.toString());
     });
   }
 
@@ -62,6 +65,7 @@ class ShowProductController extends GetxController {
       getShoppingListCount();
     }).catchError((error) {
       Helper.errorSnackBar(LocaleKeys.shared_error, error.toString());
+      Helper.logDebug(error.toString());
     });
   }
 

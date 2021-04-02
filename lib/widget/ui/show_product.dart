@@ -163,8 +163,7 @@ class ShowProduct extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextLabel(LocaleKeys.show_product_total_price.tr),
-                TextTitle(
-                    Helper.buildPriceText(_calculateTotalPrice()))
+                TextTitle(Helper.buildPriceText(_calculateTotalPrice()))
               ],
             ),
           )
@@ -174,7 +173,9 @@ class ShowProduct extends StatelessWidget {
   Widget buildName() {
     return Expanded(
       child: TextTitle(
-        Helper.isLocaleEnglish()?_controller.product()?.name ?? '':_controller.product()?.persianName,
+        Helper.isLocaleEnglish()
+            ? _controller.product()?.name ?? ''
+            : _controller.product()?.persianName,
         textAlign: TextAlign.start,
       ),
     );
@@ -199,17 +200,19 @@ class ShowProduct extends StatelessWidget {
   }
 
   Widget buildImage() {
-    return _controller.product().images.length > 0
-        ? Image.network(
-            _controller.product().images?.elementAt(0) ?? '',
-            width: double.infinity,
-            fit: BoxFit.fitWidth,
-          )
-        : Icon(
-            Icons.image,
-            color: AppColors.colorDivider,
-            size: 80,
-          );
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: _controller.product().images.length > 0
+            ? Image.network(
+                _controller.product().images?.elementAt(0) ?? '',
+                width: double.infinity,
+                fit: BoxFit.fitWidth,
+              )
+            : Icon(
+                Icons.image,
+                color: AppColors.colorDivider,
+                size: 80,
+              ));
   }
 
   void _onIncrement() {
