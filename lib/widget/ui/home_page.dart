@@ -217,7 +217,7 @@ class HomePage extends StatelessWidget {
       }
     }
     Get.to(() => ShowProductList(
-        LocaleKeys.show_product_list_filtered_products.tr, filtered));
+        LocaleKeys.show_product_list_filtered_products.tr, filtered)).then((value) => _controller.getShoppingListCount());
   }
 
   bool isEligibleForFilter(Filter filter, Product product) {
