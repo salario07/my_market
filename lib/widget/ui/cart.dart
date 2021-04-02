@@ -6,6 +6,7 @@ import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/widget/component/my_progress_indicator.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
+import 'package:my_market/widget/ui/dialog_ask.dart';
 import 'package:my_market/widget/ui/item_cart.dart';
 import 'package:my_market/helper/app_colors.dart';
 
@@ -52,7 +53,7 @@ class Cart extends StatelessWidget {
             onPressed: _controller.shoppingItems().length <= 0 ||
                     _controller.isPurchaseLoading()
                 ? null
-                : onBuy,
+                : askToBuy,
             style: buildBuyButtonStyle()),
       ),
     );
@@ -118,8 +119,17 @@ class Cart extends StatelessWidget {
     return totalPrice;
   }
 
-  void onBuy() {
-    _controller.purchase();
+  void askToBuy() {
+    showDialog(
+      context: Get.context,
+      builder: (context) => DialogAsk(
+        title: LocaleKeys.cart_confirm.tr,
+        message: LocaleKeys.cart_are_you_sure_to_buy_these_items_.tr,
+        positive: LocaleKeys.cart_buy.tr,
+        negative: LocaleKeys.shared_cancel.tr,
+        onPositiveTap: () => _controller.purchase(),
+      ),
+    );
   }
 
   CartController get _controller => Get.find<CartController>();

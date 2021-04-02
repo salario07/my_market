@@ -52,19 +52,24 @@ class LocaleKeys {
   static const show_product_items = 'show_product_items';
   static const show_product_add_to_cart = 'show_product_add_to_cart';
   static const show_product_total_price = 'show_product_total_price';
-  static const show_product_not_available = 'show_product_not_available';
+  static const show_product_unavailable = 'show_product_unavailable';
   static const cart_cart = 'cart_cart';
   static const cart_buy = 'cart_buy';
   static const cart_confirm = 'cart_confirm';
   static const cart_sure_to_remove = 'cart_sure_to_remove';
   static const cart_from_cart_ = 'cart_from_cart_';
   static const cart_cart_is_empty = 'cart_cart_is_empty';
+  static const cart_are_you_sure_to_buy_these_items_ =
+      'cart_are_you_sure_to_buy_these_items_';
   static const filter_price = 'filter_price';
   static const filter_min = 'filter_min';
   static const filter_max = 'filter_max';
   static const filter_only_available_products =
       'filter_only_available_products';
   static const filter_filter = 'filter_filter';
+  static const show_product_list_filtered_products =
+      'show_product_list_filtered_products';
+  static const show_product_not_available = 'show_product_not_available';
 }
 
 class Locales {
@@ -108,18 +113,20 @@ class Locales {
     'show_product_items': 'Items',
     'show_product_add_to_cart': 'Add to Cart',
     'show_product_total_price': 'Total Price',
-    'show_product_not_available': 'Not Available',
+    'show_product_unavailable': 'Unavailable',
     'cart_cart': 'Cart',
     'cart_buy': 'Buy',
     'cart_confirm': 'Confirm',
     'cart_sure_to_remove': 'Sure to remove',
     'cart_from_cart_': 'from Cart?',
     'cart_cart_is_empty': 'Cart is Empty',
+    'cart_are_you_sure_to_buy_these_items_': 'Are you sure to buy these items?',
     'filter_price': 'Price',
     'filter_min': 'Min',
     'filter_max': 'Max',
     'filter_only_available_products': 'Only Available Products',
     'filter_filter': 'Filter',
+    'show_product_list_filtered_products': 'Filtered Products',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -169,10 +176,12 @@ class Locales {
     'cart_sure_to_remove': 'از حذف',
     'cart_from_cart_': 'از سبد خرید اطمینان دارید؟',
     'cart_cart_is_empty': 'سبد خرید خالی است',
+    'cart_are_you_sure_to_buy_these_items_': 'Are you sure to buy these items?',
     'filter_price': 'قیمت',
     'filter_min': 'حداقل',
     'filter_max': 'حداکثر',
     'filter_only_available_products': 'فقط کالاهای موجود',
     'filter_filter': 'فیلتر',
+    'show_product_list_filtered_products': 'محصولات فیلتر شده',
   };
 }

@@ -16,7 +16,8 @@ import 'cart.dart';
 
 class ShowProduct extends StatelessWidget {
   final int id;
-  NumberPicker _numberPicker;
+  NumberPicker numberPicker;
+
   ShowProduct(this.id);
 
   @override
@@ -98,7 +99,9 @@ class ShowProduct extends StatelessWidget {
         TextLabel(LocaleKeys.show_product_stock.tr),
         SizedBox(width: 8),
         TextContent(
-          '${_controller.product().stock} ${LocaleKeys.show_product_items.tr}',
+          isProductAvailable()
+              ? '${_controller.product().stock} ${LocaleKeys.show_product_items.tr}'
+              : LocaleKeys.show_product_unavailable.tr,
           textAlign: TextAlign.end,
         )
       ],
@@ -137,17 +140,18 @@ class ShowProduct extends StatelessWidget {
   }
 
   NumberPicker buildNumberPicker() {
-    _numberPicker = NumberPicker(
+    numberPicker = NumberPicker(
       onIncrement: _isStockEmpty() ? null : _onIncrement,
       onDecrement: _onDecrement,
       initCount: _controller.productCount(),
       maxCount: _controller.product().stock,
     );
-    return _numberPicker;
+    return numberPicker;
   }
 
   Widget buildAddToCartButton() {
-    return MyButton(Text(LocaleKeys.show_product_add_to_cart.tr), _onIncrement);
+    return MyButton(Text(LocaleKeys.show_product_add_to_cart.tr),
+        isProductAvailable() ? _onIncrement : null);
   }
 
   Widget buildTotalPrice() {
@@ -234,8 +238,14 @@ class ShowProduct extends StatelessWidget {
   void _navigateToCart() {
     Get.to(() => Cart()).then((value) {
       _controller.updateData(id);
-      _numberPicker.setNumber(_controller.productCount());
+      Future.delayed(Duration(milliseconds: 300)).then((value) {
+        numberPicker.setNumber(_controller.productCount());
+      });
     });
+  }
+
+  bool isProductAvailable() {
+    return _controller.product().stock > 0;
   }
 
   ShowProductController get _controller => Get.find<ShowProductController>();

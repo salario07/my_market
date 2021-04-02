@@ -20,17 +20,14 @@ class ItemCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: navigateToShowProduct,
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            buildItemInfo(),
-            buildItemPrice(),
-          ],
-        ),
+    return Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          buildItemInfo(),
+          buildItemPrice(),
+        ],
       ),
     );
   }
@@ -77,19 +74,22 @@ class ItemCart extends StatelessWidget {
     );
   }
 
-  Card buildImage() {
-    return Card(
-      color: AppColors.colorSurface,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Dimens.card_border_radius)),
-      child: getItem().product.images.length > 0
-          ? Image.network(
-              getItem().product.images[0],
-              width: 48,
-              height: 48,
-            )
-          : SizedBox(width: 48, height: 48),
+  Widget buildImage() {
+    return GestureDetector(
+      onTap: navigateToShowProduct,
+      child: Card(
+        color: AppColors.colorSurface,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(Dimens.card_border_radius)),
+        child: getItem().product.images.length > 0
+            ? Image.network(
+                getItem().product.images[0],
+                width: 48,
+                height: 48,
+              )
+            : SizedBox(width: 48, height: 48),
+      ),
     );
   }
 
@@ -112,8 +112,10 @@ class ItemCart extends StatelessWidget {
 
   void _onIncrement() {
     ShoppingItem item = getItem();
-    item.count = item.count + 1;
-    _controller.updateItemCount(item);
+    if(item.product.stock>item.count){
+      item.count = item.count + 1;
+      _controller.updateItemCount(item);
+    }
   }
 
   void _onDecrement() {
@@ -129,7 +131,7 @@ class ItemCart extends StatelessWidget {
 
   Widget buildNumberPicker() {
     return Obx(
-          () => Row(
+      () => Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -153,7 +155,7 @@ class ItemCart extends StatelessWidget {
     return ElevatedButton(
         child: Icon(Icons.keyboard_arrow_up),
         onPressed:
-        getItem().product.stock <= getItem().count ? null : _onIncrement);
+            getItem().product.stock <= getItem().count ? null : _onIncrement);
   }
 
   OutlinedButton buildMinusButton() {
@@ -164,7 +166,6 @@ class ItemCart extends StatelessWidget {
       onPressed: _onDecrement,
     );
   }
-
 
   int calculateTotalPrice() {
     return getItem().count * getItem().product.price;

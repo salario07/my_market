@@ -46,7 +46,7 @@
     "items": "Items",
     "add_to_cart": "Add to Cart",
     "total_price": "Total Price",
-    "not_available": "Not Available"
+    "unavailable": "Unavailable"
   },
   "cart": {
     "cart": "Cart",
@@ -54,7 +54,8 @@
     "confirm": "Confirm",
     "sure_to_remove": "Sure to remove",
     "from_cart_": "from Cart?",
-    "cart_is_empty": "Cart is Empty"
+    "cart_is_empty": "Cart is Empty",
+    "are_you_sure_to_buy_these_items_": "Are you sure to buy these items?"
   },
   "filter": {
     "price": "Price",
@@ -62,5 +63,8 @@
     "max": "Max",
     "only_available_products": "Only Available Products",
     "filter": "Filter"
+  },
+  "show_product_list": {
+    "filtered_products": "Filtered Products"
   }
 }

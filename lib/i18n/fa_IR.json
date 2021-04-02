@@ -54,7 +54,8 @@
     "confirm": "تایید",
     "sure_to_remove": "از حذف",
     "from_cart_": "از سبد خرید اطمینان دارید؟",
-    "cart_is_empty": "سبد خرید خالی است"
+    "cart_is_empty": "سبد خرید خالی است",
+    "are_you_sure_to_buy_these_items_": "Are you sure to buy these items?"
   },
   "filter": {
     "price": "قیمت",
@@ -62,5 +63,8 @@
     "max" : "حداکثر",
     "only_available_products": "فقط کالاهای موجود",
     "filter": "فیلتر"
+  },
+  "show_product_list": {
+    "filtered_products": "محصولات فیلتر شده"
   }
 }

@@ -5,6 +5,7 @@ import 'package:my_market/helper/json_parser.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/model/shopping_item.dart';
 import 'package:my_market/repository/show_product_repo.dart';
+import 'package:number_picker/number_picker.dart';
 
 class ShowProductController extends GetxController {
   Rx<Product> product = Product.getDefault().obs;
@@ -42,6 +43,7 @@ class ShowProductController extends GetxController {
     repository.updateItemCount(product().id, count).then((response) {
       getProductCount();
     }).catchError((error) {
+      Helper.logDebug(error.toString());
       Helper.errorSnackBar(LocaleKeys.shared_error, error.toString());
     });
   }

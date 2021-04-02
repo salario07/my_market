@@ -5,6 +5,7 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/constants.dart';
 import 'package:my_market/helper/helper.dart';
+import 'package:my_market/model/filter.dart';
 import 'package:my_market/widget/component/my_button.dart';
 import 'package:my_market/widget/component/my_text_field.dart';
 import 'package:my_market/widget/component/text_content.dart';
@@ -129,7 +130,13 @@ class BottomSheetFilter extends StatelessWidget {
     _controller.onlyAvailableProducts(value);
   }
 
-  void filter() {}
+  void filter() {
+    Get.back(
+        result: Filter(
+            _controller.rangeMin().toInt(),
+            _controller.rangeMax().toInt(),
+            _controller.onlyAvailableProducts()));
+  }
 
   HomePageController get _controller => Get.find<HomePageController>();
 }

@@ -5,8 +5,10 @@ import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/search_product.dart';
 import 'package:my_market/helper/shared_pref.dart';
+import 'package:my_market/model/filter.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/ui/bottom_sheet_filter.dart';
 import 'package:my_market/widget/ui/cart.dart';
@@ -15,6 +17,7 @@ import 'package:my_market/widget/ui/dialog_language.dart';
 import 'package:my_market/widget/ui/item_category.dart';
 import 'package:my_market/widget/ui/item_product.dart';
 import 'package:my_market/widget/ui/login.dart';
+import 'package:my_market/widget/ui/show_product_list.dart';
 
 import 'show_product.dart';
 
@@ -69,7 +72,7 @@ class HomePage extends StatelessWidget {
       flex: 6,
       child: Obx(
         () => GridView.builder(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.only(top:8,left:8,right:8,bottom:80),
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemBuilder: (context, index) => ItemProduct(
@@ -199,8 +202,29 @@ class HomePage extends StatelessWidget {
   }
 
   void showBottomSheetFilter() {
-    Get.bottomSheet(BottomSheetFilter(), shape: buildBottomSheetShape(),backgroundColor: AppColors.colorSurface)
-        .then((value) => null);
+    Get.bottomSheet(BottomSheetFilter(),
+            shape: buildBottomSheetShape(),
+            backgroundColor: AppColors.colorSurface)
+        .then((filterObject) =>
+            filterObject != null ? onFilter(filterObject as Filter) : null);
+  }
+
+  void onFilter(Filter filter) {
+    List<Product> filtered = [];
+    for (Product product in _controller.products()) {
+      if (isEligibleForFilter(filter, product)) {
+        filtered.add(product);
+      }
+    }
+    Get.to(() => ShowProductList(
+        LocaleKeys.show_product_list_filtered_products.tr, filtered));
+  }
+
+  bool isEligibleForFilter(Filter filter, Product product) {
+    return filter.min <= product.price &&
+        filter.max >= product.price &&
+        ((filter.onlyAvailableProducts && product.stock > 0) ||
+            !filter.onlyAvailableProducts);
   }
 
   RoundedRectangleBorder buildBottomSheetShape() {
