@@ -59,7 +59,9 @@ class ItemCart extends StatelessWidget {
       children: [
         buildImage(),
         SizedBox(width: 16),
-        TextContent(getItem().product.name),
+        TextContent(Helper.isLocaleEnglish()
+            ? getItem().product.name
+            : getItem().product.persianName),
         Expanded(
           child: Align(
             alignment: AlignmentDirectional.centerEnd,
@@ -98,7 +100,7 @@ class ItemCart extends StatelessWidget {
         builder: (context) => DialogAsk(
               title: LocaleKeys.cart_confirm.tr,
               message:
-                  '${LocaleKeys.cart_sure_to_remove.tr} ${item.product.name} ${LocaleKeys.cart_from_cart_.tr}',
+                  '${LocaleKeys.cart_sure_to_remove.tr} ${Helper.isLocaleEnglish() ? item.product.name : item.product.persianName} ${LocaleKeys.cart_from_cart_.tr}',
               negative: LocaleKeys.shared_cancel.tr,
               positive: LocaleKeys.shared_remove.tr,
               onPositiveTap: removeItemFromCart,
@@ -111,7 +113,7 @@ class ItemCart extends StatelessWidget {
 
   void _onIncrement() {
     ShoppingItem item = getItem();
-    if(item.product.stock>item.count){
+    if (item.product.stock > item.count) {
       item.count = item.count + 1;
       _controller.updateItemCount(item);
     }

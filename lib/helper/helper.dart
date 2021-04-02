@@ -48,5 +48,8 @@ class Helper {
     return formatter.format(price);
   }
 
+  static bool isLocaleEnglish(){
+    return Get.locale == LocalizationService.locales[0];
+  }
 
 }

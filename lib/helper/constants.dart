@@ -21,6 +21,7 @@ class Constants {
   static const String images = 'images';
   static const String count = 'count';
   static const String product = 'product';
+  static const String persian_name = 'persianName';
 
   static const String role_user = 'user';
   static const String role_admin = 'admin';

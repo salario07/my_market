@@ -6,7 +6,7 @@ class Product {
   final int categoryId;
   int stock;
   final String name;
-  final String categoryName;
+  final String persianName;
   final num price;
   final String description;
   final List<String> images;
@@ -16,7 +16,7 @@ class Product {
       this.categoryId,
       this.stock,
       this.name,
-      this.categoryName,
+      this.persianName,
       this.price,
       this.description,
       this.images});
@@ -27,7 +27,7 @@ class Product {
       categoryId: json[Constants.category_id],
       stock: json[Constants.stock],
       name: json[Constants.name],
-      categoryName: json[Constants.category_name],
+      persianName: json[Constants.persian_name],
       price: (json[Constants.price]),
       description: json[Constants.description],
       images: JsonParser.parseStringList(json[Constants.images]),
@@ -40,7 +40,7 @@ class Product {
       Constants.category_id: categoryId,
       Constants.stock: stock,
       Constants.name: name,
-      Constants.category_name: categoryName,
+      Constants.persian_name: persianName,
       Constants.price: price,
       Constants.description: description,
       Constants.images: images
@@ -52,7 +52,7 @@ class Product {
         id: 0,
         name: '',
         categoryId: 0,
-        categoryName: '',
+        persianName: '',
         description: '',
         images: [],
         price: 0,

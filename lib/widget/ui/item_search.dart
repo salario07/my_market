@@ -36,7 +36,8 @@ class ItemSearch extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        TextContent(product.name),
+        TextContent(
+            Helper.isLocaleEnglish() ? product.name : product.persianName),
         TextTitle(Helper.buildPriceText(product.price))
       ],
     );

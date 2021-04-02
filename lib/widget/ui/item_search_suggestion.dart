@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/component/text_content.dart';
 
@@ -18,7 +19,7 @@ class ItemSearchSuggestion extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16,vertical: 12),
-              child: TextContent(_product.name),
+              child: TextContent(Helper.isLocaleEnglish()?_product.name:_product.persianName),
             )
           ],
         ),

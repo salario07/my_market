@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/model/category.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/ui/show_product_list.dart';
@@ -29,7 +30,9 @@ class ItemCategory extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Center(
         child: Text(
-          category?.name ?? '',
+          Helper.isLocaleEnglish()
+              ? category?.name ?? ''
+              : category?.persianName ?? '',
           style: TextStyle(fontSize: 18),
         ),
       ),

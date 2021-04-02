@@ -42,7 +42,7 @@ class ItemProduct extends StatelessWidget {
 
   Text buildTitle() {
     return Text(
-      product?.name ?? '',
+      Helper.isLocaleEnglish()?product?.name ?? '':product?.persianName ?? '',
       style: TextStyle(fontSize: 14),
     );
   }

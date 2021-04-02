@@ -174,7 +174,7 @@ class ShowProduct extends StatelessWidget {
   Widget buildName() {
     return Expanded(
       child: TextTitle(
-        _controller.product()?.name ?? '',
+        Helper.isLocaleEnglish()?_controller.product()?.name ?? '':_controller.product()?.persianName,
         textAlign: TextAlign.start,
       ),
     );
