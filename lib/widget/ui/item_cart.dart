@@ -15,7 +15,6 @@ import 'show_product.dart';
 
 class ItemCart extends StatelessWidget {
   final int id;
-  NumberPicker _numberPicker;
 
   ItemCart(this.id);
 
@@ -94,17 +93,6 @@ class ItemCart extends StatelessWidget {
     );
   }
 
-  Widget buildNumberPicker() {
-    _numberPicker = NumberPicker(
-      initCount: getItem().count,
-      maxCount: getItem().product.stock,
-      onDecrement: _onDecrement,
-      onIncrement: _onIncrement,
-      horizontalPadding: 0,
-    );
-    return _numberPicker;
-  }
-
   void askToRemoveItem(ShoppingItem item) {
     showDialog(
         context: Get.context,
@@ -126,7 +114,6 @@ class ItemCart extends StatelessWidget {
     ShoppingItem item = getItem();
     item.count = item.count + 1;
     _controller.updateItemCount(item);
-    _numberPicker.setNumber(item.count);
   }
 
   void _onDecrement() {
@@ -135,11 +122,49 @@ class ItemCart extends StatelessWidget {
       ShoppingItem item = getItem();
       item.count = item.count - 1;
       _controller.updateItemCount(item);
-      _numberPicker.setNumber(item.count);
     } else {
       askToRemoveItem(item);
     }
   }
+
+  Widget buildNumberPicker() {
+    return Obx(
+          () => Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          buildMinusButton(),
+          buildCounterNumber(),
+          buildPlusButton(),
+        ],
+      ),
+    );
+  }
+
+  Container buildCounterNumber() => Container(
+      width: 40,
+      child: Text(
+        getItem().count.toString(),
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        textAlign: TextAlign.center,
+      ));
+
+  ElevatedButton buildPlusButton() {
+    return ElevatedButton(
+        child: Icon(Icons.keyboard_arrow_up),
+        onPressed:
+        getItem().product.stock <= getItem().count ? null : _onIncrement);
+  }
+
+  OutlinedButton buildMinusButton() {
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+          side: BorderSide(color: AppColors.colorPrimary)),
+      child: Icon(Icons.keyboard_arrow_down),
+      onPressed: _onDecrement,
+    );
+  }
+
 
   int calculateTotalPrice() {
     return getItem().count * getItem().product.price;
