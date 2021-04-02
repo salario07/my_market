@@ -80,12 +80,21 @@ class SearchProduct extends SearchDelegate {
     } else {
       List<Product> filtered = [];
       allProducts.forEach((element) {
-        if (element.name.toLowerCase().contains(query.toLowerCase()) ||
-            element.description.toLowerCase().contains(query.toLowerCase())) {
+        if (doesProductNameContainsQuery(element) ||
+            doesProductDescriptionContainsQuery(element)) {
           filtered.add(element);
         }
       });
       return filtered;
     }
+  }
+
+  bool doesProductNameContainsQuery(Product product) {
+    return product.name.toLowerCase().contains(query.toLowerCase()) ||
+        product.persianName.toLowerCase().contains(query.toLowerCase());
+  }
+
+  bool doesProductDescriptionContainsQuery(Product product) {
+    return product.description.toLowerCase().contains(query.toLowerCase());
   }
 }
