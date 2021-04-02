@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/constants.dart';
@@ -30,16 +31,21 @@ class Helper {
         margin: EdgeInsets.all(16));
   }
 
-  static String buildPriceText(String price) {
+  static String buildPriceText(int price) {
     if (Get.locale == LocalizationService.locales[0]) {
-      return '${LocaleKeys.shared_currency.tr} $price';
+      return '${LocaleKeys.shared_currency.tr} ${addCommaSeparator(price)}';
     } else {
-      return '$price ${LocaleKeys.shared_currency.tr}';
+      return '${addCommaSeparator(price)} ${LocaleKeys.shared_currency.tr}';
     }
   }
 
   static bool isSuccessful(int statusCode) {
     return statusCode == 200 || statusCode == 201;
+  }
+
+  static String addCommaSeparator(int price){
+    var formatter = NumberFormat('###,###,###');
+    return formatter.format(price);
   }
 
 

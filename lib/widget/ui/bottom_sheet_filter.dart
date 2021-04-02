@@ -16,9 +16,9 @@ class BottomSheetFilter extends StatelessWidget {
 
   BottomSheetFilter() {
     _minController.text =
-        Helper.buildPriceText(_controller.rangeMin().toInt().toString());
+        Helper.buildPriceText(_controller.rangeMin().toInt());
     _maxController.text =
-        Helper.buildPriceText(_controller.rangeMax().toInt().toString());
+        Helper.buildPriceText(_controller.rangeMax().toInt());
   }
 
   @override
@@ -94,9 +94,9 @@ class BottomSheetFilter extends StatelessWidget {
 
   void onChangeSliderValues(RangeValues value) {
     _controller.rangeMin(value.start);
-    _minController.text = Helper.buildPriceText(value.start.toInt().toString());
+    _minController.text = Helper.buildPriceText(value.start.toInt());
     _controller.rangeMax(value.end);
-    _maxController.text = Helper.buildPriceText(value.end.toInt().toString());
+    _maxController.text = Helper.buildPriceText(value.end.toInt());
   }
 
   Align buildFilterButton() {

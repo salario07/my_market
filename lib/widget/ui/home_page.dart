@@ -236,9 +236,8 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void navigateToCart(){
-    Get.to(() => Cart())
-        .then((value) => _controller.getShoppingListCount());
+  void navigateToCart() {
+    Get.to(() => Cart()).then((value) => _controller.getShoppingListCount());
   }
 
   HomePageController get _controller => Get.find<HomePageController>();

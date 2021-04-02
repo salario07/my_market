@@ -164,7 +164,7 @@ class ShowProduct extends StatelessWidget {
               children: [
                 TextLabel(LocaleKeys.show_product_total_price.tr),
                 TextTitle(
-                    Helper.buildPriceText(_calculateTotalPrice().toString()))
+                    Helper.buildPriceText(_calculateTotalPrice()))
               ],
             ),
           )
@@ -188,7 +188,7 @@ class ShowProduct extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         child: Text(
-          Helper.buildPriceText(_controller.product().price.toString()),
+          Helper.buildPriceText(_controller.product().price),
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,

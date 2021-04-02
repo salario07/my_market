@@ -37,7 +37,7 @@ class ItemSearch extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         TextContent(product.name),
-        TextTitle(Helper.buildPriceText(product.price.toString()))
+        TextTitle(Helper.buildPriceText(product.price))
       ],
     );
   }

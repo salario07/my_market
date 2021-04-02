@@ -45,7 +45,7 @@ class ItemCart extends StatelessWidget {
       child: Align(
         alignment: AlignmentDirectional.centerStart,
         child: Text(
-          Helper.buildPriceText(calculateTotalPrice().toString()),
+          Helper.buildPriceText(calculateTotalPrice()),
           textAlign: TextAlign.end,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
@@ -65,7 +65,7 @@ class ItemCart extends StatelessWidget {
           child: Align(
             alignment: AlignmentDirectional.centerEnd,
             child: TextLabel(
-              Helper.buildPriceText(getItem().product.price.toString()),
+              Helper.buildPriceText(getItem().product.price),
               textAlign: TextAlign.end,
             ),
           ),

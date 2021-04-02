@@ -35,7 +35,7 @@ class ItemProduct extends StatelessWidget {
 
   Text buildPrice() {
     return Text(
-      Helper.buildPriceText(product?.price.toString()?? ''),
+      Helper.buildPriceText(product?.price?? 0),
       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     );
   }
