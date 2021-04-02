@@ -43,6 +43,7 @@ class SearchProduct extends SearchDelegate {
       scrollDirection: Axis.vertical,
       itemCount: filtered.length,
       separatorBuilder: (context, index) => Divider(
+        height: 1,
         color: AppColors.colorDivider,
       ),
     );
@@ -62,6 +63,7 @@ class SearchProduct extends SearchDelegate {
       itemCount: filtered.length,
       padding: EdgeInsets.symmetric(vertical: 8),
       separatorBuilder: (context, index) => Divider(
+        height: 1,
         color: AppColors.colorDivider,
       ),
     );
