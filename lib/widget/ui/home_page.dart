@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
+import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/helper/search_product.dart';
 import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/product.dart';
+import 'package:my_market/widget/ui/bottom_sheet_filter.dart';
 import 'package:my_market/widget/ui/cart.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
 import 'package:my_market/widget/ui/dialog_language.dart';
@@ -25,6 +27,15 @@ class HomePage extends StatelessWidget {
       appBar: buildAppBar(),
       body: buildContent(),
       drawer: buildDrawer(),
+      floatingActionButton: buildFloatingActionButton(),
+    );
+  }
+
+  FloatingActionButton buildFloatingActionButton() {
+    return FloatingActionButton(
+      child: Icon(Icons.filter_alt_sharp),
+      backgroundColor: AppColors.colorAccent,
+      onPressed: showBottomSheetFilter,
     );
   }
 
@@ -185,6 +196,19 @@ class HomePage extends StatelessWidget {
   void navigateToShowProduct(Product product) {
     Get.to(() => ShowProduct(product?.id ?? 0))
         .then((value) => _controller.getShoppingListCount());
+  }
+
+  void showBottomSheetFilter() {
+    Get.bottomSheet(BottomSheetFilter(), shape: buildBottomSheetShape(),backgroundColor: AppColors.colorSurface)
+        .then((value) => null);
+  }
+
+  RoundedRectangleBorder buildBottomSheetShape() {
+    return RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+          topRight: Radius.circular(Dimens.dialog_border_radius),
+          topLeft: Radius.circular(Dimens.dialog_border_radius)),
+    );
   }
 
   HomePageController get _controller => Get.find<HomePageController>();

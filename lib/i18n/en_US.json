@@ -35,17 +35,18 @@
     "categories": "Categories",
     "populars": "Populars",
     "home": "Home",
-    "logout":"Logout",
-    "sure_to_logout":"Sure to Logout?",
+    "logout": "Logout",
+    "sure_to_logout": "Sure to Logout?",
     "language": "Language",
     "search_product": "Search Product",
     "no_item_found": "No item found"
   },
   "show_product": {
-    "stock" : "Stock",
-    "items" : "Items",
-    "add_to_cart" : "Add to Cart",
-    "total_price" : "Total Price"
+    "stock": "Stock",
+    "items": "Items",
+    "add_to_cart": "Add to Cart",
+    "total_price": "Total Price",
+    "not_available": "Not Available"
   },
   "cart": {
     "cart": "Cart",
@@ -54,5 +55,12 @@
     "sure_to_remove": "Sure to remove",
     "from_cart_": "from Cart?",
     "cart_is_empty": "Cart is Empty"
+  },
+  "filter": {
+    "price": "Price",
+    "min": "Min",
+    "max": "Max",
+    "only_available_products": "Only Available Products",
+    "filter": "Filter"
   }
 }

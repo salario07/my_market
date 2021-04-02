@@ -10,6 +10,7 @@ class MyTextField extends StatelessWidget {
   final String labelText;
   final String hintText;
   final Widget suffixIconGestureDetector;
+  final bool enabled;
 
   MyTextField(
       {this.controller,
@@ -18,11 +19,13 @@ class MyTextField extends StatelessWidget {
       this.textInputAction = TextInputAction.next,
       this.labelText = '',
       this.hintText = '',
-      this.suffixIconGestureDetector});
+      this.suffixIconGestureDetector,
+      this.enabled = true});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       validator: validator,
       controller: controller,
       obscureText: obscureText,

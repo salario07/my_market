@@ -16,10 +16,12 @@ class AppColors {
   static const Color colorError = Color(0xFFEA2323);
   static const Color colorSuccess = Color(0xFF28C938);
 
-  static const Color colorDivider = Color(0xFF878787);
+  static const Color colorDivider = Color(0xFFACACAC);
 
   static const Color colorOnError = Color(0xFFFFFFFF);
   static const Color colorOnSuccess = Color(0xFFFFFFFF);
+
+  static const Color colorAccentLight = Color(0xFFFFEDD6);
 
   static const MaterialColor myPrimaryColor = const MaterialColor(
     0xFF673AB7,

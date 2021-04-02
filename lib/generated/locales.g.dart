@@ -52,12 +52,19 @@ class LocaleKeys {
   static const show_product_items = 'show_product_items';
   static const show_product_add_to_cart = 'show_product_add_to_cart';
   static const show_product_total_price = 'show_product_total_price';
+  static const show_product_not_available = 'show_product_not_available';
   static const cart_cart = 'cart_cart';
   static const cart_buy = 'cart_buy';
   static const cart_confirm = 'cart_confirm';
   static const cart_sure_to_remove = 'cart_sure_to_remove';
   static const cart_from_cart_ = 'cart_from_cart_';
   static const cart_cart_is_empty = 'cart_cart_is_empty';
+  static const filter_price = 'filter_price';
+  static const filter_min = 'filter_min';
+  static const filter_max = 'filter_max';
+  static const filter_only_available_products =
+      'filter_only_available_products';
+  static const filter_filter = 'filter_filter';
 }
 
 class Locales {
@@ -101,12 +108,18 @@ class Locales {
     'show_product_items': 'Items',
     'show_product_add_to_cart': 'Add to Cart',
     'show_product_total_price': 'Total Price',
+    'show_product_not_available': 'Not Available',
     'cart_cart': 'Cart',
     'cart_buy': 'Buy',
     'cart_confirm': 'Confirm',
     'cart_sure_to_remove': 'Sure to remove',
     'cart_from_cart_': 'from Cart?',
     'cart_cart_is_empty': 'Cart is Empty',
+    'filter_price': 'Price',
+    'filter_min': 'Min',
+    'filter_max': 'Max',
+    'filter_only_available_products': 'Only Available Products',
+    'filter_filter': 'Filter',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -149,11 +162,17 @@ class Locales {
     'show_product_items': 'عدد',
     'show_product_add_to_cart': 'اضافه به سبد خرید',
     'show_product_total_price': 'مبلغ کل',
+    'show_product_not_available': 'ناموجود',
     'cart_cart': 'سبد خرید',
     'cart_buy': 'خرید',
     'cart_confirm': 'تایید',
     'cart_sure_to_remove': 'از حذف',
     'cart_from_cart_': 'از سبد خرید اطمینان دارید؟',
     'cart_cart_is_empty': 'سبد خرید خالی است',
+    'filter_price': 'قیمت',
+    'filter_min': 'حداقل',
+    'filter_max': 'حداکثر',
+    'filter_only_available_products': 'فقط کالاهای موجود',
+    'filter_filter': 'فیلتر',
   };
 }

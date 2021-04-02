@@ -31,4 +31,8 @@ class Constants {
   static const String shared_pref_key_locale = "locale";
   static const String locale_english = "locale_english";
   static const String locale_persian = "locale_persian";
+
+  static const double minRangeSlider = 0;
+  static const double maxRangeSlider = 1000;
+  static const int rangeDivision = 200;
 }

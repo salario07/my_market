@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:my_market/generated/locales.g.dart';
+import 'package:my_market/helper/constants.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/json_parser.dart';
 import 'package:my_market/model/category.dart';
@@ -10,6 +11,9 @@ class HomePageController extends GetxController {
   RxList<Category> categories = [].cast<Category>().obs;
   RxList<Product> products = [].cast<Product>().obs;
   RxInt cartCount = 0.obs;
+  RxDouble rangeMin = Constants.minRangeSlider.obs;
+  RxDouble rangeMax = Constants.maxRangeSlider.obs;
+  RxBool onlyAvailableProducts = false.obs;
 
   HomePageRepo repository = HomePageRepo();
 
