@@ -5,7 +5,6 @@ import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
-import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/search_product.dart';
 import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/filter.dart';

@@ -9,7 +9,6 @@ import 'package:my_market/model/shopping_item.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
-import 'package:number_picker/number_picker.dart';
 
 import 'show_product.dart';
 

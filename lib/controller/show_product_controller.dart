@@ -5,7 +5,6 @@ import 'package:my_market/helper/json_parser.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/model/shopping_item.dart';
 import 'package:my_market/repository/show_product_repo.dart';
-import 'package:number_picker/number_picker.dart';
 
 class ShowProductController extends GetxController {
   Rx<Product> product = Product.getDefault().obs;
