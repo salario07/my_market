@@ -46,7 +46,7 @@
     "items" : "عدد",
     "add_to_cart" : "اضافه به سبد خرید",
     "total_price" : "مبلغ کل",
-    "not_available": "ناموجود"
+    "unavailable": "ناموجود"
   },
   "cart": {
     "cart": "سبد خرید",

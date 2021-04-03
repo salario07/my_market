@@ -5,6 +5,7 @@ import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/helper/json_parser.dart';
 import 'package:my_market/helper/search_product.dart';
 import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/filter.dart';
@@ -209,15 +210,19 @@ class HomePage extends StatelessWidget {
   }
 
   void onFilter(Filter filter) {
-    List<Product> filtered = [];
-    for (Product product in _controller.products()) {
-      if (isEligibleForFilter(filter, product)) {
-        filtered.add(product);
+    _controller.getProductsAsync().then((response) {
+      List<Product> updatedProducts = JsonParser.parseProducts(response.data);
+      _controller.products(updatedProducts);
+      List<Product> filtered = [];
+      for (Product product in updatedProducts) {
+        if (isEligibleForFilter(filter, product)) {
+          filtered.add(product);
+        }
       }
-    }
-    Get.to(() => ShowProductList(
-            LocaleKeys.show_product_list_filtered_products.tr, filtered))
-        .then((value) => _controller.getShoppingListCount());
+      Get.to(() => ShowProductList(
+              LocaleKeys.show_product_list_filtered_products.tr, filtered))
+          .then((value) => _controller.getShoppingListCount());
+    });
   }
 
   bool isEligibleForFilter(Filter filter, Product product) {

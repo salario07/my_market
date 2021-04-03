@@ -1,4 +1,5 @@
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
+import 'package:get/get.dart' hide Response;
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/constants.dart';
 import 'package:my_market/helper/helper.dart';
@@ -32,6 +33,10 @@ class HomePageController extends GetxController {
       Helper.logDebug(error.toString());
       Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
     });
+  }
+
+  Future<Response> getProductsAsync() async {
+    return await repository.getProducts();
   }
 
   void getShoppingListCount() {

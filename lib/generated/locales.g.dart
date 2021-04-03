@@ -169,7 +169,7 @@ class Locales {
     'show_product_items': 'عدد',
     'show_product_add_to_cart': 'اضافه به سبد خرید',
     'show_product_total_price': 'مبلغ کل',
-    'show_product_not_available': 'ناموجود',
+    'show_product_unavailable': 'ناموجود',
     'cart_cart': 'سبد خرید',
     'cart_buy': 'خرید',
     'cart_confirm': 'تایید',
