@@ -8,9 +8,10 @@ import 'package:my_market/helper/validators.dart';
 import 'package:my_market/model/user.dart';
 import 'package:my_market/widget/component/my_button.dart';
 import 'package:my_market/widget/component/my_progress_indicator.dart';
-import 'file:///D:/Salar/flutter/MyMarket/my_market/lib/widget/ui/login.dart';
 import 'package:my_market/widget/component/my_text_button.dart';
 import 'package:my_market/widget/component/my_text_field.dart';
+
+import 'login.dart';
 
 class SignUp extends StatelessWidget {
   final TextEditingController _firstNameController = TextEditingController();
