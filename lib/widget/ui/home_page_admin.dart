@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_market/controller/home_page_admin_controller.dart';
+import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
@@ -18,12 +18,10 @@ import 'package:my_market/widget/ui/login.dart';
 import 'package:my_market/widget/ui/show_product_admin.dart';
 import 'package:my_market/widget/ui/show_product_list.dart';
 
-import 'show_product.dart';
-
 class HomePageAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<HomePageAdminController>(() => HomePageAdminController());
+    Get.lazyPut<HomePageController>(() => HomePageController());
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: buildAppBar(),
@@ -230,5 +228,5 @@ class HomePageAdmin extends StatelessWidget {
     );
   }
 
-  HomePageAdminController get _controller => Get.find<HomePageAdminController>();
+  HomePageController get _controller => Get.find<HomePageController>();
 }

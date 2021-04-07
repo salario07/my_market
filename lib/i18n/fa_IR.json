@@ -69,5 +69,17 @@
   },
   "home_page_admin": {
     "edit": "ویرایش"
+  },
+  "add_edit_product": {
+    "add_product": "اضافه کردن محصول",
+    "edit_product": "ویرایش محصول",
+    "english_product_name": "نام انگلیسی محصول",
+    "english_product_name_hint": "نام انگلیسی محصول را بنویسید",
+    "persian_product_name": "نام فارسی محصول",
+    "persian_product_name_hint": "نام فارسی محصول را بنویسید",
+    "description_hint": "توضیحات محصول را بنویسید",
+    "price_hint": "قیمت محصول را بنویسید",
+    "stock_hint": "موجودی محصول را وارد کنید",
+    "save": "ذخیره"
   }
 }

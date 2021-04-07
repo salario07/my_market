@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_market/controller/home_page_admin_controller.dart';
 import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/constants.dart';
 import 'package:my_market/helper/helper.dart';
-import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/filter.dart';
 import 'package:my_market/widget/component/my_button.dart';
 import 'package:my_market/widget/component/my_text_field.dart';
@@ -138,11 +136,5 @@ class BottomSheetFilter extends StatelessWidget {
             _controller.onlyAvailableProducts()));
   }
 
-  dynamic get _controller {
-    if (SharedPref.isUserAdmin()) {
-      return Get.find<HomePageAdminController>();
-    } else {
-      return Get.find<HomePageController>();
-    }
-  }
+  dynamic get _controller => Get.find<HomePageController>();
 }

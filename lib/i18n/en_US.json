@@ -69,5 +69,17 @@
   },
   "home_page_admin": {
     "edit": "Edit"
+  },
+  "add_edit_product": {
+    "add_product": "Add Product",
+    "edit_product": "Edit Product",
+    "english_product_name": "English Product Name",
+    "english_product_name_hint": "Enter english product name here",
+    "persian_product_name": "Persian Product Name",
+    "persian_product_name_hint": "Enter persian product name here",
+    "description_hint": "Enter product description here",
+    "price_hint": "Enter product price here",
+    "stock_hint": "Enter product stock here",
+    "save": "Save"
   }
 }

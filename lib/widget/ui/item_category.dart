@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_market/controller/home_page_admin_controller.dart';
 import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/helper/helper.dart';
@@ -58,11 +57,6 @@ class ItemCategory extends StatelessWidget {
     return categorizedProducts;
   }
 
-  dynamic get _controller {
-    if (SharedPref.isUserAdmin()) {
-      return Get.find<HomePageAdminController>();
-    } else {
-      return Get.find<HomePageController>();
-    }
-  }
+  HomePageController get _controller => Get.find<HomePageController>();
+
 }

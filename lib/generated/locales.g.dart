@@ -70,6 +70,21 @@ class LocaleKeys {
   static const show_product_list_filtered_products =
       'show_product_list_filtered_products';
   static const home_page_admin_edit = 'home_page_admin_edit';
+  static const add_edit_product_add_product = 'add_edit_product_add_product';
+  static const add_edit_product_edit_product = 'add_edit_product_edit_product';
+  static const add_edit_product_english_product_name =
+      'add_edit_product_english_product_name';
+  static const add_edit_product_english_product_name_hint =
+      'add_edit_product_english_product_name_hint';
+  static const add_edit_product_persian_product_name =
+      'add_edit_product_persian_product_name';
+  static const add_edit_product_persian_product_name_hint =
+      'add_edit_product_persian_product_name_hint';
+  static const add_edit_product_description_hint =
+      'add_edit_product_description_hint';
+  static const add_edit_product_price_hint = 'add_edit_product_price_hint';
+  static const add_edit_product_stock_hint = 'add_edit_product_stock_hint';
+  static const add_edit_product_save = 'add_edit_product_save';
 }
 
 class Locales {
@@ -128,6 +143,18 @@ class Locales {
     'filter_filter': 'Filter',
     'show_product_list_filtered_products': 'Filtered Products',
     'home_page_admin_edit': 'Edit',
+    'add_edit_product_add_product': 'Add Product',
+    'add_edit_product_edit_product': 'Edit Product',
+    'add_edit_product_english_product_name': 'English Product Name',
+    'add_edit_product_english_product_name_hint':
+        'Enter english product name here',
+    'add_edit_product_persian_product_name': 'Persian Product Name',
+    'add_edit_product_persian_product_name_hint':
+        'Enter persian product name here',
+    'add_edit_product_description_hint': 'Enter product description here',
+    'add_edit_product_price_hint': 'Enter product price here',
+    'add_edit_product_stock_hint': 'Enter product stock here',
+    'add_edit_product_save': 'Save',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -185,5 +212,16 @@ class Locales {
     'filter_filter': 'فیلتر',
     'show_product_list_filtered_products': 'محصولات فیلتر شده',
     'home_page_admin_edit': 'ویرایش',
+    'add_edit_product_add_product': 'اضافه کردن محصول',
+    'add_edit_product_edit_product': 'ویرایش محصول',
+    'add_edit_product_english_product_name': 'نام انگلیسی محصول',
+    'add_edit_product_english_product_name_hint':
+        'نام انگلیسی محصول را بنویسید',
+    'add_edit_product_persian_product_name': 'نام فارسی محصول',
+    'add_edit_product_persian_product_name_hint': 'نام فارسی محصول را بنویسید',
+    'add_edit_product_description_hint': 'توضیحات محصول را بنویسید',
+    'add_edit_product_price_hint': 'قیمت محصول را بنویسید',
+    'add_edit_product_stock_hint': 'موجودی محصول را وارد کنید',
+    'add_edit_product_save': 'ذخیره',
   };
 }

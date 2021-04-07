@@ -8,7 +8,7 @@ import 'package:my_market/helper/helper.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/component/text_title.dart';
-
+import 'package:my_market/widget/ui/add_edit_product.dart';
 
 class ShowProductAdmin extends StatelessWidget {
   final int id;
@@ -95,7 +95,7 @@ class ShowProductAdmin extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         color: AppColors.colorBackground,
-        padding: EdgeInsets.symmetric(vertical: 8,horizontal: 16),
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Row(children: [Expanded(child: buildEditButton())]),
       ),
     );
@@ -103,7 +103,8 @@ class ShowProductAdmin extends StatelessWidget {
 
   Widget buildEditButton() {
     return OutlinedButton(
-        child: Text(LocaleKeys.home_page_admin_edit.tr), onPressed: () {});
+        child: Text(LocaleKeys.home_page_admin_edit.tr),
+        onPressed: navigateToEditProduct);
   }
 
   Widget buildName() {
@@ -153,6 +154,13 @@ class ShowProductAdmin extends StatelessWidget {
 
   bool isProductAvailable() {
     return _controller.product().stock > 0;
+  }
+
+  void navigateToEditProduct() {
+    Get.to(() => AddEditProduct(
+          false,
+          product: _controller.product(),
+        ));
   }
 
   ShowProductController get _controller => Get.find<ShowProductController>();
