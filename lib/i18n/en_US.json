@@ -80,6 +80,7 @@
     "description_hint": "Enter product description here",
     "price_hint": "Enter product price here",
     "stock_hint": "Enter product stock here",
-    "save": "Save"
+    "save": "Save",
+    "description": "Description"
   }
 }

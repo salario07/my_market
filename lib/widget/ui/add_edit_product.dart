@@ -47,6 +47,7 @@ class AddEditProduct extends StatelessWidget {
                     controller: _englishTitleController,
                     hintText: LocaleKeys
                         .add_edit_product_english_product_name_hint.tr,
+                    enabled: true,
                   ),
                   MyTextField(
                     validator: (text) => Validators.emptyValidator(text),
@@ -58,7 +59,7 @@ class AddEditProduct extends StatelessWidget {
                   ),
                   MyTextField(
                     validator: (text) => Validators.emptyValidator(text),
-                    labelText: LocaleKeys.shared_app_description.tr,
+                    labelText: LocaleKeys.add_edit_product_description.tr,
                     controller: _descriptionController,
                     hintText: LocaleKeys.add_edit_product_description_hint.tr,
                   ),

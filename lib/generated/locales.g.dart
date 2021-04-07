@@ -85,6 +85,7 @@ class LocaleKeys {
   static const add_edit_product_price_hint = 'add_edit_product_price_hint';
   static const add_edit_product_stock_hint = 'add_edit_product_stock_hint';
   static const add_edit_product_save = 'add_edit_product_save';
+  static const add_edit_product_description = 'add_edit_product_description';
 }
 
 class Locales {
@@ -155,6 +156,7 @@ class Locales {
     'add_edit_product_price_hint': 'Enter product price here',
     'add_edit_product_stock_hint': 'Enter product stock here',
     'add_edit_product_save': 'Save',
+    'add_edit_product_description': 'Description',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -223,5 +225,6 @@ class Locales {
     'add_edit_product_price_hint': 'قیمت محصول را بنویسید',
     'add_edit_product_stock_hint': 'موجودی محصول را وارد کنید',
     'add_edit_product_save': 'ذخیره',
+    'add_edit_product_description': 'توضیحات',
   };
 }
