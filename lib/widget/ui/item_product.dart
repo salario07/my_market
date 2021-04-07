@@ -23,6 +23,7 @@ class ItemProduct extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildImage(),
+              SizedBox(height: 8),
               buildTitle(),
               SizedBox(height: 8),
               buildPrice()

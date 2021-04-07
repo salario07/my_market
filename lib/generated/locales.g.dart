@@ -69,7 +69,7 @@ class LocaleKeys {
   static const filter_filter = 'filter_filter';
   static const show_product_list_filtered_products =
       'show_product_list_filtered_products';
-  static const show_product_not_available = 'show_product_not_available';
+  static const home_page_admin_edit = 'home_page_admin_edit';
 }
 
 class Locales {
@@ -127,6 +127,7 @@ class Locales {
     'filter_only_available_products': 'Only Available Products',
     'filter_filter': 'Filter',
     'show_product_list_filtered_products': 'Filtered Products',
+    'home_page_admin_edit': 'Edit',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -183,5 +184,6 @@ class Locales {
     'filter_only_available_products': 'فقط کالاهای موجود',
     'filter_filter': 'فیلتر',
     'show_product_list_filtered_products': 'محصولات فیلتر شده',
+    'home_page_admin_edit': 'ویرایش',
   };
 }

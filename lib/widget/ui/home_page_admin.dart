@@ -15,6 +15,7 @@ import 'package:my_market/widget/ui/dialog_language.dart';
 import 'package:my_market/widget/ui/item_category.dart';
 import 'package:my_market/widget/ui/item_product.dart';
 import 'package:my_market/widget/ui/login.dart';
+import 'package:my_market/widget/ui/show_product_admin.dart';
 import 'package:my_market/widget/ui/show_product_list.dart';
 
 import 'show_product.dart';
@@ -182,7 +183,7 @@ class HomePageAdmin extends StatelessWidget {
   }
 
   void navigateToShowProduct(Product product) {
-    Get.to(() => ShowProduct(product?.id ?? 0))
+    Get.to(() => ShowProductAdmin(product?.id ?? 0))
         .then((value) => _controller.getProducts());
   }
 

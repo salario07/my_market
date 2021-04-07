@@ -66,5 +66,8 @@
   },
   "show_product_list": {
     "filtered_products": "Filtered Products"
+  },
+  "home_page_admin": {
+    "edit": "Edit"
   }
 }

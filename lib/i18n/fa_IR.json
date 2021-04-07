@@ -66,5 +66,8 @@
   },
   "show_product_list": {
     "filtered_products": "محصولات فیلتر شده"
+  },
+  "home_page_admin": {
+    "edit": "ویرایش"
   }
 }
