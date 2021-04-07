@@ -4,7 +4,11 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/widget/ui/home_page.dart';
+import 'package:my_market/widget/ui/home_page_admin.dart';
 import 'package:my_market/widget/ui/login.dart';
+
+import '../../helper/constants.dart';
+import '../../helper/shared_pref.dart';
 
 class Splash extends StatelessWidget {
   Splash() {
@@ -56,9 +60,15 @@ class Splash extends StatelessWidget {
   }
 
   void navigate() {
-    Future.delayed(Duration(seconds: 1)).then((value) {
-      bool isUserLoggedIn = SharedPref?.isUserLoggedIn() ?? false;
-      isUserLoggedIn ? Get.off(() => HomePage()) : Get.off(() => Login());
+    Future.delayed(Duration(seconds: Constants.splash_delay_seconds))
+        .then((value) {
+      if (!SharedPref.isUserLoggedIn()) {
+        Get.off(() => Login());
+      } else if (SharedPref.isUserAdmin()) {
+        Get.off(() => HomePageAdmin());
+      } else {
+        Get.off(() => HomePage());
+      }
     });
   }
 }

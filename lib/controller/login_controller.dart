@@ -15,6 +15,7 @@ import '../helper/constants.dart';
 import '../helper/helper.dart';
 import '../helper/helper.dart';
 import '../helper/helper.dart';
+import '../helper/shared_pref.dart';
 
 class LoginController extends GetxController {
   RxBool isLoading = false.obs;
@@ -37,6 +38,7 @@ class LoginController extends GetxController {
     if (allowLogin) {
       bool isAdmin = _isUserAdmin(users, loggedInUser);
       SharedPref.setUserLoggedIn(true);
+      SharedPref.setUserAdmin(isAdmin);
       Helper.successSnackBar(LocaleKeys.shared_success.tr,
           LocaleKeys.login_logged_in_successfully.tr);
           isAdmin? _navigateToHomePageAdmin()

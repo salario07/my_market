@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_market/controller/home_page_admin_controller.dart';
 import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/helper/helper.dart';
+import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/category.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/ui/show_product_list.dart';
 
 class ItemCategory extends StatelessWidget {
   final Category category;
-  final bool addMode;
 
-  ItemCategory(this.category, {this.addMode = false});
+  ItemCategory(this.category);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,8 @@ class ItemCategory extends StatelessWidget {
           borderRadius: BorderRadius.circular(Dimens.card_border_radius)),
       margin: EdgeInsets.all(8),
       child: InkWell(
-        onTap: addMode ? showAddCategoryDialog : navigateToProductList,
-        child: addMode ? buildAddButton() : buildContent(),
+        onTap: navigateToProductList,
+        child: buildContent(),
       ),
     );
   }
@@ -40,13 +41,11 @@ class ItemCategory extends StatelessWidget {
     );
   }
 
-  Widget buildAddButton() {
-    return Icon(Icons.add);
-  }
-
   void navigateToProductList() {
     Get.to(() => ShowProductList(category.name, getThisCategoryProductList()))
-        .then((value) => _controller.getShoppingListCount());
+        .then((value) {
+      if (!SharedPref.isUserAdmin()) _controller.getShoppingListCount();
+    });
   }
 
   List<Product> getThisCategoryProductList() {
@@ -59,7 +58,11 @@ class ItemCategory extends StatelessWidget {
     return categorizedProducts;
   }
 
-  void showAddCategoryDialog() {}
-
-  HomePageController get _controller => Get.find<HomePageController>();
+  dynamic get _controller {
+    if (SharedPref.isUserAdmin()) {
+      return Get.find<HomePageAdminController>();
+    } else {
+      return Get.find<HomePageController>();
+    }
+  }
 }

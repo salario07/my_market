@@ -34,7 +34,7 @@ class HomePageAdmin extends StatelessWidget {
 
   FloatingActionButton buildFloatingActionButton() {
     return FloatingActionButton(
-      child: Icon(Icons.filter_alt_sharp),
+      child: Icon(Icons.add),
       backgroundColor: AppColors.colorAccent,
       onPressed: showBottomSheetFilter,
     );
@@ -57,7 +57,6 @@ class HomePageAdmin extends StatelessWidget {
           padding: EdgeInsets.all(8),
           itemBuilder: (context, index) => ItemCategory(
             _controller.categories()[index],
-            addMode: index == 0,
           ),
           itemCount: _controller.categories().length,
           scrollDirection: Axis.horizontal,
@@ -88,18 +87,25 @@ class HomePageAdmin extends StatelessWidget {
   AppBar buildAppBar() {
     return AppBar(
       title: Text(LocaleKeys.shared_app_name.tr),
-      actions: [buildSearchIcon()],
+      actions: [buildSearchIcon(),buildFilterIcon()],
     );
   }
 
   GestureDetector buildSearchIcon() {
     return GestureDetector(
-      child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Icon(Icons.search)),
+      child: Icon(Icons.search),
       onTap: () => showSearch(
           context: Get.context,
           delegate: SearchProduct(_controller.products())),
+    );
+  }
+
+  GestureDetector buildFilterIcon() {
+    return GestureDetector(
+      child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Icon(Icons.filter_alt)),
+      onTap: () => showBottomSheetFilter(),
     );
   }
 
@@ -167,6 +173,7 @@ class HomePageAdmin extends StatelessWidget {
 
   void logout() {
     SharedPref.setUserLoggedIn(false);
+    SharedPref.setUserAdmin(false);
     Get.offAll(() => Login());
   }
 

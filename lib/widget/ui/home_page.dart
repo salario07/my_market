@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_market/controller/home_page_admin_controller.dart';
 import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
@@ -30,13 +31,13 @@ class HomePage extends StatelessWidget {
       appBar: buildAppBar(),
       body: buildContent(),
       drawer: buildDrawer(),
-      floatingActionButton: buildFloatingActionButton(),
+      floatingActionButton: buildFilterFloatingActionButton(),
     );
   }
 
-  FloatingActionButton buildFloatingActionButton() {
+  FloatingActionButton buildFilterFloatingActionButton() {
     return FloatingActionButton(
-      child: Icon(Icons.filter_alt_sharp),
+      child: Icon(Icons.filter_alt),
       backgroundColor: AppColors.colorAccent,
       onPressed: showBottomSheetFilter,
     );
@@ -189,6 +190,7 @@ class HomePage extends StatelessWidget {
 
   void logout() {
     SharedPref.setUserLoggedIn(false);
+    SharedPref.setUserAdmin(false);
     Get.offAll(() => Login());
   }
 

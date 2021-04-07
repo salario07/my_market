@@ -7,7 +7,16 @@ class SharedPref {
   }
 
   static bool isUserLoggedIn() {
-    return GetStorage()?.read(Constants.shared_pref_key_is_user_logged_in)??false;
+    return GetStorage()?.read(Constants.shared_pref_key_is_user_logged_in) ??
+        false;
+  }
+
+  static void setUserAdmin(bool isAdmin) {
+    GetStorage().write(Constants.shared_pref_key_is_user_admin, isAdmin);
+  }
+
+  static bool isUserAdmin() {
+    return GetStorage()?.read(Constants.shared_pref_key_is_user_admin) ?? false;
   }
 
   static void setLocale(String locale) {
@@ -15,6 +24,7 @@ class SharedPref {
   }
 
   static String getLocale() {
-    return GetStorage()?.read(Constants.shared_pref_key_locale)??Constants.locale_english;
+    return GetStorage()?.read(Constants.shared_pref_key_locale) ??
+        Constants.locale_english;
   }
 }

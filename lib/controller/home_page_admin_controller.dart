@@ -23,9 +23,7 @@ class HomePageAdminController extends GetxController {
 
   void getCategories() {
     repository.getCategories().then((response) {
-      List<Category> allCategories = JsonParser.parseCategories(response.data);
-      allCategories.add(Category());
-      categories(allCategories);
+      categories(JsonParser.parseCategories(response.data));
     }).catchError((error) {
       Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
     });
