@@ -9,8 +9,9 @@ import 'package:my_market/widget/ui/show_product_list.dart';
 
 class ItemCategory extends StatelessWidget {
   final Category category;
+  final bool addMode;
 
-  ItemCategory(this.category);
+  ItemCategory(this.category, {this.addMode = false});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,8 @@ class ItemCategory extends StatelessWidget {
           borderRadius: BorderRadius.circular(Dimens.card_border_radius)),
       margin: EdgeInsets.all(8),
       child: InkWell(
-        onTap: navigateToProductList,
-        child: buildContent(),
+        onTap: addMode ? showAddCategoryDialog : navigateToProductList,
+        child: addMode ? buildAddButton() : buildContent(),
       ),
     );
   }
@@ -39,6 +40,10 @@ class ItemCategory extends StatelessWidget {
     );
   }
 
+  Widget buildAddButton() {
+    return Icon(Icons.add);
+  }
+
   void navigateToProductList() {
     Get.to(() => ShowProductList(category.name, getThisCategoryProductList()))
         .then((value) => _controller.getShoppingListCount());
@@ -53,6 +58,8 @@ class ItemCategory extends StatelessWidget {
     });
     return categorizedProducts;
   }
+
+  void showAddCategoryDialog() {}
 
   HomePageController get _controller => Get.find<HomePageController>();
 }

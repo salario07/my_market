@@ -8,6 +8,13 @@ import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/user.dart';
 import 'package:my_market/repository/login_repo.dart';
 import 'package:my_market/widget/ui/home_page.dart';
+import 'package:my_market/widget/ui/home_page_admin.dart';
+import '../helper/constants.dart';
+import '../helper/constants.dart';
+import '../helper/constants.dart';
+import '../helper/helper.dart';
+import '../helper/helper.dart';
+import '../helper/helper.dart';
 
 class LoginController extends GetxController {
   RxBool isLoading = false.obs;
@@ -19,19 +26,21 @@ class LoginController extends GetxController {
     isLoading(true);
     getUsers().then((response) {
       List<User> users = JsonParser.parseUsers(response.data);
-      bool allowLogin = _checkCredentials(users, user);
-      _handleLoginResponse(allowLogin);
+      _handleLoginResponse(users, user);
     }).catchError((error) {
-      Helper.errorSnackBar(LocaleKeys.shared_error, error.toString());
+      Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
     }).whenComplete(() => isLoading(false));
   }
 
-  void _handleLoginResponse(bool allowLogin) {
+  void _handleLoginResponse(List<User> users, User loggedInUser) {
+    bool allowLogin = _checkCredentials(users, loggedInUser);
     if (allowLogin) {
+      bool isAdmin = _isUserAdmin(users, loggedInUser);
       SharedPref.setUserLoggedIn(true);
       Helper.successSnackBar(LocaleKeys.shared_success.tr,
           LocaleKeys.login_logged_in_successfully.tr);
-      _navigateToHomePage();
+          isAdmin? _navigateToHomePageAdmin()
+          : _navigateToHomePage();
     } else {
       Helper.errorSnackBar(LocaleKeys.login_invalid_credentials.tr,
           LocaleKeys.login_username_or_password_is_incorrect.tr);
@@ -44,17 +53,38 @@ class LoginController extends GetxController {
 
   bool _checkCredentials(List<User> users, User loggedInUser) {
     for (User user in users) {
-      if (user.userName == loggedInUser.userName &&
-          user.password == loggedInUser.password) {
+      if (areTwoUsersTheSame(user, loggedInUser)) {
         return true;
       }
     }
     return false;
   }
 
+  bool _isUserAdmin(List<User> users, User loggedInUser) {
+    for (User user in users) {
+      if (areTwoUsersTheSame(user, loggedInUser)) {
+        return user.role == Constants.role_admin;
+      }
+    }
+    return false;
+  }
+
+  bool areTwoUsersTheSame(User user, User loggedInUser) {
+    return user.userName?.toLowerCase() == loggedInUser.userName?.toLowerCase() &&
+        user.password == loggedInUser.password;
+  }
+
   void _navigateToHomePage() {
-    Future.delayed(Duration(seconds: 1)).then((value) {
+    Future.delayed(Duration(seconds: Constants.splash_delay_seconds))
+        .then((value) {
       Get.offAll(() => HomePage());
+    });
+  }
+
+  void _navigateToHomePageAdmin() {
+    Future.delayed(Duration(seconds: Constants.splash_delay_seconds))
+        .then((value) {
+      Get.offAll(() => HomePageAdmin());
     });
   }
 }

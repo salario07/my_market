@@ -93,4 +93,5 @@ class ShowProductController extends GetxController {
     getProductCount();
     getShoppingListCount();
   }
+
 }

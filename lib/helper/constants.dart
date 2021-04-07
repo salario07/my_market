@@ -36,4 +36,6 @@ class Constants {
   static const double minRangeSlider = 0;
   static const double maxRangeSlider = 1000;
   static const int rangeDivision = 200;
+
+  static const int splash_delay_seconds = 1;
 }

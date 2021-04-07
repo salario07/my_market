@@ -1,7 +1,6 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_market/controller/home_page_controller.dart';
+import 'package:my_market/controller/home_page_admin_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
@@ -11,7 +10,6 @@ import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/filter.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/ui/bottom_sheet_filter.dart';
-import 'package:my_market/widget/ui/cart.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
 import 'package:my_market/widget/ui/dialog_language.dart';
 import 'package:my_market/widget/ui/item_category.dart';
@@ -21,10 +19,10 @@ import 'package:my_market/widget/ui/show_product_list.dart';
 
 import 'show_product.dart';
 
-class HomePage extends StatelessWidget {
+class HomePageAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<HomePageController>(() => HomePageController());
+    Get.lazyPut<HomePageAdminController>(() => HomePageAdminController());
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: buildAppBar(),
@@ -57,8 +55,10 @@ class HomePage extends StatelessWidget {
       child: Obx(
         () => ListView.builder(
           padding: EdgeInsets.all(8),
-          itemBuilder: (context, index) =>
-              ItemCategory(_controller.categories()[index]),
+          itemBuilder: (context, index) => ItemCategory(
+            _controller.categories()[index],
+            addMode: index == 0,
+          ),
           itemCount: _controller.categories().length,
           scrollDirection: Axis.horizontal,
         ),
@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
   AppBar buildAppBar() {
     return AppBar(
       title: Text(LocaleKeys.shared_app_name.tr),
-      actions: [buildCartIcon(), buildSearchIcon()],
+      actions: [buildSearchIcon()],
     );
   }
 
@@ -101,28 +101,6 @@ class HomePage extends StatelessWidget {
           context: Get.context,
           delegate: SearchProduct(_controller.products())),
     );
-  }
-
-  GestureDetector buildCartIcon() {
-    return GestureDetector(
-      child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          child: Obx(
-            () => buildBadge(),
-          )),
-      onTap: navigateToCart,
-    );
-  }
-
-  Badge buildBadge() {
-    return Badge(
-        position: BadgePosition.topStart(top: 2, start: 8),
-        badgeColor: AppColors.colorSecondary,
-        showBadge: _controller.cartCount() > 0,
-        animationType: BadgeAnimationType.scale,
-        animationDuration: Duration(milliseconds: 200),
-        badgeContent: Text(_controller.cartCount().toString()),
-        child: Icon(Icons.shopping_cart));
   }
 
   Drawer buildDrawer() {
@@ -198,7 +176,7 @@ class HomePage extends StatelessWidget {
 
   void navigateToShowProduct(Product product) {
     Get.to(() => ShowProduct(product?.id ?? 0))
-        .then((value) => _controller.getShoppingListCount());
+        .then((value) => _controller.getProducts());
   }
 
   void showBottomSheetFilter() {
@@ -226,7 +204,7 @@ class HomePage extends StatelessWidget {
   void navigateToFilteredProducts(List<Product> filtered) {
     Get.to(() => ShowProductList(
             LocaleKeys.show_product_list_filtered_products.tr, filtered))
-        .then((value) => _controller.getShoppingListCount());
+        .then((value) => _controller.getProducts());
   }
 
   bool isEligibleForFilter(Filter filter, Product product) {
@@ -244,9 +222,5 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void navigateToCart() {
-    Get.to(() => Cart()).then((value) => _controller.getShoppingListCount());
-  }
-
-  HomePageController get _controller => Get.find<HomePageController>();
+  HomePageAdminController get _controller => Get.find<HomePageAdminController>();
 }
