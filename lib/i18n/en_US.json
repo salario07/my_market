@@ -81,6 +81,8 @@
     "price_hint": "Enter product price here",
     "stock_hint": "Enter product stock here",
     "save": "Save",
-    "description": "Description"
+    "description": "Description",
+    "product_edited_successfully": "Product edited successfully",
+    "product_added_successfully": "Product added successfully"
   }
 }

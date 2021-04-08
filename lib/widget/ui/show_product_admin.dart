@@ -160,7 +160,13 @@ class ShowProductAdmin extends StatelessWidget {
     Get.to(() => AddEditProduct(
           false,
           product: _controller.product(),
-        ));
+        )).then((value) {
+      if (value != null) {
+        Helper.successSnackBar(LocaleKeys.shared_success.tr,
+            LocaleKeys.add_edit_product_product_edited_successfully.tr);
+        _controller.getProduct(id);
+      }
+    });
   }
 
   ShowProductController get _controller => Get.find<ShowProductController>();

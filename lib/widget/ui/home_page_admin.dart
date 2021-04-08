@@ -4,11 +4,13 @@ import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/json_parser.dart';
 import 'package:my_market/helper/search_product.dart';
 import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/filter.dart';
 import 'package:my_market/model/product.dart';
+import 'package:my_market/widget/ui/add_edit_product.dart';
 import 'package:my_market/widget/ui/bottom_sheet_filter.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
 import 'package:my_market/widget/ui/dialog_language.dart';
@@ -35,7 +37,7 @@ class HomePageAdmin extends StatelessWidget {
     return FloatingActionButton(
       child: Icon(Icons.add),
       backgroundColor: AppColors.colorAccent,
-      onPressed: showBottomSheetFilter,
+      onPressed: navigateToNewProduct,
     );
   }
 
@@ -86,7 +88,7 @@ class HomePageAdmin extends StatelessWidget {
   AppBar buildAppBar() {
     return AppBar(
       title: Text(LocaleKeys.shared_app_name.tr),
-      actions: [buildSearchIcon(),buildFilterIcon()],
+      actions: [buildSearchIcon(), buildFilterIcon()],
     );
   }
 
@@ -226,6 +228,16 @@ class HomePageAdmin extends StatelessWidget {
           topRight: Radius.circular(Dimens.dialog_border_radius),
           topLeft: Radius.circular(Dimens.dialog_border_radius)),
     );
+  }
+
+  void navigateToNewProduct() {
+    Get.to(() => AddEditProduct(true)).then((value) {
+      if (value != null) {
+        _controller.getProducts();
+        Helper.successSnackBar(LocaleKeys.shared_success.tr,
+            LocaleKeys.add_edit_product_product_added_successfully.tr);
+      }
+    });
   }
 
   HomePageController get _controller => Get.find<HomePageController>();

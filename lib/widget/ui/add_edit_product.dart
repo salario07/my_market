@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_market/controller/AddEditProductController.dart';
+import 'package:my_market/controller/add_edit_product_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/validators.dart';
 import 'package:my_market/model/product.dart';
-import 'package:my_market/widget/component/my_button.dart';
 import 'package:my_market/widget/component/my_text_field.dart';
 
 class AddEditProduct extends StatelessWidget {
@@ -36,6 +35,7 @@ class AddEditProduct extends StatelessWidget {
       body: Stack(
         children: [
           SingleChildScrollView(
+            padding: EdgeInsets.only(top: 24, left: 16, right: 16, bottom: 88),
             child: Form(
               key: _controller.formKey,
               child: Column(
@@ -47,8 +47,8 @@ class AddEditProduct extends StatelessWidget {
                     controller: _englishTitleController,
                     hintText: LocaleKeys
                         .add_edit_product_english_product_name_hint.tr,
-                    enabled: true,
                   ),
+                  SizedBox(height: 16),
                   MyTextField(
                     validator: (text) => Validators.emptyValidator(text),
                     labelText:
@@ -57,24 +57,33 @@ class AddEditProduct extends StatelessWidget {
                     hintText: LocaleKeys
                         .add_edit_product_persian_product_name_hint.tr,
                   ),
-                  MyTextField(
-                    validator: (text) => Validators.emptyValidator(text),
-                    labelText: LocaleKeys.add_edit_product_description.tr,
-                    controller: _descriptionController,
-                    hintText: LocaleKeys.add_edit_product_description_hint.tr,
-                  ),
+                  SizedBox(height: 16),
                   MyTextField(
                     validator: (text) => Validators.emptyValidator(text),
                     labelText: LocaleKeys.show_product_stock.tr,
                     controller: _stockController,
                     hintText: LocaleKeys.add_edit_product_stock_hint.tr,
+                    textInputType: TextInputType.number,
                   ),
+                  SizedBox(height: 16),
                   MyTextField(
                     validator: (text) => Validators.emptyValidator(text),
                     labelText: LocaleKeys.filter_price.tr,
                     controller: _priceController,
                     hintText: LocaleKeys.add_edit_product_price_hint.tr,
-                  )
+                    textInputType: TextInputType.number,
+                    textInputAction: TextInputAction.done,
+                  ),
+                  SizedBox(height: 16),
+                  MyTextField(
+                    validator: (text) => Validators.emptyValidator(text),
+                    labelText: LocaleKeys.add_edit_product_description.tr,
+                    controller: _descriptionController,
+                    hintText: LocaleKeys.add_edit_product_description_hint.tr,
+                    textInputType: TextInputType.multiline,
+                    textInputAction: TextInputAction.newline,
+                    maxLines: 3,
+                  ),
                 ],
               ),
             ),
@@ -97,22 +106,46 @@ class AddEditProduct extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
+        width: double.infinity,
         color: AppColors.colorBackground,
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [buildCancelButton(), buildSaveButton()]),
+        child: Row(mainAxisSize: MainAxisSize.max, children: [
+          buildCancelButton(),
+          SizedBox(width: 16),
+          buildSaveButton()
+        ]),
       ),
     );
   }
 
   Widget buildSaveButton() {
-    return MyButton(Text(LocaleKeys.add_edit_product_save.tr), () {});
+    return Expanded(
+        child: ElevatedButton(
+            child: Text(isAddMode?LocaleKeys.add_edit_product_add_product.tr:LocaleKeys.add_edit_product_edit_product.tr),
+            onPressed: onSave));
   }
 
   Widget buildCancelButton() {
     return OutlinedButton(
-        child: Text(LocaleKeys.shared_cancel.tr), onPressed: () {});
+        child: Text(LocaleKeys.shared_cancel.tr), onPressed: () => Get.back());
+  }
+
+  void onSave() {
+    if (_controller.formKey.currentState.validate()) {
+      _controller.editProduct(buildProductFromInput());
+    }
+  }
+
+  Product buildProductFromInput() {
+    return Product(
+        id: this.product.id,
+        name: _englishTitleController.text,
+        persianName: _persianTitleController.text,
+        stock: int.parse(_stockController.text),
+        price: int.parse(_priceController.text),
+        description: _descriptionController.text,
+        images: this.product.images,
+        categoryId: this.product.categoryId);
   }
 
   AddEditProductController get _controller =>

@@ -86,6 +86,10 @@ class LocaleKeys {
   static const add_edit_product_stock_hint = 'add_edit_product_stock_hint';
   static const add_edit_product_save = 'add_edit_product_save';
   static const add_edit_product_description = 'add_edit_product_description';
+  static const add_edit_product_product_edited_successfully =
+      'add_edit_product_product_edited_successfully';
+  static const add_edit_product_product_added_successfully =
+      'add_edit_product_product_added_successfully';
 }
 
 class Locales {
@@ -157,6 +161,9 @@ class Locales {
     'add_edit_product_stock_hint': 'Enter product stock here',
     'add_edit_product_save': 'Save',
     'add_edit_product_description': 'Description',
+    'add_edit_product_product_edited_successfully':
+        'Product edited successfully',
+    'add_edit_product_product_added_successfully': 'Product added successfully',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -226,5 +233,7 @@ class Locales {
     'add_edit_product_stock_hint': 'موجودی محصول را وارد کنید',
     'add_edit_product_save': 'ذخیره',
     'add_edit_product_description': 'توضیحات',
+    'add_edit_product_product_edited_successfully': 'محصول با موفقیت ویرایش شد',
+    'add_edit_product_product_added_successfully': 'محصول با موفقیت اضافه شد',
   };
 }

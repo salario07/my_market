@@ -11,6 +11,8 @@ class MyTextField extends StatelessWidget {
   final String hintText;
   final Widget suffixIconGestureDetector;
   final bool enabled;
+  final TextInputType textInputType;
+  final int maxLines;
 
   MyTextField(
       {this.controller,
@@ -20,7 +22,9 @@ class MyTextField extends StatelessWidget {
       this.labelText = '',
       this.hintText = '',
       this.suffixIconGestureDetector,
-      this.enabled = true});
+      this.enabled = true,
+      this.textInputType = TextInputType.text,
+      this.maxLines = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +34,8 @@ class MyTextField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       textInputAction: textInputAction,
+      keyboardType: textInputType,
+      maxLines: maxLines,
       decoration: InputDecoration(
           suffixIcon: suffixIconGestureDetector,
           labelText: labelText,

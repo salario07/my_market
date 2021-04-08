@@ -39,4 +39,5 @@ class Constants {
   static const int rangeDivision = 200;
 
   static const int splash_delay_seconds = 1;
+  static const int snackbar_delay_milliseconds = 1500;
 }

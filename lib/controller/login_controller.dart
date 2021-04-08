@@ -77,14 +77,14 @@ class LoginController extends GetxController {
   }
 
   void _navigateToHomePage() {
-    Future.delayed(Duration(seconds: Constants.splash_delay_seconds))
+    Future.delayed(Duration(milliseconds: Constants.snackbar_delay_milliseconds))
         .then((value) {
       Get.offAll(() => HomePage());
     });
   }
 
   void _navigateToHomePageAdmin() {
-    Future.delayed(Duration(seconds: Constants.splash_delay_seconds))
+    Future.delayed(Duration(milliseconds: Constants.snackbar_delay_milliseconds))
         .then((value) {
       Get.offAll(() => HomePageAdmin());
     });

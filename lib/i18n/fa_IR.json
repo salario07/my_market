@@ -81,6 +81,8 @@
     "price_hint": "قیمت محصول را بنویسید",
     "stock_hint": "موجودی محصول را وارد کنید",
     "save": "ذخیره",
-    "description": "توضیحات"
+    "description": "توضیحات",
+    "product_edited_successfully": "محصول با موفقیت ویرایش شد",
+    "product_added_successfully": "محصول با موفقیت اضافه شد"
   }
 }
