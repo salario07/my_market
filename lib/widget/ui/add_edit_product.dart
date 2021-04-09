@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/add_edit_product_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/validators.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/component/my_text_field.dart';
@@ -121,7 +122,9 @@ class AddEditProduct extends StatelessWidget {
   Widget buildSaveButton() {
     return Expanded(
         child: ElevatedButton(
-            child: Text(isAddMode?LocaleKeys.add_edit_product_add_product.tr:LocaleKeys.add_edit_product_edit_product.tr),
+            child: Text(isAddMode
+                ? LocaleKeys.add_edit_product_add_product.tr
+                : LocaleKeys.add_edit_product_edit_product.tr),
             onPressed: onSave));
   }
 
@@ -131,21 +134,48 @@ class AddEditProduct extends StatelessWidget {
   }
 
   void onSave() {
-    if (_controller.formKey.currentState.validate()) {
-      _controller.editProduct(buildProductFromInput());
+    if (_controller.formKey.currentState.validate() && checkInput()) {
+      if (isAddMode) {
+        _controller.addProduct(buildProductFromInput());
+      } else {
+        _controller.editProduct(buildProductFromInput());
+      }
+    }
+  }
+
+  bool checkInput() {
+    if (!Helper.isNumeric(_stockController.text)) {
+      Helper.errorSnackBar(LocaleKeys.shared_error.tr,
+          LocaleKeys.add_edit_product_stock_must_be_numeric.tr);
+      return false;
+    } else if (!Helper.isNumeric(_priceController.text)) {
+      Helper.errorSnackBar(LocaleKeys.shared_error.tr,
+          LocaleKeys.add_edit_product_price_must_be_numeric.tr);
+      return false;
+    } else {
+      return true;
     }
   }
 
   Product buildProductFromInput() {
-    return Product(
-        id: this.product.id,
-        name: _englishTitleController.text,
-        persianName: _persianTitleController.text,
-        stock: int.parse(_stockController.text),
-        price: int.parse(_priceController.text),
-        description: _descriptionController.text,
-        images: this.product.images,
-        categoryId: this.product.categoryId);
+    if (isAddMode) {
+      return Product(
+          name: _englishTitleController.text,
+          persianName: _persianTitleController.text,
+          stock: int.parse(_stockController.text),
+          price: int.parse(_priceController.text),
+          description: _descriptionController.text);
+    } else {
+      return Product(
+          id: this.product.id,
+          name: _englishTitleController.text,
+          persianName: _persianTitleController.text,
+          stock: int.parse(_stockController.text),
+          price: int.parse(_priceController.text),
+          description: _descriptionController.text,
+          images: this.product.images,
+          categoryId: this.product.categoryId);
+    }
   }
 
   AddEditProductController get _controller =>

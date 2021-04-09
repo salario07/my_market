@@ -232,7 +232,7 @@ class HomePageAdmin extends StatelessWidget {
 
   void navigateToNewProduct() {
     Get.to(() => AddEditProduct(true)).then((value) {
-      if (value != null) {
+      if (value != null && value) {
         _controller.getProducts();
         Helper.successSnackBar(LocaleKeys.shared_success.tr,
             LocaleKeys.add_edit_product_product_added_successfully.tr);

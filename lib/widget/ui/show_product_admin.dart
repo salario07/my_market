@@ -161,7 +161,7 @@ class ShowProductAdmin extends StatelessWidget {
           false,
           product: _controller.product(),
         )).then((value) {
-      if (value != null) {
+      if (value != null && value) {
         Helper.successSnackBar(LocaleKeys.shared_success.tr,
             LocaleKeys.add_edit_product_product_edited_successfully.tr);
         _controller.getProduct(id);
