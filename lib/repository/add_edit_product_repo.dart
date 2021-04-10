@@ -15,4 +15,8 @@ class AddEditProductRepo {
     return _dio.post(Constants.url_products,data: product.toJson());
   }
 
+  Future<Response> getCategories(){
+    return _dio.get(Constants.url_categories);
+  }
+
 }

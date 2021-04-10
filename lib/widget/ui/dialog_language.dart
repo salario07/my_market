@@ -11,11 +11,15 @@ class DialogLanguage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.all(Radius.circular(Dimens.dialog_border_radius))),
+      shape: buildDialogShape(),
       child: buildContent(),
     );
+  }
+
+  RoundedRectangleBorder buildDialogShape() {
+    return RoundedRectangleBorder(
+        borderRadius:
+            BorderRadius.all(Radius.circular(Dimens.dialog_border_radius)));
   }
 
   Padding buildContent() {

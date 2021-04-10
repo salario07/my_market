@@ -90,10 +90,8 @@ class LocaleKeys {
       'add_edit_product_product_edited_successfully';
   static const add_edit_product_product_added_successfully =
       'add_edit_product_product_added_successfully';
-  static const add_edit_product_stock_must_be_numeric =
-      'add_edit_product_stock_must_be_numeric';
-  static const add_edit_product_price_must_be_numeric =
-      'add_edit_product_price_must_be_numeric';
+  static const add_edit_product_category = 'add_edit_product_category';
+  static const add_edit_product_not_select = 'add_edit_product_not_select';
 }
 
 class Locales {
@@ -168,8 +166,8 @@ class Locales {
     'add_edit_product_product_edited_successfully':
         'Product edited successfully',
     'add_edit_product_product_added_successfully': 'Product added successfully',
-    'add_edit_product_stock_must_be_numeric': 'Stock must be numeric',
-    'add_edit_product_price_must_be_numeric': 'Price must be numeric',
+    'add_edit_product_category': 'Category',
+    'add_edit_product_not_select': 'Not Selected',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -241,7 +239,7 @@ class Locales {
     'add_edit_product_description': 'توضیحات',
     'add_edit_product_product_edited_successfully': 'محصول با موفقیت ویرایش شد',
     'add_edit_product_product_added_successfully': 'محصول با موفقیت اضافه شد',
-    'add_edit_product_stock_must_be_numeric': 'موجودی وارد شده باید عدد باشد',
-    'add_edit_product_price_must_be_numeric': 'قیمت وارد شده باید عدد باشد',
+    'add_edit_product_category': 'دسته بندی',
+    'add_edit_product_not_select': 'انتخاب نشده',
   };
 }

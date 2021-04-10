@@ -7,7 +7,7 @@ class ItemProduct extends StatelessWidget {
   final Product product;
   final Function onTap;
 
-  ItemProduct(this.product,this.onTap);
+  ItemProduct(this.product, this.onTap);
 
   @override
   Widget build(BuildContext context) {
@@ -36,25 +36,29 @@ class ItemProduct extends StatelessWidget {
 
   Text buildPrice() {
     return Text(
-      Helper.buildPriceText(product?.price?? 0),
+      Helper.buildPriceText(product?.price ?? 0),
       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     );
   }
 
   Text buildTitle() {
     return Text(
-      Helper.isLocaleEnglish()?product?.name ?? '':product?.persianName ?? '',
+      Helper.isLocaleEnglish()
+          ? product?.name ?? ''
+          : product?.persianName ?? '',
       style: TextStyle(fontSize: 14),
     );
   }
 
   Center buildImage() {
     return Center(
-      child: Image.network(
-        product?.images?.elementAt(0) ?? '',
-        width: 80,
-        height: 80,
-      ),
+      child: !Helper.isListNullOrEmpty(product.images)
+          ? Image.network(
+              product.images.elementAt(0),
+              width: 80,
+              height: 80,
+            )
+          : Icon(Icons.image, size: 80),
     );
   }
 }

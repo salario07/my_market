@@ -11,6 +11,10 @@ class Helper {
     return text == null || text.isEmpty;
   }
 
+  static bool isListNullOrEmpty(List<String> list) {
+    return list == null || list.isEmpty;
+  }
+
   static void logDebug(String text, {String className = ''}) {
     print('${Constants.debug_tag} $className : $text');
   }
@@ -50,13 +54,6 @@ class Helper {
 
   static bool isLocaleEnglish(){
     return Get.locale == LocalizationService.locales[0];
-  }
-
-  static bool isNumeric(String s) {
-    if(s == null) {
-      return false;
-    }
-    return double.parse(s) != null;
   }
 
 }

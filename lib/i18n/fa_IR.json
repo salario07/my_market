@@ -84,7 +84,7 @@
     "description": "توضیحات",
     "product_edited_successfully": "محصول با موفقیت ویرایش شد",
     "product_added_successfully": "محصول با موفقیت اضافه شد",
-    "stock_must_be_numeric": "موجودی وارد شده باید عدد باشد",
-    "price_must_be_numeric": "قیمت وارد شده باید عدد باشد"
+    "category": "دسته بندی",
+    "not_select": "انتخاب نشده"
   }
 }

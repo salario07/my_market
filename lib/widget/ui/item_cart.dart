@@ -83,7 +83,7 @@ class ItemCart extends StatelessWidget {
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(Dimens.card_border_radius)),
-        child: getItem().product.images.length > 0
+        child: !Helper.isListNullOrEmpty(getItem().product.images)
             ? Image.network(
                 getItem().product.images[0],
                 width: 48,

@@ -202,7 +202,7 @@ class ShowProduct extends StatelessWidget {
   Widget buildImage() {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: _controller.product().images.length > 0
+        child: !Helper.isListNullOrEmpty(_controller.product().images)
             ? Image.network(
                 _controller.product().images?.elementAt(0) ?? '',
                 width: double.infinity,

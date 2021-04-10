@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 import 'package:my_market/controller/add_edit_product_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
@@ -7,15 +8,20 @@ import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/validators.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/component/my_text_field.dart';
+import 'package:my_market/widget/component/text_label.dart';
+import 'package:my_market/widget/component/text_title.dart';
+import 'package:my_market/widget/ui/dialog_select_category.dart';
 
 class AddEditProduct extends StatelessWidget {
   final bool isAddMode;
   final Product product;
   final TextEditingController _englishTitleController = TextEditingController();
   final TextEditingController _persianTitleController = TextEditingController();
-  final TextEditingController _stockController = TextEditingController();
-  final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final MaskedTextController _priceController =
+      MaskedTextController(mask: '000,000,000');
+  final MaskedTextController _stockController =
+      MaskedTextController(mask: '000,000');
 
   AddEditProduct(this.isAddMode, {this.product}) {
     if (!isAddMode) {
@@ -41,6 +47,14 @@ class AddEditProduct extends StatelessWidget {
               key: _controller.formKey,
               child: Column(
                 children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      TextLabel(LocaleKeys.add_edit_product_category.tr),
+                      Expanded(child: TextTitle())
+                    ],
+                  ),
                   MyTextField(
                     validator: (text) => Validators.emptyValidator(text),
                     labelText:
@@ -134,26 +148,12 @@ class AddEditProduct extends StatelessWidget {
   }
 
   void onSave() {
-    if (_controller.formKey.currentState.validate() && checkInput()) {
+    if (_controller.formKey.currentState.validate()) {
       if (isAddMode) {
         _controller.addProduct(buildProductFromInput());
       } else {
         _controller.editProduct(buildProductFromInput());
       }
-    }
-  }
-
-  bool checkInput() {
-    if (!Helper.isNumeric(_stockController.text)) {
-      Helper.errorSnackBar(LocaleKeys.shared_error.tr,
-          LocaleKeys.add_edit_product_stock_must_be_numeric.tr);
-      return false;
-    } else if (!Helper.isNumeric(_priceController.text)) {
-      Helper.errorSnackBar(LocaleKeys.shared_error.tr,
-          LocaleKeys.add_edit_product_price_must_be_numeric.tr);
-      return false;
-    } else {
-      return true;
     }
   }
 
@@ -176,6 +176,16 @@ class AddEditProduct extends StatelessWidget {
           images: this.product.images,
           categoryId: this.product.categoryId);
     }
+  }
+
+  void showSelectCategoryDialog() {
+    showDialog(
+        context: Get.context,
+        builder: (context) => DialogSelectCategory()).then((value) {
+      if (value != null) {
+        _controller.category(value);
+      }
+    });
   }
 
   AddEditProductController get _controller =>

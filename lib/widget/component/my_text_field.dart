@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
 
@@ -36,6 +37,9 @@ class MyTextField extends StatelessWidget {
       textInputAction: textInputAction,
       keyboardType: textInputType,
       maxLines: maxLines,
+      inputFormatters: textInputType == TextInputType.number
+          ? [FilteringTextInputFormatter.digitsOnly]
+          : [],
       decoration: InputDecoration(
           suffixIcon: suffixIconGestureDetector,
           labelText: labelText,

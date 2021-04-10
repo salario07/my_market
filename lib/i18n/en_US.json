@@ -84,7 +84,7 @@
     "description": "Description",
     "product_edited_successfully": "Product edited successfully",
     "product_added_successfully": "Product added successfully",
-    "stock_must_be_numeric": "Stock must be numeric",
-    "price_must_be_numeric": "Price must be numeric"
+    "category": "Category",
+    "not_select": "Not Selected"
   }
 }
