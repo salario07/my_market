@@ -47,13 +47,20 @@ class Helper {
     return statusCode == 200 || statusCode == 201;
   }
 
-  static String addCommaSeparator(int price){
+  static String addCommaSeparator(int price) {
     var formatter = NumberFormat('###,###,###');
     return formatter.format(price);
   }
 
-  static bool isLocaleEnglish(){
+  static bool isLocaleEnglish() {
     return Get.locale == LocalizationService.locales[0];
   }
 
+  static String removeThousandsCommaSeparator(String text) {
+    return text.replaceAll(',', '');
+  }
+
+  static int parseNumberTextFieldText(String text) {
+    return int.parse(removeThousandsCommaSeparator(text));
+  }
 }

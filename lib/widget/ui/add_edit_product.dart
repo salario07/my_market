@@ -259,8 +259,8 @@ class AddEditProduct extends StatelessWidget {
       return Product(
           name: _englishTitleController.text,
           persianName: _persianTitleController.text,
-          stock: int.parse(_stockController.text),
-          price: int.parse(_priceController.text),
+          stock: Helper.parseNumberTextFieldText(_stockController.text),
+          price: Helper.parseNumberTextFieldText(_priceController.text),
           description: _descriptionController.text,
           categoryId: _controller.category().id);
     } else {
@@ -268,8 +268,8 @@ class AddEditProduct extends StatelessWidget {
           id: this.product.id,
           name: _englishTitleController.text,
           persianName: _persianTitleController.text,
-          stock: int.parse(_stockController.text),
-          price: int.parse(_priceController.text),
+          stock: Helper.parseNumberTextFieldText(_stockController.text),
+          price: Helper.parseNumberTextFieldText(_priceController.text),
           description: _descriptionController.text,
           images: this.product.images,
           categoryId: _controller.category().id);
