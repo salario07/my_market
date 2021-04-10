@@ -9,14 +9,16 @@ import 'package:my_market/model/product.dart';
 import 'package:my_market/repository/home_page_repo.dart';
 
 class HomePageController extends GetxController {
+  bool isAdmin;
   RxList<Category> categories = [].cast<Category>().obs;
   RxList<Product> products = [].cast<Product>().obs;
   RxInt cartCount = 0.obs;
   RxDouble rangeMin = Constants.minRangeSlider.obs;
   RxDouble rangeMax = Constants.maxRangeSlider.obs;
   RxBool onlyAvailableProducts = false.obs;
-
   HomePageRepo repository = HomePageRepo();
+
+  HomePageController(this.isAdmin);
 
   void getCategories() {
     repository.getCategories().then((response) {
@@ -53,6 +55,8 @@ class HomePageController extends GetxController {
     super.onInit();
     getCategories();
     getProducts();
-    getShoppingListCount();
+    if(!isAdmin){
+      getShoppingListCount();
+    }
   }
 }

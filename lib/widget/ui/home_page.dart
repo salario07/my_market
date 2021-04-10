@@ -24,7 +24,7 @@ import 'show_product.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<HomePageController>(() => HomePageController());
+    Get.lazyPut<HomePageController>(() => HomePageController(false));
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: buildAppBar(),

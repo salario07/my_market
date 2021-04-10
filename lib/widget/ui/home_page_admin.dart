@@ -23,7 +23,7 @@ import 'package:my_market/widget/ui/show_product_list.dart';
 class HomePageAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<HomePageController>(() => HomePageController());
+    Get.lazyPut<HomePageController>(() => HomePageController(true));
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: buildAppBar(),
