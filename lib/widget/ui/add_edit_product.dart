@@ -6,6 +6,7 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/validators.dart';
+import 'package:my_market/helper/constants.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/component/my_text_field.dart';
 import 'package:my_market/widget/component/text_content.dart';
@@ -19,9 +20,9 @@ class AddEditProduct extends StatelessWidget {
   final TextEditingController _persianTitleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final MaskedTextController _priceController =
-      MaskedTextController(mask: '000,000,000');
+      MaskedTextController(mask: Constants.masked_text_pattern);
   final MaskedTextController _stockController =
-      MaskedTextController(mask: '000,000');
+      MaskedTextController(mask: Constants.masked_text_pattern);
 
   AddEditProduct(this.isAddMode, {this.product}) {
     if (!isAddMode) {
@@ -57,7 +58,7 @@ class AddEditProduct extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           TextLabel(LocaleKeys.add_edit_product_category.tr),
-                          SizedBox(width: 8),
+                          SizedBox(width: 16),
                           Obx(
                             () => TextContent(
                               _controller.category().id == 0
@@ -67,7 +68,9 @@ class AddEditProduct extends StatelessWidget {
                                       : _controller.category().persianName,
                               textAlign: TextAlign.end,
                             ),
-                          )
+                          ),
+                          SizedBox(width: 4),
+                          Icon(Icons.arrow_drop_down)
                         ],
                       ),
                     ),

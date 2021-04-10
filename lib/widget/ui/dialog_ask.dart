@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
 
 class DialogAsk extends StatelessWidget {
@@ -16,6 +17,7 @@ class DialogAsk extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: AppColors.colorSurface,
       shape: _buildShape(),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),

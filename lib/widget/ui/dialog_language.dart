@@ -10,9 +10,10 @@ import 'package:my_market/widget/component/text_content.dart';
 class DialogLanguage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return AlertDialog(
+      backgroundColor: AppColors.colorSurface,
       shape: buildDialogShape(),
-      child: buildContent(),
+      content: buildContent(),
     );
   }
 
@@ -22,19 +23,16 @@ class DialogLanguage extends StatelessWidget {
             BorderRadius.all(Radius.circular(Dimens.dialog_border_radius)));
   }
 
-  Padding buildContent() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          buildEnglishButton(),
-          Divider(
-            color: AppColors.colorDivider,
-          ),
-          buildPersianButton(),
-        ],
-      ),
+  Widget buildContent() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        buildEnglishButton(),
+        Divider(
+          color: AppColors.colorDivider,
+        ),
+        buildPersianButton(),
+      ],
     );
   }
 

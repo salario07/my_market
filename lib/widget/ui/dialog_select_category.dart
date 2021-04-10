@@ -5,6 +5,7 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/helper/helper.dart';
+import 'package:my_market/widget/component/my_progress_indicator.dart';
 import 'package:my_market/widget/component/text_content.dart';
 
 class DialogSelectCategory extends StatelessWidget {
@@ -14,9 +15,11 @@ class DialogSelectCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return AlertDialog(
+      scrollable: true,
+      content: buildContent(),
+      backgroundColor: AppColors.colorSurface,
       shape: buildDialogShape(),
-      child: buildContent(),
     );
   }
 
@@ -27,15 +30,31 @@ class DialogSelectCategory extends StatelessWidget {
   }
 
   Widget buildContent() {
-    return Obx(() =>
-        _controller.categories().isEmpty ? buildEmptyText() : buildListView());
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Obx(() => _controller.isLoadingCategories()
+            ? buildLoadingItem()
+            : _controller.categories().isEmpty
+                ? buildEmptyText()
+                : buildListView()),
+      ],
+    );
+  }
+
+  Center buildLoadingItem() {
+    return Center(
+        child: SizedBox(
+            width: 40, height: 40, child: CircularProgressIndicator()));
   }
 
   ListView buildListView() {
     return ListView.separated(
+      shrinkWrap: true,
       itemBuilder: (context, index) {
         return buildCategoryItem(index);
       },
+      physics: NeverScrollableScrollPhysics(),
       itemCount: _controller.categories().length,
       scrollDirection: Axis.vertical,
       separatorBuilder: (context, index) => buildDivider(),
@@ -53,15 +72,23 @@ class DialogSelectCategory extends StatelessWidget {
   InkWell buildCategoryItem(int index) {
     return InkWell(
       onTap: () {
-        Get.back(result: _controller.categories().elementAt(index));
+        selectItem(index);
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: TextContent(Helper.isLocaleEnglish()
-            ? _controller.categories().elementAt(index).name
-            : _controller.categories().elementAt(index).persianName),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        child: buildCategoryNameText(index),
       ),
     );
+  }
+
+  TextContent buildCategoryNameText(int index) {
+    return TextContent(Helper.isLocaleEnglish()
+        ? _controller.categories().elementAt(index).name
+        : _controller.categories().elementAt(index).persianName);
+  }
+
+  void selectItem(index) {
+    Get.back(result: _controller.categories().elementAt(index));
   }
 
   AddEditProductController get _controller =>

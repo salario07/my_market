@@ -40,4 +40,6 @@ class Constants {
 
   static const int splash_delay_seconds = 1;
   static const int snackbar_delay_milliseconds = 1500;
+
+  static const String masked_text_pattern = '000,000,000';
 }
