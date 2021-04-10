@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/show_product_list_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/search_product.dart';
+import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/ui/item_product.dart';
+import 'package:my_market/widget/ui/show_product_admin.dart';
 
 import 'cart.dart';
 import 'show_product.dart';
@@ -20,7 +23,8 @@ class ShowProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<ShowProductListController>(() => ShowProductListController());
+    Get.lazyPut<ShowProductListController>(
+        () => ShowProductListController(products));
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: buildAppBar(),
@@ -29,25 +33,31 @@ class ShowProductList extends StatelessWidget {
   }
 
   Widget buildContent() {
-    return products.isEmpty
+    return _controller.products().isEmpty
         ? Center(
             child: TextContent(LocaleKeys.home_page_no_item_found.tr),
           )
-        : GridView.builder(
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-            itemBuilder: (context, index) => ItemProduct(
-                products[index], () => navigateToShowProduct(products[index])),
-            itemCount: products.length,
-            scrollDirection: Axis.vertical,
-            padding: EdgeInsets.all(8),
+        : Obx(
+            () => GridView.builder(
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemBuilder: (context, index) => ItemProduct(
+                  _controller.products()[index],
+                  () => navigateToShowProduct(_controller.products()[index])),
+              itemCount: _controller.products().length,
+              scrollDirection: Axis.vertical,
+              padding: EdgeInsets.all(8),
+            ),
           );
   }
 
   AppBar buildAppBar() {
     return AppBar(
       title: Text(title),
-      actions: [buildCartIcon(), buildSearchIcon()],
+      actions: [
+        SharedPref.isUserAdmin() ? SizedBox() : buildCartIcon(),
+        buildSearchIcon()
+      ],
     );
   }
 
@@ -84,8 +94,26 @@ class ShowProductList extends StatelessWidget {
   }
 
   void navigateToShowProduct(Product product) {
-    Get.to(() => ShowProduct(product?.id ?? 0))
-        .then((value) => _controller.getShoppingListCount());
+    if (SharedPref.isUserAdmin()) {
+      Get.to(() => ShowProductAdmin(product?.id ?? 0)).then((value) {
+        if (value != null) {
+          Helper.successSnackBar(LocaleKeys.shared_success.tr,
+              LocaleKeys.show_product_product_deleted_successfully.tr);
+          removeProductFromList(value);
+        }
+      });
+    } else {
+      Get.to(() => ShowProduct(product?.id ?? 0)).then((value) {
+        _controller.getShoppingListCount();
+      });
+    }
+  }
+
+  void removeProductFromList(int id) {
+    List<Product> newProducts = [];
+    newProducts.addAll(_controller.products());
+    newProducts.removeWhere((element) => element.id == id);
+    _controller.products(newProducts);
   }
 
   ShowProductListController get _controller =>

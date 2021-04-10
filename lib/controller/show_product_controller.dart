@@ -7,6 +7,7 @@ import 'package:my_market/model/shopping_item.dart';
 import 'package:my_market/repository/show_product_repo.dart';
 
 class ShowProductController extends GetxController {
+  bool isAdmin;
   Rx<Product> product = Product.getDefault().obs;
   RxBool isLoading = true.obs;
   RxInt productCount = 0.obs;
@@ -17,7 +18,7 @@ class ShowProductController extends GetxController {
 
   final int id;
 
-  ShowProductController(this.id);
+  ShowProductController(this.id,this.isAdmin);
 
   void getProduct(int id) {
     isLoading(true);
@@ -78,6 +79,14 @@ class ShowProductController extends GetxController {
     });
   }
 
+  void removeProduct() {
+    repository.removeProduct(id).then((value) {
+      Get.back(result: id);
+    }).catchError((error) {
+      Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
+    });
+  }
+
   ShoppingItem getDefaultShoppingItem() {
     return ShoppingItem(id: product().id, product: product(), count: 1);
   }
@@ -90,8 +99,9 @@ class ShowProductController extends GetxController {
 
   void updateData(int id) {
     getProduct(id);
-    getProductCount();
-    getShoppingListCount();
+    if(!isAdmin){
+      getProductCount();
+      getShoppingListCount();
+    }
   }
-
 }

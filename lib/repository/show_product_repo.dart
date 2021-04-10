@@ -32,4 +32,9 @@ class ShowProductRepo {
   Future<Response> getShoppingList() {
     return _dio.get(Constants.url_shopping_list);
   }
+
+  Future<Response> removeProduct(int id) {
+    return _dio.delete('${Constants.url_products}/$id');
+  }
+
 }

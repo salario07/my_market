@@ -43,7 +43,11 @@ class ItemCategory extends StatelessWidget {
   void navigateToProductList() {
     Get.to(() => ShowProductList(category.name, getThisCategoryProductList()))
         .then((value) {
-      if (!SharedPref.isUserAdmin()) _controller.getShoppingListCount();
+      if (SharedPref.isUserAdmin()){
+        _controller.getProducts();
+      }else{
+        _controller.getShoppingListCount();
+      }
     });
   }
 
@@ -58,5 +62,4 @@ class ItemCategory extends StatelessWidget {
   }
 
   HomePageController get _controller => Get.find<HomePageController>();
-
 }

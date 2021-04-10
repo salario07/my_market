@@ -19,7 +19,7 @@ class AddEditProductController extends GetxController {
   AddEditProductRepo repository = AddEditProductRepo();
   RxList<Category> categories = [].cast<Category>().obs;
   Rx<Category> category = Category(id: 0).obs;
-  Rx<File> file = null.obs;
+  Rx<File> file = File('').obs;
 
   AddEditProductController(this.isAddMode,this.categoryId);
 

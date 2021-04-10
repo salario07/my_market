@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       locale: getLocale(),
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
-      title: LocaleKeys.shared_app_name.tr,
+      title: 'My Market',
       theme: ThemeData(
         primarySwatch: AppColors.myPrimaryColor,
       ),

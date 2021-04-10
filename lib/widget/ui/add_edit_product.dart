@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:my_market/controller/add_edit_product_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/helper/fileUtil.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/validators.dart';
 import 'package:my_market/helper/constants.dart';
@@ -33,7 +35,6 @@ class AddEditProduct extends StatelessWidget {
       _descriptionController.text = product.description;
       _stockController.text = product.stock.toString();
       _priceController.text = product.price.toString();
-      //_controller.getCategory(product.categoryId);
     }
   }
 
@@ -71,10 +72,20 @@ class AddEditProduct extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius:
                       BorderRadius.circular(Dimens.card_border_radius)),
-              child: Container(
-                width: 160,
-                height: 160,
-                child: Text(''),
+              child: GestureDetector(
+                onTap: handleFilePicker,
+                child: Container(
+                  width: 160,
+                  height: 160,
+                  child: Obx(() => _controller.file().path.isNotEmpty
+                      ? Image.file(
+                          _controller.file(),
+                          fit: BoxFit.fitWidth,
+                        )
+                      : Center(
+                          child: Icon(Icons.add),
+                        )),
+                ),
               ),
             ),
           ),
@@ -283,6 +294,12 @@ class AddEditProduct extends StatelessWidget {
       if (value != null) {
         _controller.category(value);
       }
+    });
+  }
+
+  void handleFilePicker() {
+    FileUtil.imageFilePicker().then((value) {
+      _controller.file(FileUtil.getSingleFileFromFilePicker(value));
     });
   }
 

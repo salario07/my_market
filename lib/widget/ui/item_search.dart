@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/helper.dart';
+import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_title.dart';
 import 'package:my_market/widget/ui/show_product.dart';
+import 'package:my_market/widget/ui/show_product_admin.dart';
 
 class ItemSearch extends StatelessWidget {
   final Product product;
@@ -14,7 +17,7 @@ class ItemSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.to(() => ShowProduct(product.id)),
+      onTap: navigateToShowProduct,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         child: buildContent(),
@@ -47,5 +50,18 @@ class ItemSearch extends StatelessWidget {
     return product.images.length > 0
         ? Image.network(product.images[0], width: 40, height: 40)
         : Icon(Icons.image, size: 40);
+  }
+
+  void navigateToShowProduct() {
+    if (SharedPref.isUserAdmin()) {
+      Get.to(() => ShowProductAdmin(product.id)).then((value) {
+        if (value != null) {
+          Helper.successSnackBar(LocaleKeys.shared_success.tr,
+              LocaleKeys.show_product_product_deleted_successfully.tr);
+        }
+      });
+    } else {
+      Get.to(() => ShowProduct(product.id));
+    }
   }
 }

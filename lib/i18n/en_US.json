@@ -12,7 +12,8 @@
     "success": "Success",
     "cancel": "Cancel",
     "remove": "Remove",
-    "currency": "$"
+    "currency": "$",
+    "delete": "Delete"
   },
   "sign_up": {
     "first_name": "First Name",
@@ -46,7 +47,9 @@
     "items": "Items",
     "add_to_cart": "Add to Cart",
     "total_price": "Total Price",
-    "unavailable": "Unavailable"
+    "unavailable": "Unavailable",
+    "sure_to_delete_this_product": "Sure to delete this product?",
+    "product_deleted_successfully" :"Product deleted successfully"
   },
   "cart": {
     "cart": "Cart",

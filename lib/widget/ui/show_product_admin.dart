@@ -9,6 +9,7 @@ import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
 import 'package:my_market/widget/component/text_title.dart';
 import 'package:my_market/widget/ui/add_edit_product.dart';
+import 'package:my_market/widget/ui/dialog_ask.dart';
 
 class ShowProductAdmin extends StatelessWidget {
   final int id;
@@ -17,7 +18,7 @@ class ShowProductAdmin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<ShowProductController>(() => ShowProductController(id));
+    Get.lazyPut<ShowProductController>(() => ShowProductController(id, true));
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: buildAppBar(),
@@ -29,7 +30,16 @@ class ShowProductAdmin extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
-      title: Obx(() => Text(_controller.product()?.name ?? '')),
+      title: Obx(() =>
+          Text(_controller
+              .product()
+              ?.name ?? '')),
+      actions: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: IconButton(icon: Icon(Icons.delete_forever), onPressed: askToRemove),
+        )
+      ],
     );
   }
 
@@ -37,10 +47,12 @@ class ShowProductAdmin extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Obx(
-        () => Padding(
-          padding: EdgeInsets.only(top: 16, bottom: 88, right: 16, left: 16),
-          child: buildProductInfo(),
-        ),
+            () =>
+            Padding(
+              padding: EdgeInsets.only(
+                  top: 16, bottom: 88, right: 16, left: 16),
+              child: buildProductInfo(),
+            ),
       ),
     );
   }
@@ -72,7 +84,9 @@ class ShowProductAdmin extends StatelessWidget {
         SizedBox(width: 8),
         TextContent(
           isProductAvailable()
-              ? '${_controller.product().stock} ${LocaleKeys.show_product_items.tr}'
+              ? '${_controller
+              .product()
+              .stock} ${LocaleKeys.show_product_items.tr}'
               : LocaleKeys.show_product_unavailable.tr,
           textAlign: TextAlign.end,
         )
@@ -84,7 +98,9 @@ class ShowProductAdmin extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: TextContent(
-        _controller.product()?.description ?? '',
+        _controller
+            .product()
+            ?.description ?? '',
         textAlign: TextAlign.start,
       ),
     );
@@ -111,8 +127,12 @@ class ShowProductAdmin extends StatelessWidget {
     return Expanded(
       child: TextTitle(
         Helper.isLocaleEnglish()
-            ? _controller.product()?.name ?? ''
-            : _controller.product()?.persianName,
+            ? _controller
+            .product()
+            ?.name ?? ''
+            : _controller
+            .product()
+            ?.persianName,
         textAlign: TextAlign.start,
       ),
     );
@@ -126,7 +146,9 @@ class ShowProductAdmin extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         child: Text(
-          Helper.buildPriceText(_controller.product().price),
+          Helper.buildPriceText(_controller
+              .product()
+              .price),
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -139,25 +161,33 @@ class ShowProductAdmin extends StatelessWidget {
   Widget buildImage() {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: !Helper.isListNullOrEmpty(_controller.product().images)
+        child: !Helper.isListNullOrEmpty(_controller
+            .product()
+            .images)
             ? Image.network(
-                _controller.product().images?.elementAt(0) ?? '',
-                width: double.infinity,
-                fit: BoxFit.fitWidth,
-              )
+          _controller
+              .product()
+              .images
+              ?.elementAt(0) ?? '',
+          width: double.infinity,
+          fit: BoxFit.fitWidth,
+        )
             : Icon(
-                Icons.image,
-                color: AppColors.colorDivider,
-                size: 80,
-              ));
+          Icons.image,
+          color: AppColors.colorDivider,
+          size: 80,
+        ));
   }
 
   bool isProductAvailable() {
-    return _controller.product().stock > 0;
+    return _controller
+        .product()
+        .stock > 0;
   }
 
   void navigateToEditProduct() {
-    Get.to(() => AddEditProduct(
+    Get.to(() =>
+        AddEditProduct(
           false,
           product: _controller.product(),
         )).then((value) {
@@ -167,6 +197,21 @@ class ShowProductAdmin extends StatelessWidget {
         _controller.getProduct(id);
       }
     });
+  }
+
+  void askToRemove() {
+    showDialog(context: Get.context, builder: (context) =>
+        DialogAsk(
+          title: LocaleKeys.shared_delete.tr,
+          message: LocaleKeys.show_product_sure_to_delete_this_product.tr,
+          negative: LocaleKeys.shared_cancel.tr,
+          positive: LocaleKeys.shared_delete.tr,
+          onPositiveTap: removeProduct,
+        ));
+  }
+
+  void removeProduct() {
+    _controller.removeProduct();
   }
 
   ShowProductController get _controller => Get.find<ShowProductController>();

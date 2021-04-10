@@ -183,8 +183,13 @@ class HomePageAdmin extends StatelessWidget {
   }
 
   void navigateToShowProduct(Product product) {
-    Get.to(() => ShowProductAdmin(product?.id ?? 0))
-        .then((value) => _controller.getProducts());
+    Get.to(() => ShowProductAdmin(product?.id ?? 0)).then((value) {
+      if (value != null) {
+        Helper.successSnackBar(LocaleKeys.shared_success.tr,
+            LocaleKeys.show_product_product_deleted_successfully.tr);
+      }
+      _controller.getProducts();
+    });
   }
 
   void showBottomSheetFilter() {

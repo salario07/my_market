@@ -23,6 +23,7 @@ class LocaleKeys {
   static const shared_cancel = 'shared_cancel';
   static const shared_remove = 'shared_remove';
   static const shared_currency = 'shared_currency';
+  static const shared_delete = 'shared_delete';
   static const sign_up_first_name = 'sign_up_first_name';
   static const sign_up_last_name = 'sign_up_last_name';
   static const sign_up_first_name_hint = 'sign_up_first_name_hint';
@@ -53,6 +54,10 @@ class LocaleKeys {
   static const show_product_add_to_cart = 'show_product_add_to_cart';
   static const show_product_total_price = 'show_product_total_price';
   static const show_product_unavailable = 'show_product_unavailable';
+  static const show_product_sure_to_delete_this_product =
+      'show_product_sure_to_delete_this_product';
+  static const show_product_product_deleted_successfully =
+      'show_product_product_deleted_successfully';
   static const cart_cart = 'cart_cart';
   static const cart_buy = 'cart_buy';
   static const cart_confirm = 'cart_confirm';
@@ -113,6 +118,7 @@ class Locales {
     'shared_cancel': 'Cancel',
     'shared_remove': 'Remove',
     'shared_currency': '\$',
+    'shared_delete': 'Delete',
     'sign_up_first_name': 'First Name',
     'sign_up_last_name': 'Last Name',
     'sign_up_first_name_hint': 'Enter First Name here',
@@ -140,6 +146,8 @@ class Locales {
     'show_product_add_to_cart': 'Add to Cart',
     'show_product_total_price': 'Total Price',
     'show_product_unavailable': 'Unavailable',
+    'show_product_sure_to_delete_this_product': 'Sure to delete this product?',
+    'show_product_product_deleted_successfully': 'Product deleted successfully',
     'cart_cart': 'Cart',
     'cart_buy': 'Buy',
     'cart_confirm': 'Confirm',
@@ -189,6 +197,7 @@ class Locales {
     'shared_cancel': 'لغو',
     'shared_remove': 'حذف',
     'shared_currency': 'تومان',
+    'shared_delete': 'حذف',
     'sign_up_first_name': 'نام',
     'sign_up_last_name': 'نام خانوادگی',
     'sign_up_first_name_hint': 'نام تان را اینجا وارد کنید',
@@ -217,6 +226,9 @@ class Locales {
     'show_product_add_to_cart': 'اضافه به سبد خرید',
     'show_product_total_price': 'مبلغ کل',
     'show_product_unavailable': 'ناموجود',
+    'show_product_sure_to_delete_this_product':
+        'آیا از حذف این محصول اطمینان دارید؟',
+    'show_product_product_deleted_successfully': 'محصول با موفقیت حذف شد',
     'cart_cart': 'سبد خرید',
     'cart_buy': 'خرید',
     'cart_confirm': 'تایید',

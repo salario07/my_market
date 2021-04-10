@@ -12,7 +12,8 @@
     "success": "موفق",
     "cancel": "لغو",
     "remove": "حذف",
-    "currency": "تومان"
+    "currency": "تومان",
+    "delete": "حذف"
   },
   "sign_up": {
     "first_name": "نام",
@@ -46,7 +47,9 @@
     "items" : "عدد",
     "add_to_cart" : "اضافه به سبد خرید",
     "total_price" : "مبلغ کل",
-    "unavailable": "ناموجود"
+    "unavailable": "ناموجود",
+    "sure_to_delete_this_product": "آیا از حذف این محصول اطمینان دارید؟",
+    "product_deleted_successfully" :"محصول با موفقیت حذف شد"
   },
   "cart": {
     "cart": "سبد خرید",

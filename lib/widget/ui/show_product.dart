@@ -22,7 +22,7 @@ class ShowProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<ShowProductController>(() => ShowProductController(id));
+    Get.lazyPut<ShowProductController>(() => ShowProductController(id,false));
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: buildAppBar(),
