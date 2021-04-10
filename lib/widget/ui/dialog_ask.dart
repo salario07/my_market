@@ -16,11 +16,11 @@ class DialogAsk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return AlertDialog(
       backgroundColor: AppColors.colorSurface,
       shape: _buildShape(),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+      content: Padding(
+        padding: EdgeInsets.only(top: 16),
         child: _buildContent(),
       ),
     );
