@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
@@ -5,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:my_market/controller/add_edit_product_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
-import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/helper/fileUtil.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/validators.dart';
@@ -67,25 +68,27 @@ class AddEditProduct extends StatelessWidget {
       child: Column(
         children: [
           Center(
-            child: Card(
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(Dimens.card_border_radius)),
-              child: GestureDetector(
-                onTap: handleFilePicker,
-                child: Container(
-                  width: 160,
-                  height: 160,
-                  child: Obx(() => _controller.file().path.isNotEmpty
-                      ? Image.file(
-                          _controller.file(),
-                          fit: BoxFit.fitWidth,
-                        )
-                      : Center(
-                          child: Icon(Icons.add),
-                        )),
-                ),
+            child: GestureDetector(
+              onTap: handleFilePicker,
+              child: Container(
+                color: AppColors.colorSurface,
+                width: 160,
+                height: 160,
+                child: Obx(() => _controller.file().path.isNotEmpty
+                    ? Image.file(
+                        _controller.file(),
+                        fit: BoxFit.fitWidth,
+                      )
+                    : Center(
+                        child: Row(mainAxisSize: MainAxisSize.min, children: [
+                          TextLabel(LocaleKeys.add_edit_product_add_image.tr),
+                          SizedBox(width: 8),
+                          Icon(
+                            Icons.add,
+                            color: AppColors.colorDivider,
+                          )
+                        ]),
+                      )),
               ),
             ),
           ),
@@ -247,16 +250,23 @@ class AddEditProduct extends StatelessWidget {
 
   void onSave() {
     if (_controller.formKey.currentState.validate() && checkInput()) {
-      if (isAddMode) {
-        _controller.addProduct(buildProductFromInput());
-      } else {
-        _controller.editProduct(buildProductFromInput());
-      }
+      buildProductFromInput().then((product) {
+        if (isAddMode) {
+          _controller.addProduct(product);
+        } else {
+          _controller.editProduct(product);
+        }
+      });
     }
   }
 
   bool checkInput() {
-    if (_controller.category().id == 0) {
+    if (_controller.file().path.isEmpty && isAddMode) {
+      Helper.errorSnackBar(
+          LocaleKeys.add_edit_product_product_image_not_selected.tr,
+          LocaleKeys.add_edit_product_please_select_product_image.tr);
+      return false;
+    } else if (_controller.category().id == 0) {
       Helper.errorSnackBar(LocaleKeys.add_edit_product_category_not_selected.tr,
           LocaleKeys.add_edit_product_please_select_category.tr);
       return false;
@@ -265,26 +275,31 @@ class AddEditProduct extends StatelessWidget {
     }
   }
 
-  Product buildProductFromInput() {
-    if (isAddMode) {
-      return Product(
-          name: _englishTitleController.text,
-          persianName: _persianTitleController.text,
-          stock: Helper.parseNumberTextFieldText(_stockController.text),
-          price: Helper.parseNumberTextFieldText(_priceController.text),
-          description: _descriptionController.text,
-          categoryId: _controller.category().id);
-    } else {
-      return Product(
-          id: this.product.id,
-          name: _englishTitleController.text,
-          persianName: _persianTitleController.text,
-          stock: Helper.parseNumberTextFieldText(_stockController.text),
-          price: Helper.parseNumberTextFieldText(_priceController.text),
-          description: _descriptionController.text,
-          images: this.product.images,
-          categoryId: _controller.category().id);
-    }
+  Future<Product> buildProductFromInput() async {
+    Product product;
+    await getImageFileAsBase64().then((image) {
+      if (isAddMode) {
+        product = Product(
+            name: _englishTitleController.text,
+            persianName: _persianTitleController.text,
+            stock: Helper.parseNumberTextFieldText(_stockController.text),
+            price: Helper.parseNumberTextFieldText(_priceController.text),
+            description: _descriptionController.text,
+            categoryId: _controller.category().id,
+            images: [image]);
+      } else {
+        product = Product(
+            id: this.product.id,
+            name: _englishTitleController.text,
+            persianName: _persianTitleController.text,
+            stock: Helper.parseNumberTextFieldText(_stockController.text),
+            price: Helper.parseNumberTextFieldText(_priceController.text),
+            description: _descriptionController.text,
+            images: this.product.images,
+            categoryId: _controller.category().id);
+      }
+    });
+    return product;
   }
 
   void showSelectCategoryDialog() {
@@ -301,6 +316,11 @@ class AddEditProduct extends StatelessWidget {
     FileUtil.imageFilePicker().then((value) {
       _controller.file(FileUtil.getSingleFileFromFilePicker(value));
     });
+  }
+
+  Future<String> getImageFileAsBase64() async {
+    List<int> imageBytes = await _controller.file().readAsBytes();
+    return base64Encode(imageBytes);
   }
 
   AddEditProductController get _controller =>

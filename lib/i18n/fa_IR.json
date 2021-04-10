@@ -90,6 +90,9 @@
     "category": "دسته بندی",
     "not_selected": "انتخاب نشده",
     "category_not_selected": "دسته بندی انتخاب نشده",
-    "please_select_category": "لطفا دسته بندی را انتخاب کنید"
+    "please_select_category": "لطفا دسته بندی را انتخاب کنید",
+    "product_image_not_selected": "عکس محصول انتخاب نشده است",
+    "please_select_product_image": "لطفا عکس محصول را انتخاب کنید",
+    "add_image": "افزودن عکس"
   }
 }
