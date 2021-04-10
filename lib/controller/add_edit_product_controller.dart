@@ -42,6 +42,14 @@ class AddEditProductController extends GetxController {
     }).whenComplete(() => isLoadingCategories(false));
   }
 
+  void getCategory(int id) {
+    repository.getCategory(id).then((response) {
+      category(JsonParser.parseCategories(response.data).elementAt(0));
+    }).catchError((error) {
+      Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
+    });
+  }
+
   void navigateBack() {
     Get.back(result: true);
   }

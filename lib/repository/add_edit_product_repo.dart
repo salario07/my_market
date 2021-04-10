@@ -4,19 +4,22 @@ import 'package:my_market/model/product.dart';
 import 'api_client.dart';
 
 class AddEditProductRepo {
-
   Dio _dio = ApiClient.getDio();
 
-  Future<Response> editProduct(Product product){
-    return _dio.patch('${Constants.url_products}/${product.id}',data: product.toJson());
+  Future<Response> editProduct(Product product) {
+    return _dio.patch('${Constants.url_products}/${product.id}',
+        data: product.toJson());
   }
 
-  Future<Response> addProduct(Product product){
-    return _dio.post(Constants.url_products,data: product.toJson());
+  Future<Response> addProduct(Product product) {
+    return _dio.post(Constants.url_products, data: product.toJson());
   }
 
-  Future<Response> getCategories(){
+  Future<Response> getCategories() {
     return _dio.get(Constants.url_categories);
   }
 
+  Future<Response> getCategory(int id) {
+    return _dio.get('${Constants.url_categories}/$id');
+  }
 }

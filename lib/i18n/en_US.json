@@ -85,6 +85,8 @@
     "product_edited_successfully": "Product edited successfully",
     "product_added_successfully": "Product added successfully",
     "category": "Category",
-    "not_select": "Not Selected"
+    "not_selected": "Not selected",
+    "category_not_selected": "Category not selected",
+    "please_select_category": "Please select category"
   }
 }

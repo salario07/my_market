@@ -91,7 +91,11 @@ class LocaleKeys {
   static const add_edit_product_product_added_successfully =
       'add_edit_product_product_added_successfully';
   static const add_edit_product_category = 'add_edit_product_category';
-  static const add_edit_product_not_select = 'add_edit_product_not_select';
+  static const add_edit_product_not_selected = 'add_edit_product_not_selected';
+  static const add_edit_product_category_not_selected =
+      'add_edit_product_category_not_selected';
+  static const add_edit_product_please_select_category =
+      'add_edit_product_please_select_category';
 }
 
 class Locales {
@@ -167,7 +171,9 @@ class Locales {
         'Product edited successfully',
     'add_edit_product_product_added_successfully': 'Product added successfully',
     'add_edit_product_category': 'Category',
-    'add_edit_product_not_select': 'Not Selected',
+    'add_edit_product_not_selected': 'Not selected',
+    'add_edit_product_category_not_selected': 'Category not selected',
+    'add_edit_product_please_select_category': 'Please select category',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -240,6 +246,8 @@ class Locales {
     'add_edit_product_product_edited_successfully': 'محصول با موفقیت ویرایش شد',
     'add_edit_product_product_added_successfully': 'محصول با موفقیت اضافه شد',
     'add_edit_product_category': 'دسته بندی',
-    'add_edit_product_not_select': 'انتخاب نشده',
+    'add_edit_product_not_selected': 'انتخاب نشده',
+    'add_edit_product_category_not_selected': 'دسته بندی انتخاب نشده',
+    'add_edit_product_please_select_category': 'لطفا دسته بندی را انتخاب کنید',
   };
 }

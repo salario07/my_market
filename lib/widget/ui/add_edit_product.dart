@@ -8,8 +8,8 @@ import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/validators.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/component/my_text_field.dart';
+import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/component/text_label.dart';
-import 'package:my_market/widget/component/text_title.dart';
 import 'package:my_market/widget/ui/dialog_select_category.dart';
 
 class AddEditProduct extends StatelessWidget {
@@ -30,6 +30,7 @@ class AddEditProduct extends StatelessWidget {
       _descriptionController.text = product.description;
       _stockController.text = product.stock.toString();
       _priceController.text = product.price.toString();
+      //_controller.getCategory(product.categoryId);
     }
   }
 
@@ -47,14 +48,31 @@ class AddEditProduct extends StatelessWidget {
               key: _controller.formKey,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      TextLabel(LocaleKeys.add_edit_product_category.tr),
-                      Expanded(child: TextTitle())
-                    ],
+                  InkWell(
+                    onTap: showSelectCategoryDialog,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          TextLabel(LocaleKeys.add_edit_product_category.tr),
+                          SizedBox(width: 8),
+                          Obx(
+                            () => TextContent(
+                              _controller.category().id == 0
+                                  ? LocaleKeys.add_edit_product_not_selected.tr
+                                  : Helper.isLocaleEnglish()
+                                      ? _controller.category().name
+                                      : _controller.category().persianName,
+                              textAlign: TextAlign.end,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
+                  SizedBox(height: 16),
                   MyTextField(
                     validator: (text) => Validators.emptyValidator(text),
                     labelText:
@@ -148,12 +166,23 @@ class AddEditProduct extends StatelessWidget {
   }
 
   void onSave() {
-    if (_controller.formKey.currentState.validate()) {
+    if (_controller.formKey.currentState.validate() && checkInput()) {
       if (isAddMode) {
         _controller.addProduct(buildProductFromInput());
       } else {
         _controller.editProduct(buildProductFromInput());
       }
+    }
+  }
+
+  bool checkInput() {
+    if (_controller.category().id == 0) {
+      Helper.successSnackBar(
+          LocaleKeys.add_edit_product_category_not_selected.tr,
+          LocaleKeys.add_edit_product_please_select_category.tr);
+      return false;
+    } else {
+      return true;
     }
   }
 

@@ -85,6 +85,8 @@
     "product_edited_successfully": "محصول با موفقیت ویرایش شد",
     "product_added_successfully": "محصول با موفقیت اضافه شد",
     "category": "دسته بندی",
-    "not_select": "انتخاب نشده"
+    "not_selected": "انتخاب نشده",
+    "category_not_selected": "دسته بندی انتخاب نشده",
+    "please_select_category": "لطفا دسته بندی را انتخاب کنید"
   }
 }
