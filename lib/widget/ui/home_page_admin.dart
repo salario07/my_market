@@ -12,6 +12,7 @@ import 'package:my_market/model/filter.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/ui/add_edit_product.dart';
 import 'package:my_market/widget/ui/bottom_sheet_filter.dart';
+import 'package:my_market/widget/ui/categories.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
 import 'package:my_market/widget/ui/dialog_language.dart';
 import 'package:my_market/widget/ui/item_category.dart';
@@ -121,6 +122,9 @@ class HomePageAdmin extends StatelessWidget {
           Divider(height: 2, color: AppColors.colorDivider),
           buildDrawerItem(Icons.language, LocaleKeys.home_page_language.tr,
               changeLanguage, false),
+          Divider(height: 2, color: AppColors.colorDivider),
+          buildDrawerItem(Icons.category, LocaleKeys.home_page_categories.tr,
+              navigateToCategories, false),
           Divider(height: 2, color: AppColors.colorDivider),
           buildDrawerItem(
               Icons.logout, LocaleKeys.home_page_logout.tr, askToLogout, false),
@@ -251,6 +255,14 @@ class HomePageAdmin extends StatelessWidget {
         _controller.getProducts();
         Helper.successSnackBar(LocaleKeys.shared_success.tr,
             LocaleKeys.add_edit_product_product_added_successfully.tr);
+      }
+    });
+  }
+
+  void navigateToCategories() {
+    Get.to(() => Categories()).then((value) {
+      if (value != null) {
+        _controller.getCategories();
       }
     });
   }

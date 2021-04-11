@@ -95,5 +95,13 @@
     "product_image_not_selected": "عکس محصول انتخاب نشده است",
     "please_select_product_image": "لطفا عکس محصول را انتخاب کنید",
     "add_image": "افزودن عکس"
+  },
+  "categories": {
+    "sure_to_delete_category": "ایا از حذف دسته بندی اطمینان دارید؟",
+    "category_english_name": "نام انگلیسی دسته بندی",
+    "category_english_name_label": "نام انگلیسی دسته بندی را وارد کنید",
+    "category_persian_name": "نام فارسی دسته بندی",
+    "category_persian_name_label": "نام فارسی دسته بندی را وارد کنید",
+    "add": "اضافه"
   }
 }

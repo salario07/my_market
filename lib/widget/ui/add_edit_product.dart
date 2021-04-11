@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,6 @@ import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/fileUtil.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/validators.dart';
-import 'package:my_market/helper/constants.dart';
 import 'package:my_market/model/product.dart';
 import 'package:my_market/widget/component/my_progress_indicator.dart';
 import 'package:my_market/widget/component/my_text_field.dart';

@@ -40,7 +40,7 @@ class DialogAsk extends StatelessWidget {
         SizedBox(
           height: 16,
         ),
-        Text(message),
+        Text(message,textAlign: TextAlign.center,),
         SizedBox(
           height: 32,
         ),

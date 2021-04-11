@@ -107,6 +107,17 @@ class LocaleKeys {
   static const add_edit_product_please_select_product_image =
       'add_edit_product_please_select_product_image';
   static const add_edit_product_add_image = 'add_edit_product_add_image';
+  static const categories_sure_to_delete_category =
+      'categories_sure_to_delete_category';
+  static const categories_category_english_name =
+      'categories_category_english_name';
+  static const categories_category_english_name_label =
+      'categories_category_english_name_label';
+  static const categories_category_persian_name =
+      'categories_category_persian_name';
+  static const categories_category_persian_name_label =
+      'categories_category_persian_name_label';
+  static const categories_add = 'categories_add';
 }
 
 class Locales {
@@ -193,6 +204,14 @@ class Locales {
     'add_edit_product_please_select_product_image':
         'Please select product image',
     'add_edit_product_add_image': 'Add image',
+    'categories_sure_to_delete_category': 'Sure to delete category?',
+    'categories_category_english_name': 'Category English Name',
+    'categories_category_english_name_label':
+        'Enter category english name here',
+    'categories_category_persian_name': 'Category Persian Name',
+    'categories_category_persian_name_label':
+        'Enter category persian name here',
+    'categories_add': 'Add',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -277,5 +296,13 @@ class Locales {
     'add_edit_product_please_select_product_image':
         'لطفا عکس محصول را انتخاب کنید',
     'add_edit_product_add_image': 'افزودن عکس',
+    'categories_sure_to_delete_category': 'ایا از حذف دسته بندی اطمینان دارید؟',
+    'categories_category_english_name': 'نام انگلیسی دسته بندی',
+    'categories_category_english_name_label':
+        'نام انگلیسی دسته بندی را وارد کنید',
+    'categories_category_persian_name': 'نام فارسی دسته بندی',
+    'categories_category_persian_name_label':
+        'نام فارسی دسته بندی را وارد کنید',
+    'categories_add': 'اضافه',
   };
 }
