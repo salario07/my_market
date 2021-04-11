@@ -118,6 +118,12 @@ class LocaleKeys {
   static const categories_category_persian_name_label =
       'categories_category_persian_name_label';
   static const categories_add = 'categories_add';
+  static const categories_category_added_successfully =
+      'categories_category_added_successfully';
+  static const categories_category_edited_successfully =
+      'categories_category_edited_successfully';
+  static const categories_category_deleted_successfully =
+      'categories_category_deleted_successfully';
 }
 
 class Locales {
@@ -212,6 +218,9 @@ class Locales {
     'categories_category_persian_name_label':
         'Enter category persian name here',
     'categories_add': 'Add',
+    'categories_category_added_successfully': 'Category added successfully',
+    'categories_category_edited_successfully': 'Category edited successfully',
+    'categories_category_deleted_successfully': 'Category deleted successfully',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -304,5 +313,8 @@ class Locales {
     'categories_category_persian_name_label':
         'نام فارسی دسته بندی را وارد کنید',
     'categories_add': 'اضافه',
+    'categories_category_added_successfully': 'دسته بندی با موفقیت اضافه شد',
+    'categories_category_edited_successfully': 'دسته بندی با موفقیت ویرایش شد',
+    'categories_category_deleted_successfully': 'دسته بندی با موفقیت حذف شد',
   };
 }

@@ -27,51 +27,100 @@ class DialogAddEditCategory extends StatelessWidget {
       scrollable: false,
       backgroundColor: AppColors.colorSurface,
       shape: _buildShape(),
-      content: Form(
-        key: _controller.formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            MyTextField(
-              validator: (text) => Validators.emptyValidator(text),
-              labelText: LocaleKeys.categories_category_english_name,
-              hintText: LocaleKeys.categories_category_english_name_label,
-              controller: _englishNameController,
-            ),
-            MyTextField(
-              validator: (text) => Validators.emptyValidator(text),
-              labelText: LocaleKeys.categories_category_persian_name,
-              hintText: LocaleKeys.categories_category_persian_name_label,
-              controller: _persianNameController,
-            ),
-            SizedBox(height: 24),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextButton(
-                    onPressed: () => Get.back(),
-                    child: Text(LocaleKeys.shared_cancel.tr)),
-                SizedBox(width: 16),
-                ElevatedButton(
-                    onPressed: onSave,
-                    child: Text(isAddMode
-                        ? LocaleKeys.categories_add.tr
-                        : LocaleKeys.home_page_admin_edit.tr))
-              ],
-            )
-          ],
-        ),
+      content: buildForm(),
+    );
+  }
+
+  Form buildForm() {
+    return Form(
+      key: _controller.formKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          buildEnglishNameTextField(),
+          SizedBox(height: 16),
+          buildPersianNameTextField(),
+          SizedBox(height: 24),
+          buildButtons()
+        ],
       ),
     );
   }
 
+  Row buildButtons() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        TextButton(
+            onPressed: () => Get.back(),
+            child: Text(LocaleKeys.shared_cancel.tr)),
+        SizedBox(width: 16),
+        ElevatedButton(
+            onPressed: _controller.isAddEditLoading() ? null : onSave,
+            child: _controller.isAddEditLoading()
+                ? buildLoadingSaveButton()
+                : buildSaveButtonText())
+      ],
+    );
+  }
+
+  MyTextField buildPersianNameTextField() {
+    return MyTextField(
+      validator: (text) => Validators.emptyValidator(text),
+      labelText: LocaleKeys.categories_category_persian_name.tr,
+      hintText: LocaleKeys.categories_category_persian_name_label.tr,
+      controller: _persianNameController,
+    );
+  }
+
+  MyTextField buildEnglishNameTextField() {
+    return MyTextField(
+      validator: (text) => Validators.emptyValidator(text),
+      labelText: LocaleKeys.categories_category_english_name.tr,
+      hintText: LocaleKeys.categories_category_english_name_label.tr,
+      controller: _englishNameController,
+    );
+  }
+
+  Row buildLoadingSaveButton() {
+    return Row(
+      children: [
+        SizedBox(
+          width: 20,
+          height: 20,
+          child: CircularProgressIndicator(),
+        ),
+        buildSaveButtonText()
+      ],
+    );
+  }
+
+  Text buildSaveButtonText() {
+    return Text(isAddMode
+        ? LocaleKeys.categories_add.tr
+        : LocaleKeys.home_page_admin_edit.tr);
+  }
+
   void onSave() {
     if (_controller.formKey.currentState.validate()) {
-      if(isAddMode){
-
-      }else{
-
+      if (isAddMode) {
+        _controller.addCategory(buildCategoryFromInput());
+      } else {
+        _controller.editCategory(buildCategoryFromInput());
       }
+    }
+  }
+
+  Category buildCategoryFromInput() {
+    if (isAddMode) {
+      return Category(
+          name: _englishNameController.text,
+          persianName: _persianNameController.text);
+    } else {
+      return Category(
+          id: this.category.id,
+          name: _englishNameController.text,
+          persianName: _persianNameController.text);
     }
   }
 

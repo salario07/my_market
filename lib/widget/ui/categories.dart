@@ -6,6 +6,7 @@ import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/widget/component/my_progress_indicator.dart';
 import 'package:my_market/widget/component/text_content.dart';
+import 'package:my_market/widget/ui/dialog_add_edit_category.dart';
 
 import 'dialog_ask.dart';
 
@@ -55,21 +56,31 @@ class Categories extends StatelessWidget {
                 Icons.delete_forever,
                 color: AppColors.colorError,
               ),
-              onPressed: askToDeleteCategory),
+              onPressed: () => askToDeleteCategory(index)),
           IconButton(
               icon: Icon(
                 Icons.edit,
                 color: AppColors.colorSecondary,
               ),
-              onPressed: showDialogEditCategory),
+              onPressed: () => showDialogEditCategory(index)),
         ],
       ),
     );
   }
 
-  void showDialogAddCategory() {}
+  void showDialogAddCategory() {
+    showDialog(
+      context: Get.context,
+      builder: (context) => DialogAddEditCategory(true),
+    ).then((value) {
+      if (value != null && value) {
+        Helper.successSnackBar(LocaleKeys.shared_success.tr,
+            LocaleKeys.categories_category_added_successfully.tr);
+      }
+    });
+  }
 
-  void askToDeleteCategory() {
+  void askToDeleteCategory(index) {
     showDialog(
       context: Get.context,
       builder: (context) => DialogAsk(
@@ -77,14 +88,29 @@ class Categories extends StatelessWidget {
         message: LocaleKeys.categories_sure_to_delete_category.tr,
         positive: LocaleKeys.shared_delete.tr,
         negative: LocaleKeys.shared_cancel.tr,
-        onPositiveTap: deleteCategory,
+        onPositiveTap: () => deleteCategory(index),
       ),
     );
   }
 
-  void showDialogEditCategory() {}
+  void showDialogEditCategory(int index) {
+    showDialog(
+      context: Get.context,
+      builder: (context) => DialogAddEditCategory(
+        false,
+        category: _controller.categories().elementAt(index),
+      ),
+    ).then((value) {
+      if (value != null && value) {
+        Helper.successSnackBar(LocaleKeys.shared_success.tr,
+            LocaleKeys.categories_category_edited_successfully.tr);
+      }
+    });
+  }
 
-  void deleteCategory() {}
+  void deleteCategory(int index) {
+    _controller.deleteCategory(_controller.categories().elementAt(index));
+  }
 
   CategoriesController get _controller => Get.find<CategoriesController>();
 }

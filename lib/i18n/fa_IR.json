@@ -102,6 +102,9 @@
     "category_english_name_label": "نام انگلیسی دسته بندی را وارد کنید",
     "category_persian_name": "نام فارسی دسته بندی",
     "category_persian_name_label": "نام فارسی دسته بندی را وارد کنید",
-    "add": "اضافه"
+    "add": "اضافه",
+    "category_added_successfully": "دسته بندی با موفقیت اضافه شد",
+    "category_edited_successfully": "دسته بندی با موفقیت ویرایش شد",
+    "category_deleted_successfully": "دسته بندی با موفقیت حذف شد"
   }
 }

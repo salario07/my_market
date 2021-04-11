@@ -18,4 +18,8 @@ class CategoriesRepo {
     return _dio.patch('${Constants.url_categories}/${category.id}',
         data: category.toJson());
   }
+
+  Future<Response> deleteCategory(Category category) {
+    return _dio.delete('${Constants.url_categories}/${category.id}');
+  }
 }

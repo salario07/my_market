@@ -261,9 +261,7 @@ class HomePageAdmin extends StatelessWidget {
 
   void navigateToCategories() {
     Get.to(() => Categories()).then((value) {
-      if (value != null) {
-        _controller.getCategories();
-      }
+      _controller.getCategories();
     });
   }
 

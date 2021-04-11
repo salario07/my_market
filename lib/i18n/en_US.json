@@ -102,6 +102,9 @@
     "category_english_name_label": "Enter category english name here",
     "category_persian_name": "Category Persian Name",
     "category_persian_name_label": "Enter category persian name here",
-    "add": "Add"
+    "add": "Add",
+    "category_added_successfully": "Category added successfully",
+    "category_edited_successfully": "Category edited successfully",
+    "category_deleted_successfully": "Category deleted successfully"
   }
 }
