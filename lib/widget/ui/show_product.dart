@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -202,9 +204,9 @@ class ShowProduct extends StatelessWidget {
   Widget buildImage() {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: !Helper.isListNullOrEmpty(_controller.product().images)
-            ? Image.network(
-                _controller.product().images?.elementAt(0) ?? '',
+        child: !Helper.isNullOrEmpty(_controller.product().image)
+            ? Image.memory(
+                base64Decode(_controller.product().image),
                 width: double.infinity,
                 fit: BoxFit.fitWidth,
               )

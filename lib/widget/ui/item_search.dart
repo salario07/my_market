@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_market/generated/locales.g.dart';
@@ -47,8 +49,8 @@ class ItemSearch extends StatelessWidget {
   }
 
   Widget buildImage() {
-    return product.images.length > 0
-        ? Image.network(product.images[0], width: 40, height: 40)
+    return !Helper.isNullOrEmpty(product.image)
+        ? Image.memory(base64Decode(product.image), width: 40, height: 40)
         : Icon(Icons.image, size: 40);
   }
 

@@ -18,7 +18,7 @@ class Constants {
   static const String category_name = 'categoryName';
   static const String price = 'price';
   static const String description = 'description';
-  static const String images = 'images';
+  static const String image = 'image';
   static const String count = 'count';
   static const String product = 'product';
   static const String persian_name = 'persianName';

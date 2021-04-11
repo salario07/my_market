@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_market/controller/cart_controller.dart';
@@ -83,9 +85,9 @@ class ItemCart extends StatelessWidget {
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(Dimens.card_border_radius)),
-        child: !Helper.isListNullOrEmpty(getItem().product.images)
-            ? Image.network(
-                getItem().product.images[0],
+        child: !Helper.isNullOrEmpty(getItem().product.image)
+            ? Image.memory(
+                base64Decode(getItem().product.image),
                 width: 48,
                 height: 48,
               )

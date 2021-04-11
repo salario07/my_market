@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/model/product.dart';
@@ -52,13 +55,13 @@ class ItemProduct extends StatelessWidget {
 
   Center buildImage() {
     return Center(
-      child: !Helper.isListNullOrEmpty(product.images)
-          ? Image.network(
-              product.images.elementAt(0),
+      child: !Helper.isNullOrEmpty(product.image)
+          ? Image.memory(
+              base64Decode(product.image),
               width: 80,
               height: 80,
             )
-          : Icon(Icons.image, size: 80),
+          : Icon(Icons.image, size: 80, color: AppColors.colorDivider),
     );
   }
 }

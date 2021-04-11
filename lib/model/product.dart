@@ -9,7 +9,7 @@ class Product {
   final String persianName;
   final num price;
   final String description;
-  final List<String> images;
+  final String image;
 
   Product(
       {this.id,
@@ -19,7 +19,7 @@ class Product {
       this.persianName,
       this.price,
       this.description,
-      this.images});
+      this.image});
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
@@ -30,7 +30,7 @@ class Product {
       persianName: json[Constants.persian_name],
       price: (json[Constants.price]),
       description: json[Constants.description],
-      images: JsonParser.parseStringList(json[Constants.images]),
+      image: json[Constants.image],
     );
   }
 
@@ -43,7 +43,7 @@ class Product {
       Constants.persian_name: persianName,
       Constants.price: price,
       Constants.description: description,
-      Constants.images: images
+      Constants.image: image
     };
   }
 
@@ -54,7 +54,7 @@ class Product {
         categoryId: 0,
         persianName: '',
         description: '',
-        images: [],
+        image: '',
         price: 0,
         stock: 0);
   }

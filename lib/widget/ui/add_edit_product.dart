@@ -24,10 +24,10 @@ class AddEditProduct extends StatelessWidget {
   final TextEditingController _englishTitleController = TextEditingController();
   final TextEditingController _persianTitleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  final MaskedTextController _priceController =
-      MaskedTextController(mask: Constants.masked_text_pattern);
-  final MaskedTextController _stockController =
-      MaskedTextController(mask: Constants.masked_text_pattern);
+  final MoneyMaskedTextController _priceController = MoneyMaskedTextController(
+      precision: 0, decimalSeparator: '', thousandSeparator: ',');
+  final MoneyMaskedTextController _stockController = MoneyMaskedTextController(
+      precision: 0, decimalSeparator: '', thousandSeparator: ',');
 
   AddEditProduct(this.isAddMode, {this.product}) {
     if (!isAddMode) {
@@ -286,7 +286,7 @@ class AddEditProduct extends StatelessWidget {
             price: Helper.parseNumberTextFieldText(_priceController.text),
             description: _descriptionController.text,
             categoryId: _controller.category().id,
-            images: [image]);
+            image: image);
       } else {
         product = Product(
             id: this.product.id,
@@ -295,7 +295,7 @@ class AddEditProduct extends StatelessWidget {
             stock: Helper.parseNumberTextFieldText(_stockController.text),
             price: Helper.parseNumberTextFieldText(_priceController.text),
             description: _descriptionController.text,
-            images: this.product.images,
+            image: this.product.image,
             categoryId: _controller.category().id);
       }
     });

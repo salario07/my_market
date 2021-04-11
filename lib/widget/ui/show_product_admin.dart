@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_market/controller/show_product_controller.dart';
@@ -161,14 +163,11 @@ class ShowProductAdmin extends StatelessWidget {
   Widget buildImage() {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: !Helper.isListNullOrEmpty(_controller
+        child: !Helper.isNullOrEmpty(_controller
             .product()
-            .images)
-            ? Image.network(
-          _controller
-              .product()
-              .images
-              ?.elementAt(0) ?? '',
+            .image)
+            ? Image.memory(
+          base64Decode(_controller.product().image),
           width: double.infinity,
           fit: BoxFit.fitWidth,
         )
