@@ -5,11 +5,13 @@ import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
+import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/json_parser.dart';
 import 'package:my_market/helper/search_product.dart';
 import 'package:my_market/helper/shared_pref.dart';
 import 'package:my_market/model/filter.dart';
 import 'package:my_market/model/product.dart';
+import 'package:my_market/model/user.dart';
 import 'package:my_market/widget/ui/bottom_sheet_filter.dart';
 import 'package:my_market/widget/ui/cart.dart';
 import 'package:my_market/widget/ui/dialog_ask.dart';
@@ -144,11 +146,21 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Container buildDrawerHeader() {
+  Widget buildDrawerHeader() {
     return Container(
       width: double.infinity,
       height: 160,
-      child: ColoredBox(color: AppColors.colorPrimary),
+      decoration: BoxDecoration(color: AppColors.colorPrimary),
+      child: Align(
+        alignment: AlignmentDirectional.bottomStart,
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: Text(
+            '${LocaleKeys.home_page_hello.tr} ${SharedPref.getUserFullName()}',
+            style: TextStyle(color: AppColors.colorSurface, fontSize: 16),
+          ),
+        ),
+      ),
     );
   }
 
@@ -190,6 +202,7 @@ class HomePage extends StatelessWidget {
   void logout() {
     SharedPref.setUserLoggedIn(false);
     SharedPref.setUserAdmin(false);
+    SharedPref.setUser(User());
     Get.offAll(() => Login());
   }
 

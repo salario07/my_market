@@ -1,15 +1,14 @@
 import 'package:my_market/helper/constants.dart';
-import 'package:my_market/helper/json_parser.dart';
 
 class Product {
-  final int id;
+  int id;
   final int categoryId;
   int stock;
   final String name;
   final String persianName;
   final num price;
   final String description;
-  final String image;
+  String image;
 
   Product(
       {this.id,

@@ -49,6 +49,7 @@ class LocaleKeys {
   static const home_page_language = 'home_page_language';
   static const home_page_search_product = 'home_page_search_product';
   static const home_page_no_item_found = 'home_page_no_item_found';
+  static const home_page_hello = 'home_page_hello';
   static const show_product_stock = 'show_product_stock';
   static const show_product_items = 'show_product_items';
   static const show_product_add_to_cart = 'show_product_add_to_cart';
@@ -146,6 +147,7 @@ class Locales {
     'home_page_language': 'Language',
     'home_page_search_product': 'Search Product',
     'home_page_no_item_found': 'No item found',
+    'home_page_hello': 'Hello',
     'show_product_stock': 'Stock',
     'show_product_items': 'Items',
     'show_product_add_to_cart': 'Add to Cart',
@@ -230,6 +232,7 @@ class Locales {
     'home_page_language': 'زبان',
     'home_page_search_product': 'جستجوی محصول',
     'home_page_no_item_found': 'موردی یافت نشد',
+    'home_page_hello': 'سلام',
     'show_product_stock': 'موجودی',
     'show_product_items': 'عدد',
     'show_product_add_to_cart': 'اضافه به سبد خرید',

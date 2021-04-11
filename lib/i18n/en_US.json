@@ -40,7 +40,8 @@
     "sure_to_logout": "Sure to Logout?",
     "language": "Language",
     "search_product": "Search Product",
-    "no_item_found": "No item found"
+    "no_item_found": "No item found",
+    "hello": "Hello"
   },
   "show_product": {
     "stock": "Stock",

@@ -6,6 +6,8 @@ import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/constants.dart';
 import 'package:my_market/helper/localization_service.dart';
 
+import 'shared_pref.dart';
+
 class Helper {
   static bool isNullOrEmpty(String text) {
     return text == null || text.isEmpty;

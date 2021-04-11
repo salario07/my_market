@@ -40,6 +40,7 @@ class SignUpController extends GetxController {
 
   void _addUser(User user) {
     repository.addUser(user).then((response) {
+      SharedPref.setUser(user);
       SharedPref.setUserLoggedIn(true);
       Helper.successSnackBar(LocaleKeys.shared_success.tr,
           LocaleKeys.sign_up_signed_up_successfully.tr);

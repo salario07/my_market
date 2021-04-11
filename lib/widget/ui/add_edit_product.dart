@@ -67,31 +67,7 @@ class AddEditProduct extends StatelessWidget {
       key: _controller.formKey,
       child: Column(
         children: [
-          Center(
-            child: GestureDetector(
-              onTap: handleFilePicker,
-              child: Container(
-                color: AppColors.colorSurface,
-                width: 160,
-                height: 160,
-                child: Obx(() => _controller.file().path.isNotEmpty
-                    ? Image.file(
-                        _controller.file(),
-                        fit: BoxFit.fitWidth,
-                      )
-                    : Center(
-                        child: Row(mainAxisSize: MainAxisSize.min, children: [
-                          TextLabel(LocaleKeys.add_edit_product_add_image.tr),
-                          SizedBox(width: 8),
-                          Icon(
-                            Icons.add,
-                            color: AppColors.colorDivider,
-                          )
-                        ]),
-                      )),
-              ),
-            ),
-          ),
+          buildImage(),
           SizedBox(height: 16),
           buildCategory(),
           SizedBox(height: 16),
@@ -105,6 +81,39 @@ class AddEditProduct extends StatelessWidget {
           SizedBox(height: 16),
           buildDescriptionTextField(),
         ],
+      ),
+    );
+  }
+
+  Center buildImage() {
+    return Center(
+      child: GestureDetector(
+        onTap: handleFilePicker,
+        child: Container(
+          color: AppColors.colorSurface,
+          width: 160,
+          height: 160,
+          child: Obx(() => _controller.file().path.isNotEmpty
+              ? Image.file(
+                  _controller.file(),
+                  fit: BoxFit.fitWidth,
+                )
+              : isAddMode
+                  ? Center(
+                      child: Row(mainAxisSize: MainAxisSize.min, children: [
+                        TextLabel(LocaleKeys.add_edit_product_add_image.tr),
+                        SizedBox(width: 8),
+                        Icon(
+                          Icons.add,
+                          color: AppColors.colorDivider,
+                        )
+                      ]),
+                    )
+                  : Image.memory(
+                      base64Decode(product.image),
+                      fit: BoxFit.fitWidth,
+                    )),
+        ),
       ),
     );
   }
@@ -139,7 +148,7 @@ class AddEditProduct extends StatelessWidget {
 
   MyTextField buildPriceTextField() {
     return MyTextField(
-      validator: (text) => Validators.emptyValidator(text),
+      validator: (text) => Validators.emptyNonZeroValidator(text),
       labelText: LocaleKeys.filter_price.tr,
       controller: _priceController,
       hintText: LocaleKeys.add_edit_product_price_hint.tr,
@@ -276,29 +285,23 @@ class AddEditProduct extends StatelessWidget {
   }
 
   Future<Product> buildProductFromInput() async {
-    Product product;
-    await getImageFileAsBase64().then((image) {
-      if (isAddMode) {
-        product = Product(
-            name: _englishTitleController.text,
-            persianName: _persianTitleController.text,
-            stock: Helper.parseNumberTextFieldText(_stockController.text),
-            price: Helper.parseNumberTextFieldText(_priceController.text),
-            description: _descriptionController.text,
-            categoryId: _controller.category().id,
-            image: image);
-      } else {
-        product = Product(
-            id: this.product.id,
-            name: _englishTitleController.text,
-            persianName: _persianTitleController.text,
-            stock: Helper.parseNumberTextFieldText(_stockController.text),
-            price: Helper.parseNumberTextFieldText(_priceController.text),
-            description: _descriptionController.text,
-            image: this.product.image,
-            categoryId: _controller.category().id);
-      }
-    });
+    Product product = Product(
+        name: _englishTitleController.text,
+        persianName: _persianTitleController.text,
+        stock: Helper.parseNumberTextFieldText(_stockController.text),
+        price: Helper.parseNumberTextFieldText(_priceController.text),
+        description: _descriptionController.text,
+        categoryId: _controller.category().id);
+    if (_controller.file().path.isEmpty) {
+      product.image = this.product.image;
+    } else {
+      await getImageFileAsBase64().then((image) {
+        product.image = image;
+      });
+    }
+    if(!isAddMode){
+      product.id = this.product.id;
+    }
     return product;
   }
 

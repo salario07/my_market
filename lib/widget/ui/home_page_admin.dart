@@ -129,11 +129,21 @@ class HomePageAdmin extends StatelessWidget {
     );
   }
 
-  Container buildDrawerHeader() {
+  Widget buildDrawerHeader() {
     return Container(
       width: double.infinity,
       height: 160,
-      child: ColoredBox(color: AppColors.colorPrimary),
+      decoration: BoxDecoration(color: AppColors.colorPrimary),
+      child: Align(
+        alignment: AlignmentDirectional.bottomStart,
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: Text(
+            '${LocaleKeys.home_page_hello.tr} ${SharedPref.getUserFullName()}',
+            style: TextStyle(color: AppColors.colorSurface, fontSize: 16),
+          ),
+        ),
+      ),
     );
   }
 

@@ -56,6 +56,7 @@ class LoginController extends GetxController {
   bool _checkCredentials(List<User> users, User loggedInUser) {
     for (User user in users) {
       if (areTwoUsersTheSame(user, loggedInUser)) {
+        SharedPref.setUser(user);
         return true;
       }
     }

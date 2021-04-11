@@ -12,4 +12,12 @@ class Validators {
   static String nonValidator(String text) {
     return null;
   }
+
+  static String emptyNonZeroValidator(String text) {
+    return Helper.isNullOrEmpty(text)
+        ? 'Required'
+        : text == '0'
+            ? 'Required'
+            : null;
+  }
 }

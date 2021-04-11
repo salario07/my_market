@@ -40,7 +40,8 @@
     "sure_to_logout":"آیا می خواهید از حساب کاربری خود خارج شوید؟",
     "language": "زبان",
     "search_product": "جستجوی محصول",
-    "no_item_found": "موردی یافت نشد"
+    "no_item_found": "موردی یافت نشد",
+    "hello": "سلام"
   },
   "show_product": {
     "stock" : "موجودی",
