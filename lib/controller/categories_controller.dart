@@ -1,15 +1,19 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/json_parser.dart';
 import 'package:my_market/model/category.dart';
+import 'package:my_market/model/product.dart';
 import 'package:my_market/repository/categories_repo.dart';
 
 class CategoriesController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isAddEditLoading = false.obs;
+  RxBool isProductsLoading = false.obs;
   RxList<Category> categories = [].cast<Category>().obs;
+  RxList<Product> categoryProducts = [].cast<Product>().obs;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   CategoriesRepo repository = CategoriesRepo();
 
@@ -51,6 +55,21 @@ class CategoriesController extends GetxController {
       Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
     });
   }
+
+  void getCategoryProducts(int categoryId) {
+    isProductsLoading(true);
+    repository.getProducts().then((response) {
+      List<Product> allProducts = JsonParser.parseProducts(response.data);
+      categoryProducts(Helper.getThisCategoryProductList(allProducts, categoryId));
+    }).catchError((error) {
+      Helper.errorSnackBar(LocaleKeys.shared_error.tr, error.toString());
+    }).whenComplete(() => isProductsLoading(false));
+  }
+
+  Future<Response> getCategoryProductsAsync(int categoryId) async{
+    return await repository.getProducts();
+  }
+
 
   @override
   void onInit() {

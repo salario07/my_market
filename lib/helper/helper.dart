@@ -5,6 +5,7 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/constants.dart';
 import 'package:my_market/helper/localization_service.dart';
+import 'package:my_market/model/product.dart';
 
 import 'shared_pref.dart';
 
@@ -64,5 +65,16 @@ class Helper {
 
   static int parseNumberTextFieldText(String text) {
     return int.parse(removeThousandsCommaSeparator(text));
+  }
+
+  static List<Product> getThisCategoryProductList(
+      List<Product> allProducts, int categoryId) {
+    List<Product> categorizedProducts = [];
+    allProducts.forEach((element) {
+      if (element.categoryId == categoryId) {
+        categorizedProducts.add(element);
+      }
+    });
+    return categorizedProducts;
   }
 }

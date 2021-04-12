@@ -22,4 +22,8 @@ class CategoriesRepo {
   Future<Response> deleteCategory(Category category) {
     return _dio.delete('${Constants.url_categories}/${category.id}');
   }
+
+  Future<Response> getProducts() {
+    return _dio.get(Constants.url_products);
+  }
 }

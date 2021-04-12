@@ -39,8 +39,8 @@ class ShowProductList extends StatelessWidget {
           )
         : Obx(
             () => GridView.builder(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.9),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 0.9),
               itemBuilder: (context, index) => ItemProduct(
                   _controller.products()[index],
                   () => navigateToShowProduct(_controller.products()[index])),

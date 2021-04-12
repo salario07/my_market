@@ -106,6 +106,7 @@
     "add": "اضافه",
     "category_added_successfully": "دسته بندی با موفقیت اضافه شد",
     "category_edited_successfully": "دسته بندی با موفقیت ویرایش شد",
-    "category_deleted_successfully": "دسته بندی با موفقیت حذف شد"
+    "category_deleted_successfully": "دسته بندی با موفقیت حذف شد",
+    "category_deletion_warning": "برای حذف این دسته بندی لطفا ابتدا محصولات زیر را ویرایش کنید"
   }
 }

@@ -4,9 +4,13 @@ import 'package:my_market/controller/categories_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/helper.dart';
+import 'package:my_market/helper/json_parser.dart';
+import 'package:my_market/model/product.dart';
+import 'package:my_market/widget/component/my_divider.dart';
 import 'package:my_market/widget/component/my_progress_indicator.dart';
 import 'package:my_market/widget/component/text_content.dart';
 import 'package:my_market/widget/ui/dialog_add_edit_category.dart';
+import 'package:my_market/widget/ui/dialog_category_deletion_warning.dart';
 
 import 'dialog_ask.dart';
 
@@ -23,12 +27,13 @@ class Categories extends StatelessWidget {
         child: Obx(
           () => _controller.isLoading()
               ? Center(child: MyProgressIndicator(40))
-              : ListView.builder(
+              : ListView.separated(
                   itemBuilder: (context, index) {
                     return buildCategoryItem(index);
                   },
                   itemCount: _controller.categories().length,
                   padding: EdgeInsets.all(8),
+                  separatorBuilder: (context, index) => MyDivider(),
                 ),
         ),
       ),
@@ -40,8 +45,8 @@ class Categories extends StatelessWidget {
   }
 
   Widget buildCategoryItem(int index) {
-    return Card(
-      margin: EdgeInsets.all(8),
+    return Padding(
+      padding: EdgeInsets.all(8),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,21 +56,29 @@ class Categories extends StatelessWidget {
               child: TextContent(Helper.isLocaleEnglish()
                   ? _controller.categories().elementAt(index).name
                   : _controller.categories().elementAt(index).persianName)),
-          IconButton(
-              icon: Icon(
-                Icons.delete_forever,
-                color: AppColors.colorError,
-              ),
-              onPressed: () => askToDeleteCategory(index)),
-          IconButton(
-              icon: Icon(
-                Icons.edit,
-                color: AppColors.colorSecondary,
-              ),
-              onPressed: () => showDialogEditCategory(index)),
+          buildDeleteButton(index),
+          buildEditButton(index),
         ],
       ),
     );
+  }
+
+  IconButton buildDeleteButton(int index) {
+    return IconButton(
+        icon: Icon(
+          Icons.delete_forever,
+          color: AppColors.colorError,
+        ),
+        onPressed: () => askToDeleteCategory(index));
+  }
+
+  IconButton buildEditButton(int index) {
+    return IconButton(
+        icon: Icon(
+          Icons.edit,
+          color: AppColors.colorSecondary,
+        ),
+        onPressed: () => showDialogEditCategory(index));
   }
 
   void showDialogAddCategory() {
@@ -108,8 +121,22 @@ class Categories extends StatelessWidget {
     });
   }
 
-  void deleteCategory(int index) {
-    _controller.deleteCategory(_controller.categories().elementAt(index));
+  void deleteCategory(int index) async {
+    int categoryId = _controller.categories().elementAt(index).id;
+    await _controller.getCategoryProductsAsync(categoryId).then((response) {
+      List<Product> thisCategoryProducts = Helper.getThisCategoryProductList(
+          JsonParser.parseProducts(response.data), categoryId);
+      if (thisCategoryProducts.length > 0) {
+        //_controller.categoryProducts(thisCategoryProducts);
+        showDialog(
+          context: Get.context,
+          builder: (context) =>
+              DialogCategoryDeletionWarning(categoryId, thisCategoryProducts),
+        );
+      } else {
+        _controller.deleteCategory(_controller.categories().elementAt(index));
+      }
+    });
   }
 
   CategoriesController get _controller => Get.find<CategoriesController>();

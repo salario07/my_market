@@ -106,6 +106,7 @@
     "add": "Add",
     "category_added_successfully": "Category added successfully",
     "category_edited_successfully": "Category edited successfully",
-    "category_deleted_successfully": "Category deleted successfully"
+    "category_deleted_successfully": "Category deleted successfully",
+    "category_deletion_warning": "You should change these products category in order to delete this category"
   }
 }

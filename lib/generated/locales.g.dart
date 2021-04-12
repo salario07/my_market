@@ -125,6 +125,8 @@ class LocaleKeys {
       'categories_category_edited_successfully';
   static const categories_category_deleted_successfully =
       'categories_category_deleted_successfully';
+  static const categories_category_deletion_warning =
+      'categories_category_deletion_warning';
 }
 
 class Locales {
@@ -223,6 +225,8 @@ class Locales {
     'categories_category_added_successfully': 'Category added successfully',
     'categories_category_edited_successfully': 'Category edited successfully',
     'categories_category_deleted_successfully': 'Category deleted successfully',
+    'categories_category_deletion_warning':
+        'You should change these products category in order to delete this category',
   };
   static const fa_IR = {
     'shared_app_name': 'فروشگاه من',
@@ -319,5 +323,7 @@ class Locales {
     'categories_category_added_successfully': 'دسته بندی با موفقیت اضافه شد',
     'categories_category_edited_successfully': 'دسته بندی با موفقیت ویرایش شد',
     'categories_category_deleted_successfully': 'دسته بندی با موفقیت حذف شد',
+    'categories_category_deletion_warning':
+        'برای حذف این دسته بندی لطفا ابتدا محصولات زیر را ویرایش کنید',
   };
 }

@@ -8,12 +8,11 @@ import 'package:my_market/repository/home_page_repo.dart';
 class ShowProductListController extends GetxController {
   RxInt cartCount = 0.obs;
   RxList<Product> products = [].cast<Product>().obs;
-  List<Product> definedProducts;
 
   HomePageRepo repository = HomePageRepo();
 
-  ShowProductListController(this.definedProducts) {
-    products(definedProducts);
+  ShowProductListController(List<Product> initProducts) {
+    products(initProducts);
   }
 
   void getShoppingListCount() {
