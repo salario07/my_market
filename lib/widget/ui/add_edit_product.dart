@@ -65,7 +65,7 @@ class AddEditProduct extends StatelessWidget {
       key: _controller.formKey,
       child: Column(
         children: [
-          buildImage(),
+          buildImageContainer(),
           SizedBox(height: 16),
           buildCategory(),
           SizedBox(height: 16),
@@ -83,7 +83,7 @@ class AddEditProduct extends StatelessWidget {
     );
   }
 
-  Center buildImage() {
+  Center buildImageContainer() {
     return Center(
       child: GestureDetector(
         onTap: handleFilePicker,
@@ -91,29 +91,37 @@ class AddEditProduct extends StatelessWidget {
           color: AppColors.colorSurface,
           width: 160,
           height: 160,
-          child: Obx(() => _controller.file().path.isNotEmpty
-              ? Image.file(
-                  _controller.file(),
-                  fit: BoxFit.fitWidth,
-                )
-              : isAddMode
-                  ? Center(
-                      child: Row(mainAxisSize: MainAxisSize.min, children: [
-                        TextLabel(LocaleKeys.add_edit_product_add_image.tr),
-                        SizedBox(width: 8),
-                        Icon(
-                          Icons.add,
-                          color: AppColors.colorDivider,
-                        )
-                      ]),
-                    )
-                  : Image.memory(
-                      base64Decode(product.image),
-                      fit: BoxFit.fitWidth,
-                    )),
+          child: buildImage(),
         ),
       ),
     );
+  }
+
+  Obx buildImage() {
+    return Obx(() => _controller.file().path.isNotEmpty
+            ? Image.file(
+                _controller.file(),
+                fit: BoxFit.fitWidth,
+              )
+            : isAddMode
+                ? buildAddImageWidget()
+                : Image.memory(
+                    base64Decode(product.image),
+                    fit: BoxFit.fitWidth,
+                  ));
+  }
+
+  Center buildAddImageWidget() {
+    return Center(
+                    child: Row(mainAxisSize: MainAxisSize.min, children: [
+                      TextLabel(LocaleKeys.add_edit_product_add_image.tr),
+                      SizedBox(width: 8),
+                      Icon(
+                        Icons.add,
+                        color: AppColors.colorDivider,
+                      )
+                    ]),
+                  );
   }
 
   MyTextField buildEnglishNameTextField() {

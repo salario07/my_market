@@ -16,7 +16,7 @@ import 'package:my_market/widget/ui/dialog_ask.dart';
 class ShowProductAdmin extends StatelessWidget {
   final int id;
 
-  ShowProductAdmin(this.id){
+  ShowProductAdmin(this.id) {
     Get.lazyPut<ShowProductController>(() => ShowProductController(true));
     _controller.updateData(id);
   }
