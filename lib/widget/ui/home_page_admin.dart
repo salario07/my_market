@@ -75,7 +75,7 @@ class HomePageAdmin extends StatelessWidget {
         () => GridView.builder(
           padding: EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 80),
           gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.9),
           itemBuilder: (context, index) => ItemProduct(
               _controller.products()[index],
               () => navigateToShowProduct(_controller.products()[index])),
@@ -181,7 +181,7 @@ class HomePageAdmin extends StatelessWidget {
               title: LocaleKeys.home_page_logout.tr,
               message: LocaleKeys.home_page_sure_to_logout.tr,
               negative: LocaleKeys.shared_cancel.tr,
-              positive: LocaleKeys.home_page_logout.tr,
+              positive: LocaleKeys.home_page_logout_short.tr,
               onPositiveTap: logout,
             ));
   }

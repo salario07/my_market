@@ -41,7 +41,8 @@
     "language": "زبان",
     "search_product": "جستجوی محصول",
     "no_item_found": "موردی یافت نشد",
-    "hello": "سلام"
+    "hello": "سلام",
+    "logout_short": "خروج"
   },
   "show_product": {
     "stock" : "موجودی",

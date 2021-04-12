@@ -49,7 +49,8 @@ class DialogAddEditCategory extends StatelessWidget {
 
   Row buildButtons() {
     return Row(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.max,
       children: [
         TextButton(
             onPressed: () => Get.back(),

@@ -41,7 +41,8 @@
     "language": "Language",
     "search_product": "Search Product",
     "no_item_found": "No item found",
-    "hello": "Hello"
+    "hello": "Hello",
+    "logout_short": "Logout"
   },
   "show_product": {
     "stock": "Stock",

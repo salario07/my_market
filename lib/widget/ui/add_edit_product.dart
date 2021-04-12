@@ -178,9 +178,7 @@ class AddEditProduct extends StatelessWidget {
           children: [
             TextLabel(LocaleKeys.add_edit_product_category.tr),
             SizedBox(width: 16),
-            Obx(
-              () => buildCategoryName(),
-            ),
+            buildCategoryName(),
             SizedBox(width: 4),
             Icon(Icons.arrow_drop_down)
           ],
@@ -189,14 +187,16 @@ class AddEditProduct extends StatelessWidget {
     );
   }
 
-  TextContent buildCategoryName() {
-    return TextContent(
-      _controller.category().id == 0
-          ? LocaleKeys.add_edit_product_not_selected.tr
-          : Helper.isLocaleEnglish()
-              ? _controller.category().name
-              : _controller.category().persianName,
-      textAlign: TextAlign.end,
+  Widget buildCategoryName() {
+    return Obx(
+      () => TextContent(
+        _controller.category().id == 0
+            ? LocaleKeys.add_edit_product_not_selected.tr
+            : Helper.isLocaleEnglish()
+                ? _controller.category().name
+                : _controller.category().persianName,
+        textAlign: TextAlign.end,
+      ),
     );
   }
 
@@ -297,7 +297,7 @@ class AddEditProduct extends StatelessWidget {
         product.image = image;
       });
     }
-    if(!isAddMode){
+    if (!isAddMode) {
       product.id = this.product.id;
     }
     return product;

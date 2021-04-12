@@ -29,7 +29,7 @@ class ItemProduct extends StatelessWidget {
               SizedBox(height: 8),
               buildTitle(),
               SizedBox(height: 8),
-              buildPrice()
+              buildPrice(),
             ],
           ),
         ),

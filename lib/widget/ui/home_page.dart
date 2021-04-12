@@ -5,7 +5,6 @@ import 'package:my_market/controller/home_page_controller.dart';
 import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
-import 'package:my_market/helper/helper.dart';
 import 'package:my_market/helper/json_parser.dart';
 import 'package:my_market/helper/search_product.dart';
 import 'package:my_market/helper/shared_pref.dart';
@@ -76,7 +75,7 @@ class HomePage extends StatelessWidget {
         () => GridView.builder(
           padding: EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 80),
           gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.9),
           itemBuilder: (context, index) => ItemProduct(
               _controller.products()[index],
               () => navigateToShowProduct(_controller.products()[index])),
@@ -194,7 +193,7 @@ class HomePage extends StatelessWidget {
               title: LocaleKeys.home_page_logout.tr,
               message: LocaleKeys.home_page_sure_to_logout.tr,
               negative: LocaleKeys.shared_cancel.tr,
-              positive: LocaleKeys.home_page_logout.tr,
+              positive: LocaleKeys.home_page_logout_short.tr,
               onPositiveTap: logout,
             ));
   }
