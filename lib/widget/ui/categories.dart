@@ -20,27 +20,43 @@ class Categories extends StatelessWidget {
     Get.lazyPut<CategoriesController>(() => CategoriesController());
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
-      appBar: AppBar(
-        title: Text(LocaleKeys.home_page_categories.tr),
+      appBar: buildAppBar(),
+      body: buildBody(),
+      floatingActionButton: buildFloatingActionButton(),
+    );
+  }
+
+  Container buildBody() {
+    return Container(
+      child: Obx(
+        () => _controller.isLoading() ? buildLoadingView() : buildListView(),
       ),
-      body: Container(
-        child: Obx(
-          () => _controller.isLoading()
-              ? Center(child: MyProgressIndicator(40))
-              : ListView.separated(
-                  itemBuilder: (context, index) {
-                    return buildCategoryItem(index);
-                  },
-                  itemCount: _controller.categories().length,
-                  padding: EdgeInsets.all(8),
-                  separatorBuilder: (context, index) => MyDivider(),
-                ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: showDialogAddCategory,
-      ),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      title: Text(LocaleKeys.home_page_categories.tr),
+    );
+  }
+
+  FloatingActionButton buildFloatingActionButton() {
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: showDialogAddCategory,
+    );
+  }
+
+  Center buildLoadingView() => Center(child: MyProgressIndicator(40));
+
+  ListView buildListView() {
+    return ListView.separated(
+      itemBuilder: (context, index) {
+        return buildCategoryItem(index);
+      },
+      itemCount: _controller.categories().length,
+      padding: EdgeInsets.all(8),
+      separatorBuilder: (context, index) => MyDivider(),
     );
   }
 
@@ -127,16 +143,20 @@ class Categories extends StatelessWidget {
       List<Product> thisCategoryProducts = Helper.getThisCategoryProductList(
           JsonParser.parseProducts(response.data), categoryId);
       if (thisCategoryProducts.length > 0) {
-        //_controller.categoryProducts(thisCategoryProducts);
-        showDialog(
-          context: Get.context,
-          builder: (context) =>
-              DialogCategoryDeletionWarning(categoryId, thisCategoryProducts),
-        );
+        buildDialogDeletionWarning(categoryId, thisCategoryProducts);
       } else {
         _controller.deleteCategory(_controller.categories().elementAt(index));
       }
     });
+  }
+
+  void buildDialogDeletionWarning(
+      int categoryId, List<Product> thisCategoryProducts) {
+    showDialog(
+      context: Get.context,
+      builder: (context) =>
+          DialogCategoryDeletionWarning(categoryId, thisCategoryProducts),
+    );
   }
 
   CategoriesController get _controller => Get.find<CategoriesController>();

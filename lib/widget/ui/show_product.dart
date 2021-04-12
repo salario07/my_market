@@ -20,7 +20,13 @@ class ShowProduct extends StatelessWidget {
   final int id;
   NumberPicker numberPicker;
 
-  ShowProduct(this.id);
+  ShowProduct(this.id,{bool updateNumberPicker = false}){
+    if(updateNumberPicker){
+      Future.delayed(Duration(milliseconds: 300)).then((value) {
+        _updateDataAndNumberPicker();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -241,11 +247,15 @@ class ShowProduct extends StatelessWidget {
   }
 
   void _navigateToCart() {
-    Get.to(() => Cart()).then((value) {
-      _controller.updateData(id);
-      Future.delayed(Duration(milliseconds: 300)).then((value) {
-        numberPicker.setNumber(_controller.productCount());
-      });
+    Get.to(() => Cart(updateData: true)).then((value) {
+      _updateDataAndNumberPicker();
+    });
+  }
+
+  void _updateDataAndNumberPicker() {
+    _controller.updateData(id);
+    Future.delayed(Duration(milliseconds: 300)).then((value) {
+      numberPicker.setNumber(_controller.productCount());
     });
   }
 

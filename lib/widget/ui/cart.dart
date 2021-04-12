@@ -11,6 +11,9 @@ import 'package:my_market/widget/ui/item_cart.dart';
 import 'package:my_market/helper/app_colors.dart';
 
 class Cart extends StatelessWidget {
+
+
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<CartController>(() => CartController());
@@ -133,4 +136,10 @@ class Cart extends StatelessWidget {
   }
 
   CartController get _controller => Get.find<CartController>();
+
+  Cart({bool updateData = false}){
+    Future.delayed(Duration(milliseconds: 300)).then((value) {
+      _controller.getShoppingList();
+    });
+  }
 }

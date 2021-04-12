@@ -175,15 +175,17 @@ class ItemCart extends StatelessWidget {
   }
 
   ShoppingItem getItem() {
-    return _controller.shoppingItems().firstWhere((element) {
-      if (element.product.id == id) Helper.logDebug('get item id is $id');
+    List<ShoppingItem> items = _controller.shoppingItems();
+    return items.firstWhere((element) {
       return element.product.id == id;
     });
   }
 
   void navigateToShowProduct() {
-    Get.to(() => ShowProduct(id))
-        .then((value) => _controller.getShoppingList());
+    Get.to(() => ShowProduct(
+          id,
+          updateNumberPicker: true,
+        )).then((value) => _controller.getShoppingList());
   }
 
   CartController get _controller => Get.find<CartController>();
