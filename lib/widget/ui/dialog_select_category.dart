@@ -5,7 +5,6 @@ import 'package:my_market/generated/locales.g.dart';
 import 'package:my_market/helper/app_colors.dart';
 import 'package:my_market/helper/dimens.dart';
 import 'package:my_market/helper/helper.dart';
-import 'package:my_market/widget/component/my_progress_indicator.dart';
 import 'package:my_market/widget/component/text_content.dart';
 
 class DialogSelectCategory extends StatelessWidget {
