@@ -184,7 +184,6 @@ class ItemCart extends StatelessWidget {
   void navigateToShowProduct() {
     Get.to(() => ShowProduct(
           id,
-          updateNumberPicker: true,
         )).then((value) => _controller.getShoppingList());
   }
 

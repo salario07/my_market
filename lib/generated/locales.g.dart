@@ -112,6 +112,8 @@ class LocaleKeys {
   static const add_edit_product_please_select_product_image =
       'add_edit_product_please_select_product_image';
   static const add_edit_product_add_image = 'add_edit_product_add_image';
+  static const add_edit_product_price_with_currency =
+      'add_edit_product_price_with_currency';
   static const categories_sure_to_delete_category =
       'categories_sure_to_delete_category';
   static const categories_category_english_name =
@@ -223,6 +225,7 @@ class Locales {
     'add_edit_product_please_select_product_image':
         'Please select product image',
     'add_edit_product_add_image': 'Add image',
+    'add_edit_product_price_with_currency': 'Price (\$)',
     'categories_sure_to_delete_category': 'Sure to delete category?',
     'categories_category_english_name': 'Category English Name',
     'categories_category_english_name_label':
@@ -325,6 +328,7 @@ class Locales {
     'add_edit_product_please_select_product_image':
         'لطفا عکس محصول را انتخاب کنید',
     'add_edit_product_add_image': 'افزودن عکس',
+    'add_edit_product_price_with_currency': 'قیمت (تومان)',
     'categories_sure_to_delete_category': 'ایا از حذف دسته بندی اطمینان دارید؟',
     'categories_category_english_name': 'نام انگلیسی دسته بندی',
     'categories_category_english_name_label':

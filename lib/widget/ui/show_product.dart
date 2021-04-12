@@ -20,17 +20,13 @@ class ShowProduct extends StatelessWidget {
   final int id;
   NumberPicker numberPicker;
 
-  ShowProduct(this.id,{bool updateNumberPicker = false}){
-    if(updateNumberPicker){
-      Future.delayed(Duration(milliseconds: 300)).then((value) {
-        _updateDataAndNumberPicker();
-      });
-    }
+  ShowProduct(this.id) {
+    Get.lazyPut<ShowProductController>(() => ShowProductController(false));
+    _updateData();
   }
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<ShowProductController>(() => ShowProductController(id,false));
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: buildAppBar(),
@@ -225,16 +221,16 @@ class ShowProduct extends StatelessWidget {
 
   void _onIncrement() {
     if (_controller.productCount() == 0) {
-      _controller.addToShoppingList();
+      _controller.addToShoppingList(id);
     }
-    _controller.updateShoppingCount(_controller.productCount() + 1);
+    _controller.updateShoppingCount(id, _controller.productCount() + 1);
   }
 
   void _onDecrement() {
     if (_controller.productCount() == 1) {
-      _controller.removeFromShoppingList();
+      _controller.removeFromShoppingList(id);
     } else {
-      _controller.updateShoppingCount(_controller.productCount() - 1);
+      _controller.updateShoppingCount(id, _controller.productCount() - 1);
     }
   }
 
@@ -248,11 +244,11 @@ class ShowProduct extends StatelessWidget {
 
   void _navigateToCart() {
     Get.to(() => Cart(updateData: true)).then((value) {
-      _updateDataAndNumberPicker();
+      _updateData();
     });
   }
 
-  void _updateDataAndNumberPicker() {
+  void _updateData() {
     _controller.updateData(id);
     Future.delayed(Duration(milliseconds: 300)).then((value) {
       numberPicker.setNumber(_controller.productCount());

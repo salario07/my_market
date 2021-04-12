@@ -98,7 +98,8 @@
     "please_select_category": "لطفا دسته بندی را انتخاب کنید",
     "product_image_not_selected": "عکس محصول انتخاب نشده است",
     "please_select_product_image": "لطفا عکس محصول را انتخاب کنید",
-    "add_image": "افزودن عکس"
+    "add_image": "افزودن عکس",
+    "price_with_currency": "قیمت (تومان)"
   },
   "categories": {
     "sure_to_delete_category": "ایا از حذف دسته بندی اطمینان دارید؟",

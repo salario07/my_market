@@ -16,9 +16,7 @@ class ShowProductController extends GetxController {
 
   ShowProductRepo repository = ShowProductRepo();
 
-  final int id;
-
-  ShowProductController(this.id,this.isAdmin);
+  ShowProductController(this.isAdmin);
 
   void getProduct(int id) {
     isLoading(true);
@@ -31,9 +29,10 @@ class ShowProductController extends GetxController {
     }).whenComplete(() => isLoading(false));
   }
 
-  void getProductCount() {
+  void getProductCount(int id) {
     repository.getShoppingCount(id).then((response) {
       ShoppingItem shoppingItem = ShoppingItem.fromJson(response.data);
+      Helper.logDebug('count is ${shoppingItem.count}');
       productCount(shoppingItem.count);
     }).catchError((error) {
       productCount(0);
@@ -41,18 +40,18 @@ class ShowProductController extends GetxController {
     }).whenComplete(() => isProductCountLoaded(true));
   }
 
-  void updateShoppingCount(int count) {
+  void updateShoppingCount(int id,int count) {
     repository.updateItemCount(product().id, count).then((response) {
-      getProductCount();
+      getProductCount(id);
     }).catchError((error) {
       Helper.logDebug(error.toString());
       Helper.errorSnackBar(LocaleKeys.shared_error, error.toString());
     });
   }
 
-  void removeFromShoppingList() {
+  void removeFromShoppingList(int id) {
     repository.removeFromShoppingList(id).then((response) {
-      getProductCount();
+      getProductCount(id);
       getShoppingListCount();
     }).catchError((error) {
       Helper.errorSnackBar(LocaleKeys.shared_error, error.toString());
@@ -60,9 +59,9 @@ class ShowProductController extends GetxController {
     });
   }
 
-  void addToShoppingList() {
+  void addToShoppingList(int id,) {
     repository.addToShoppingList(getDefaultShoppingItem()).then((response) {
-      getProductCount();
+      getProductCount(id);
       getShoppingListCount();
     }).catchError((error) {
       Helper.errorSnackBar(LocaleKeys.shared_error, error.toString());
@@ -79,7 +78,7 @@ class ShowProductController extends GetxController {
     });
   }
 
-  void removeProduct() {
+  void removeProduct(int id) {
     repository.removeProduct(id).then((value) {
       Get.back(result: id);
     }).catchError((error) {
@@ -94,13 +93,12 @@ class ShowProductController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    updateData(id);
   }
 
   void updateData(int id) {
     getProduct(id);
     if(!isAdmin){
-      getProductCount();
+      getProductCount(id);
       getShoppingListCount();
     }
   }

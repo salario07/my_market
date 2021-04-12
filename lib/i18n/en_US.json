@@ -98,7 +98,8 @@
     "please_select_category": "Please select category",
     "product_image_not_selected": "Product image not selected",
     "please_select_product_image": "Please select product image",
-    "add_image": "Add image"
+    "add_image": "Add image",
+    "price_with_currency": "Price ($)"
   },
   "categories": {
     "sure_to_delete_category": "Sure to delete category?",

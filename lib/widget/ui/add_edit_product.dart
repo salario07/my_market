@@ -144,10 +144,10 @@ class AddEditProduct extends StatelessWidget {
     );
   }
 
-  MyTextField buildPriceTextField() {
+  Widget buildPriceTextField() {
     return MyTextField(
       validator: (text) => Validators.emptyNonZeroValidator(text),
-      labelText: LocaleKeys.filter_price.tr,
+      labelText: LocaleKeys.add_edit_product_price_with_currency.tr,
       controller: _priceController,
       hintText: LocaleKeys.add_edit_product_price_hint.tr,
       textInputType: TextInputType.number,
