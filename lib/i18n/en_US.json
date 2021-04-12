@@ -60,7 +60,10 @@
     "sure_to_remove": "Sure to remove",
     "from_cart_": "from Cart?",
     "cart_is_empty": "Cart is Empty",
-    "are_you_sure_to_buy_these_items_": "Are you sure to buy these items?"
+    "are_you_sure_to_buy_these_items_": "Are you sure to buy these items?",
+    "purchase_was_successful": "Purchase was successful",
+    "purchase_half_success_message": "Purchasing remained items in cart was not successful, please try again",
+    "purchase_fail_message": "Purchase was not successful, please try again"
   },
   "filter": {
     "price": "Price",

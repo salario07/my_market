@@ -68,6 +68,10 @@ class LocaleKeys {
   static const cart_cart_is_empty = 'cart_cart_is_empty';
   static const cart_are_you_sure_to_buy_these_items_ =
       'cart_are_you_sure_to_buy_these_items_';
+  static const cart_purchase_was_successful = 'cart_purchase_was_successful';
+  static const cart_purchase_half_success_message =
+      'cart_purchase_half_success_message';
+  static const cart_purchase_fail_message = 'cart_purchase_fail_message';
   static const filter_price = 'filter_price';
   static const filter_min = 'filter_min';
   static const filter_max = 'filter_max';
@@ -183,6 +187,11 @@ class Locales {
     'cart_from_cart_': 'from Cart?',
     'cart_cart_is_empty': 'Cart is Empty',
     'cart_are_you_sure_to_buy_these_items_': 'Are you sure to buy these items?',
+    'cart_purchase_was_successful': 'Purchase was successful',
+    'cart_purchase_half_success_message':
+        'Purchasing remained items in cart was not successful, please try again',
+    'cart_purchase_fail_message':
+        'Purchase was not successful, please try again',
     'filter_price': 'Price',
     'filter_min': 'Min',
     'filter_max': 'Max',
@@ -283,6 +292,10 @@ class Locales {
     'cart_from_cart_': 'از سبد خرید اطمینان دارید؟',
     'cart_cart_is_empty': 'سبد خرید خالی است',
     'cart_are_you_sure_to_buy_these_items_': 'Are you sure to buy these items?',
+    'cart_purchase_was_successful': 'خرید موفقیت آمیز بود',
+    'cart_purchase_half_success_message':
+        'خرید محصولات باقیمانده در سبد خرید ناموفق بود، لطفا دوباره تلاش کنید',
+    'cart_purchase_fail_message': 'خرید موفق نبود، لطفا دوباره تلاش کنید',
     'filter_price': 'قیمت',
     'filter_min': 'حداقل',
     'filter_max': 'حداکثر',

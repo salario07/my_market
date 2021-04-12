@@ -62,19 +62,23 @@ class CartController extends GetxController {
   void handleUserNotification(
       bool isPurchaseSuccessful, bool purchasedAtLeastOneProduct) {
     if (isPurchaseSuccessful) {
-      Helper.successSnackBar(
-          LocaleKeys.shared_success.tr, 'Purchase was successful');
+      Helper.successSnackBar(LocaleKeys.shared_success.tr,
+          LocaleKeys.cart_purchase_was_successful.tr);
     } else if (purchasedAtLeastOneProduct) {
       Helper.errorSnackBar(LocaleKeys.shared_error.tr,
-          'Purchasing remained items in cart was not successful, please try again');
+          LocaleKeys.cart_purchase_half_success_message.tr);
     } else {
-      Helper.errorSnackBar(LocaleKeys.shared_error.tr,
-          'Purchase was not successful, please try again');
+      Helper.errorSnackBar(
+          LocaleKeys.shared_error.tr, LocaleKeys.cart_purchase_fail_message.tr);
     }
   }
 
   Product reduceProductStock(ShoppingItem item) {
-    item.product.stock = item.product.stock - item.count;
+    int newStock = item.product.stock - item.count;
+    if (newStock < 0) {
+      newStock = 0;
+    }
+    item.product.stock = newStock;
     return item.product;
   }
 
